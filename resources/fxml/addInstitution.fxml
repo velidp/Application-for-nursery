@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="454.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="291.0" prefWidth="454.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.AddInstitutionController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="65.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="312.0" minWidth="10.0" prefWidth="232.0" />
@@ -33,22 +33,22 @@
       <Label text="Direktor:" GridPane.rowIndex="1" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="7">
         <buttons>
-          <Button mnemonicParsing="false" text="OK" />
-            <Button mnemonicParsing="false" text="Cancel" />
+          <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
         </buttons>
       </ButtonBar>
-      <ComboBox prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" />
+      <ComboBox fx:id="placeOfInstitutionCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" />
       <Label text="Ime:" GridPane.rowIndex="2" />
       <Label text="Prezime:" GridPane.rowIndex="3" />
       <Label text="Jmbg:" GridPane.rowIndex="4" />
       <Label text="Datum rodjenja:" GridPane.rowIndex="5" />
       <Label text="Mjesto rođenja:" GridPane.rowIndex="6" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
-      <DatePicker prefHeight="25.0" prefWidth="367.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-      <ComboBox prefHeight="25.0" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-      <Button mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+      <TextField fx:id="nameOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="surenameOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <TextField fx:id="jmbgOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <DatePicker fx:id="dateOfBirthOfDirector" prefHeight="25.0" prefWidth="367.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <ComboBox fx:id="placeOfBirthOfDirectorCombo" prefHeight="25.0" prefWidth="252.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <Button fx:id="addPlaceOfInstitutionButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -57,7 +57,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
+      <Button fx:id="addPlaceOfBirthOfDirectorButton" mnemonicParsing="false" prefHeight="24.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="6">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>

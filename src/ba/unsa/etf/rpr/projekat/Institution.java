@@ -30,4 +30,9 @@ public class Institution {
     public void setDirector(Person director) {
         this.director = director;
     }
+
+    @Override
+    public String toString() {
+        return "Mjesto: " + place.getName() + " Direktor: " + director.getName() + " " + director.getSurename() ;
+    }
 }

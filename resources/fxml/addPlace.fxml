@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="304.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="159.0" prefWidth="304.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.AddPlaceController">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="141.0" minWidth="10.0" prefWidth="85.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="209.0" minWidth="10.0" prefWidth="209.0" />
@@ -24,13 +24,13 @@
       <Label text="Naziv:" />
       <Label text="Adresa:" GridPane.rowIndex="1" />
       <Label text="Poštanski broj:" GridPane.rowIndex="2" />
-      <TextField GridPane.columnIndex="1" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <TextField GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="nameOfPlaceField" GridPane.columnIndex="1" />
+      <TextField fx:id="adressOfPlaceField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <TextField fx:id="zipCodeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <buttons>
-          <Button mnemonicParsing="false" text="OK" />
-            <Button mnemonicParsing="false" text="Cancel" />
+          <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
+            <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
         </buttons>
       </ButtonBar>
    </children>
