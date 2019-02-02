@@ -35,6 +35,7 @@ public class MainController {
     public Button startButton;
     public ComboBox institutionCombo;
     public Button addInstitutionButton;
+    public MenuItem menuChange;
 
     public KindergartenDAO base = new KindergartenDAO();
 
@@ -59,6 +60,7 @@ public class MainController {
                 if(radioChildren.isSelected()){
                     addPerson.setDisable(false);
                     removePerson.setDisable(false);
+                    editPerson.setDisable(false);
                     radioParent.setSelected(false);
                     radioWorker.setSelected(false);
                     if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
@@ -80,6 +82,7 @@ public class MainController {
                 if(radioWorker.isSelected()){
                     radioParent.setSelected(false);
                     addPerson.setDisable(false);
+                    editPerson.setDisable(false);
                     removePerson.setDisable(false);
                     radioChildren.setSelected(false);
                     if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
@@ -101,6 +104,7 @@ public class MainController {
                 if(radioParent.isSelected()){
                     addPerson.setDisable(true);
                     removePerson.setDisable(true);
+                    editPerson.setDisable(true);
                     radioChildren.setSelected(false);
                     radioWorker.setSelected(false);
 
@@ -116,10 +120,6 @@ public class MainController {
                 }
             }
         });
-
-
-
-
 
         groupCombo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -153,30 +153,34 @@ public class MainController {
             }
         });
 
-
-
-
-
         editPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addDirector.fxml"));
+                if (tableOfPersons.getSelectionModel().isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setHeaderText("Greška");
+                    alert.setContentText("Niste odabrali niti jednu stavku");
 
-                Parent root = null;
-                try {
-                    root = loader1.load();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                    alert.showAndWait();
+                } else if(radioChildren.isSelected()) {
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
+
+                    Parent root = null;
+                    try {
+                        root = loader1.load();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Izmjeni osobu");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root, 451, 378));
+                    stage.showAndWait();
                 }
-
-                Stage stage = new Stage();
-                stage.setTitle("Izmjeni osobu");
-                stage.setResizable(false);
-                stage.setScene(new Scene(root, 396, 197));
-                stage.showAndWait();
             }
         });
-
 
         addPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override

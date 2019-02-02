@@ -26,4 +26,10 @@ povezanost ustanove sa svim ostalim
 validacija nije nigdje uradjena
 
 uraditi ovo što sam zamislio pa onda ici na ono da se sve iskoristii
+
+plan:
+izmjene
+mnemonici
+forWork
+izvještaj
  */

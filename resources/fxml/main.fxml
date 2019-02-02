@@ -45,8 +45,9 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
             <items>
-              <MenuItem fx:id="removeMenu" mnemonicParsing="false" text="Ukloni osobu" />
-                  <MenuItem fx:id="addMenu" mnemonicParsing="false" text="Dodaj osobu" />
+              <MenuItem fx:id="removeMenu" mnemonicParsing="false" text="Ukloni" />
+                  <MenuItem fx:id="addMenu" mnemonicParsing="false" text="Dodaj" />
+                  <MenuItem fx:id="menuChange" mnemonicParsing="false" text="Izmjeni" />
                   <MenuItem fx:id="reportMenu" mnemonicParsing="false" text="Izvještaj" />
             </items>
           </Menu>
