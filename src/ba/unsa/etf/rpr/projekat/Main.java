@@ -23,6 +23,7 @@ problemi do sad:
 isti direktor za više ustanova.
 validacija
 povezanost ustanove sa svim ostalim
-brisanje i roditelja prilikom brisanja djeteta.
+validacija nije nigdje uradjena
 
+uraditi ovo što sam zamislio pa onda ici na ono da se sve iskoristii
  */

@@ -181,21 +181,46 @@ public class MainController {
         addPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(radioChildren.isSelected()){
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
+                if (radioChildren.isSelected()) {
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
 
-                Parent root = null;
-                try {
-                    root = loader1.load();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                    Parent root = null;
+                    try {
+                        root = loader1.load();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
 
-                Stage stage = new Stage();
-                stage.setTitle("Dodaj djete");
-                stage.setResizable(false);
-                stage.setScene(new Scene(root, 451, 378));
-                stage.showAndWait();
+                    Stage stage = new Stage();
+                    stage.setTitle("Dodaj djete");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root, 451, 378));
+                    stage.showAndWait();
+                    if (!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected()) {
+                            tableOfPersons.setItems(base.getChildren12());
+                        } else if (radioWorker.isSelected()) {
+                            tableOfPersons.setItems(base.getEducators());
+                        } else if (radioParent.isSelected()) {
+                            tableOfPersons.setItems(base.getParents());
+                        }
+                    } else if (!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        if (radioChildren.isSelected()) {
+                            tableOfPersons.setItems(base.getChildren35());
+                        } else if (radioWorker.isSelected()) {
+                            tableOfPersons.setItems(base.getEducators());
+                        } else if (radioParent.isSelected()) {
+                            tableOfPersons.setItems(base.getParents());
+                        }
+                    } else if (!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")) {
+                        if (radioChildren.isSelected()) {
+                            tableOfPersons.setItems(base.getChildrenWithSpecialNeeds());
+                        } else if (radioWorker.isSelected()) {
+                            tableOfPersons.setItems(base.getSpecialEducators());
+                        } else if (radioParent.isSelected()) {
+                            tableOfPersons.setItems(base.getParents());
+                        }
+                    }
             } else if(radioWorker.isSelected()){
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
 
@@ -211,6 +236,16 @@ public class MainController {
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 362, 282));
                     stage.showAndWait();
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
+                        tableOfPersons.setItems(base.getEducators());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")){
+                        tableOfPersons.setItems(base.getEducators());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")){
+                        tableOfPersons.setItems(base.getSpecialEducators());
+                    }
+
                 }
             }
         });

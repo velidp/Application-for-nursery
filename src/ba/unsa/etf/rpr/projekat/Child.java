@@ -17,9 +17,18 @@ import java.io.File;
 
 public class Child extends Person{
 
-    private Parentt parentt = new Parentt();
+    public Parentt parentt = new Parentt();
     Institution institution = new Institution();
 
+    boolean djeteJeSaPosebnimPotrebama;
+
+    public boolean isDjeteJeSaPosebnimPotrebama() {
+        return djeteJeSaPosebnimPotrebama;
+    }
+
+    public void setDjeteJeSaPosebnimPotrebama(boolean djeteJeSaPosebnimPotrebama) {
+        this.djeteJeSaPosebnimPotrebama = djeteJeSaPosebnimPotrebama;
+    }
 
     public Child(){
         try{
