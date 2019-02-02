@@ -22,5 +22,7 @@ public class Main extends Application {
 problemi do sad:
 isti direktor za više ustanova.
 validacija
+povezanost ustanove sa svim ostalim
+brisanje i roditelja prilikom brisanja djeteta.
 
  */

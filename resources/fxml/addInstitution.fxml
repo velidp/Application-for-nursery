@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,21 +18,22 @@
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="307.0" />
   </columnConstraints>
   <rowConstraints>
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Mjesto:" />
-      <Label text="Direktor:" GridPane.rowIndex="1" />
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <Label text="Mjesto:" GridPane.rowIndex="1" />
+      <Label text="Direktor:" GridPane.rowIndex="2" />
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
         <buttons>
           <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
             <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
         </buttons>
       </ButtonBar>
-      <ComboBox fx:id="placeOfInstitutionCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" />
-      <Button fx:id="addPlaceOfInstitutionButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">
+      <ComboBox fx:id="placeOfInstitutionCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <Button fx:id="addPlaceOfInstitutionButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -40,7 +42,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addDirectorButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+      <Button fx:id="addDirectorButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -49,7 +51,9 @@
             </ImageView>
          </graphic>
       </Button>
-      <ComboBox fx:id="directorCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ComboBox fx:id="directorCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <Label text="Naziv:" />
+      <TextField fx:id="nameOfInstitution" GridPane.columnIndex="1" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

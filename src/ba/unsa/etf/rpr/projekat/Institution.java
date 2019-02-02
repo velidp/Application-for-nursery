@@ -4,8 +4,17 @@ package ba.unsa.etf.rpr.projekat;
 
 public class Institution {
     int id;
+    String name;
     Place place;
     Person director;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public int getId() {
         return id;
@@ -33,6 +42,6 @@ public class Institution {
 
     @Override
     public String toString() {
-        return "Mjesto: " + place.getName() + " Direktor: " + director.getName() + " " + director.getSurename() ;
+        return name;
     }
 }

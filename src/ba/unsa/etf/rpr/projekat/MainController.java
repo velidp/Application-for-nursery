@@ -57,6 +57,8 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
                 if(radioChildren.isSelected()){
+                    addPerson.setDisable(false);
+                    removePerson.setDisable(false);
                     radioParent.setSelected(false);
                     radioWorker.setSelected(false);
                     if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
@@ -77,6 +79,8 @@ public class MainController {
             public void handle(ActionEvent event) {
                 if(radioWorker.isSelected()){
                     radioParent.setSelected(false);
+                    addPerson.setDisable(false);
+                    removePerson.setDisable(false);
                     radioChildren.setSelected(false);
                     if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
                         tableOfPersons.setItems(base.getEducators());
@@ -95,6 +99,8 @@ public class MainController {
             @Override
             public void handle(ActionEvent event) {
                 if(radioParent.isSelected()){
+                    addPerson.setDisable(true);
+                    removePerson.setDisable(true);
                     radioChildren.setSelected(false);
                     radioWorker.setSelected(false);
 
@@ -175,7 +181,8 @@ public class MainController {
         addPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addDirector.fxml"));
+                if(radioChildren.isSelected()){
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
 
                 Parent root = null;
                 try {
@@ -185,10 +192,26 @@ public class MainController {
                 }
 
                 Stage stage = new Stage();
-                stage.setTitle("Dodaj osobu");
+                stage.setTitle("Dodaj djete");
                 stage.setResizable(false);
-                stage.setScene(new Scene(root, 396, 197));
+                stage.setScene(new Scene(root, 451, 378));
                 stage.showAndWait();
+            } else if(radioWorker.isSelected()){
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
+
+                    Parent root = null;
+                    try {
+                        root = loader1.load();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Dodaj uposlenika");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root, 362, 282));
+                    stage.showAndWait();
+                }
             }
         });
 
@@ -215,16 +238,45 @@ public class MainController {
         removePerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Brisanje osobe");
-                alert.setHeaderText("");
-                alert.setContentText("Da li zaista želite izbrisati odabranu osobu?");
+                if (!tableOfPersons.getSelectionModel().isEmpty()) {
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Brisanje osobe");
+                    alert.setHeaderText("");
+                    alert.setContentText("Da li zaista želite izbrisati odabranu osobu?");
 
-                Optional<ButtonType> result = alert.showAndWait();
-                if (result.get() == ButtonType.OK){
-                    // ... user chose OK
-                } else {
-                    // ... user chose CANCEL or closed the dialog
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.get() == ButtonType.OK) {
+
+                        if (radioChildren.isSelected()) {
+                            if (groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                                base.removeChildren12((Person) tableOfPersons.getSelectionModel().getSelectedItem());
+                                tableOfPersons.setItems(base.getChildren12());
+                            } else if (groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                                base.removeChildren35((Person) tableOfPersons.getSelectionModel().getSelectedItem());
+                                tableOfPersons.setItems(base.getChildren35());
+                            } else if (groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")) {
+                                base.removeChildrenWithSpecilaNeeds((Person) tableOfPersons.getSelectionModel().getSelectedItem());
+                                tableOfPersons.setItems(base.getChildrenWithSpecialNeeds());
+                            }
+                        } else if (radioWorker.isSelected()) {
+                            if (groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine") || groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                                base.removeEducator((Person) tableOfPersons.getSelectionModel().getSelectedItem());
+                                tableOfPersons.setItems(base.getEducators());
+                            } else if (groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")) {
+                                base.removeSpecialEducator((Person) tableOfPersons.getSelectionModel().getSelectedItem());
+                                tableOfPersons.setItems(base.getSpecialEducators());
+                            }
+                        }
+                    } else {
+                        // ... user chose CANCEL or closed the dialog
+                    }
+                } else if(tableOfPersons.getSelectionModel().isEmpty()){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setHeaderText("Greška");
+                    alert.setContentText("Niste odabrali niti jednu stavku");
+
+                    alert.showAndWait();
                 }
             }
         });

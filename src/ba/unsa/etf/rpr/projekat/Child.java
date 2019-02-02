@@ -17,6 +17,10 @@ import java.io.File;
 
 public class Child extends Person{
 
+    private Parentt parentt = new Parentt();
+    Institution institution = new Institution();
+
+
     public Child(){
         try{
             final String xmlFilePath = this.getName() + String.valueOf(this.getId()) + ".xml";
@@ -74,4 +78,19 @@ public class Child extends Person{
         }
     }
 
+    public Parentt getParentt() {
+        return parentt;
+    }
+
+    public void setParentt(Parentt parentt) {
+        this.parentt = parentt;
+    }
+
+    public Institution getInstitution() {
+        return institution;
+    }
+
+    public void setInstitution(Institution institution) {
+        this.institution = institution;
+    }
 }

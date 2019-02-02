@@ -12,7 +12,8 @@ public class KindergartenDAO {
 
     private PreparedStatement getInstitutions, placeByID, getPlaces, addPlace, getDirectors, directorById,
                                 addInstitution, addDirector, getEducators, getSpecialEducators, getChildrenWithSpecialNeeds,
-    getChildren12, getChildren35, getParents;
+    getChildren12, getChildren35, getParents, removeChildren12, removeChildren35, removeChildrenWithSpecilaNeeds,
+    removeEducator, removeSpecialEducator, removeParent;
 
 
     {
@@ -24,7 +25,7 @@ public class KindergartenDAO {
             getPlaces = con.prepareStatement("select * from places");
             addPlace = con.prepareStatement("insert into places (id, name, adress, zipCode) values (?, ?, ?, ?)");
             directorById = con.prepareStatement("select * from directors where id = ?");
-            addInstitution = con.prepareStatement("insert into institutions (id, place, director) values (?, ?, ?)");
+            addInstitution = con.prepareStatement("insert into institutions (id, place, director, name) values (?, ?, ?, ?)");
             addDirector = con.prepareStatement("insert into directors (id, name, surename, jmbg, date_of_birth, place) values (?, ?, ?, ?, ?, ?)");
             getEducators = con.prepareStatement("select * from educators");
             getSpecialEducators = con.prepareStatement("select * from specialEducators");
@@ -32,6 +33,12 @@ public class KindergartenDAO {
             getChildren12 = con.prepareStatement("select * from children12");
             getChildren35 = con.prepareStatement("select * from children35");
             getParents = con.prepareStatement("select * from parents");
+            removeChildren35 = con.prepareStatement("delete from children35 where id = ?");
+            removeChildren12 = con.prepareStatement("delete from children12 where id = ?");
+            removeChildrenWithSpecilaNeeds = con.prepareStatement("delete from childeren_with_special_needs where id = ?");
+            removeEducator = con.prepareStatement("delete from educators where id = ?");
+            removeSpecialEducator = con.prepareStatement("delete from specialEducators where id = ?");
+            removeParent = con.prepareStatement("delete from parents where id = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -94,6 +101,7 @@ public class KindergartenDAO {
                 institution.setId(rs.getInt(1));
                 institution.setDirector(directorById(rs.getInt(3)));
                 institution.setPlace(placeByID(rs.getInt(2)));
+                institution.setName(rs.getString(4));
                 list.add(institution);
             }
         } catch (SQLException e) {
@@ -183,6 +191,7 @@ public class KindergartenDAO {
             addInstitution.setInt(1, this.getMaxIdFromInstitutions());
             addInstitution.setInt(2, institution.getPlace().getId());
             addInstitution.setInt(3, institution.getDirector().getId());
+            addInstitution.setString(4, institution.getName());
             addInstitution.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -346,5 +355,60 @@ public class KindergartenDAO {
             e.printStackTrace();
         }
         return observableList;
+    }
+
+    public void removeEducator(Person educator){
+        try {
+            removeEducator.setInt(1, educator.getId());
+            removeEducator.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+    public void removeSpecialEducator(Person educator){
+        try {
+            removeSpecialEducator.setInt(1, educator.getId());
+            removeSpecialEducator.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeChildren12(Person child){
+        Child child1 = (Child) child;
+        try {
+            removeChildren12.setInt(1, child.getId());
+            removeParent.setInt(1, child1.getParentt().getId());
+            removeParent.executeUpdate();
+            removeChildren12.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeChildren35(Person child){
+        Child child1 = (Child) child;
+        try {
+            removeChildren35.setInt(1, child.getId());
+            removeParent.setInt(1, child1.getParentt().getId());
+            removeParent.executeUpdate();
+            removeChildren35.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void removeChildrenWithSpecilaNeeds(Person child){
+        Child child1 = (Child) child;
+        try {
+            removeChildrenWithSpecilaNeeds.setInt(1, child.getId());
+            removeParent.setInt(1, child1.getParentt().getId());
+            removeParent.executeUpdate();
+            removeChildrenWithSpecilaNeeds.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
