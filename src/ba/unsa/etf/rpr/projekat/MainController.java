@@ -46,7 +46,7 @@ public class MainController {
         editPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPerson.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addDirector.fxml"));
 
                 Parent root = null;
                 try {
@@ -67,7 +67,7 @@ public class MainController {
         addPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPerson.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addDirector.fxml"));
 
                 Parent root = null;
                 try {
@@ -141,7 +141,7 @@ public class MainController {
         addMenu.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPerson.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addDirector.fxml"));
 
                 Parent root = null;
                 try {
@@ -189,10 +189,12 @@ public class MainController {
                 }
 
                 Stage stage = new Stage();
-                stage.setTitle("Dodaj osobu");
+                stage.setTitle("Dodaj ustanovu");
                 stage.setResizable(false);
-                stage.setScene(new Scene(root, 454, 291));
+                stage.setScene(new Scene(root, 379, 157));
                 stage.showAndWait();
+                institutionCombo.setItems(base.getInstitutions());
+                institutionCombo.getSelectionModel().selectLast();
             }
         });
     }

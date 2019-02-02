@@ -12,18 +12,21 @@ import java.util.List;
 public class KindergartenDAO {
     private Connection con;
 
-    private PreparedStatement getInstitutions, personByID, placeByID, getPlaces, addPlace, getPersons;
+    private PreparedStatement getInstitutions, placeByID, getPlaces, addPlace, getDirectors, directorById,
+                                addInstitution, addDirector;
 
 
     {
         try {
             con = DriverManager.getConnection("jdbc:sqlite:base.db");
             getInstitutions = con.prepareStatement("select * from institutions");
-            personByID = con.prepareStatement("select * from persons where id = ?");
+            getDirectors = con.prepareStatement("select * from directors");
             placeByID = con.prepareStatement("select * from places where id = ?");
             getPlaces = con.prepareStatement("select * from places");
             addPlace = con.prepareStatement("insert into places (id, name, adress, zipCode) values (?, ?, ?, ?)");
-            getPersons = con.prepareStatement("select * from persons");
+            directorById = con.prepareStatement("select * from directors where id = ?");
+            addInstitution = con.prepareStatement("insert into institutions (id, place, director) values (?, ?, ?)");
+            addDirector = con.prepareStatement("insert into directors (id, name, surename, jmbg, date_of_birth, place) values (?, ?, ?, ?, ?, ?)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -50,13 +53,13 @@ public class KindergartenDAO {
         return observableList;
     }
 
-    public ObservableList<Person> getPersons(){
+    public ObservableList<Person> getDirectors(){
         List<Person> list = new ArrayList<Person>();
         ObservableList<Person> observableList = FXCollections.observableList(list);
 
         ResultSet rs = null;
         try {
-            rs = getPersons.executeQuery();
+            rs = getDirectors.executeQuery();
             while(rs.next()){
                 Person person = new Person();
                 person.setId(rs.getInt(1));
@@ -84,7 +87,7 @@ public class KindergartenDAO {
             while(rs.next()){
                 Institution institution = new Institution();
                 institution.setId(rs.getInt(1));
-                institution.setDirector(personById(rs.getInt(3)));
+                institution.setDirector(directorById(rs.getInt(3)));
                 institution.setPlace(placeByID(rs.getInt(2)));
                 list.add(institution);
             }
@@ -94,24 +97,23 @@ public class KindergartenDAO {
         return observableList;
     }
 
-    public Person personById(int idOfPerson){
-        Person person = new Person();
+    private Person directorById(int idOfDirector) {
+        Person director = new Person();
         try {
-            personByID.setInt(1, idOfPerson);
-            ResultSet rs = personByID.executeQuery();
+            directorById.setInt(1, idOfDirector);
+            ResultSet rs = directorById.executeQuery();
             while (rs.next()){
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-
+                director.setId(idOfDirector);
+                director.setName(rs.getString(2));
+                director.setSurename(rs.getString(3));
+                director.setJmbg(rs.getString(4));
+                director.setDateOfBirth(rs.getDate(5).toLocalDate());
+                director.setPlaceOfBirth(placeByID(rs.getInt(6)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return person;
+        return director;
     }
 
     private Place placeByID(int idOfPlace) {
@@ -171,12 +173,23 @@ public class KindergartenDAO {
     }
 
 
-    public int getMaxIdFromPersons() {
+    public void addInstitution(Institution institution) {
+        try {
+            addInstitution.setInt(1, this.getMaxIdFromInstitutions());
+            addInstitution.setInt(2, institution.getPlace().getId());
+            addInstitution.setInt(3, institution.getDirector().getId());
+            addInstitution.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getMaxIdFromDirecotors() {
         ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getPersons().iterator();
+        Iterator it = this.getDirectors().iterator();
         while (it.hasNext()){
-            Person person = (Person) it.next();
-            lista.add(person.getId());
+            Person dircetro = (Person) it.next();
+            lista.add(dircetro.getId());
         }
         if(!lista.isEmpty()) {
             return (int) Collections.max(lista) + 1;
@@ -184,5 +197,17 @@ public class KindergartenDAO {
         return 1;
     }
 
-
+    public void addDirector(Person director){
+        try {
+            addDirector.setInt(1, this.getMaxIdFromDirecotors());
+            addDirector.setString(2, director.getName());
+            addDirector.setString(3, director.getSurename());
+            addDirector.setString(4, director.getJmbg());
+            addDirector.setDate(5, Date.valueOf(director.getDateOfBirth()));
+            addDirector.setInt(6, director.getPlaceOfBirth().getId());
+            addDirector.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

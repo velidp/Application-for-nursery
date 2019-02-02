@@ -55,4 +55,9 @@ public class Person {
     public void setPlaceOfBirth(Place placeOfBirth) {
         this.placeOfBirth = placeOfBirth;
     }
+
+    @Override
+    public String toString() {
+        return name + " " + surename;
+    }
 }
