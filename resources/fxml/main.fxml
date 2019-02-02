@@ -8,6 +8,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.RadioMenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -30,7 +31,6 @@
     <RowConstraints maxHeight="57.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="36.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="124.0" minHeight="10.0" prefHeight="39.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="374.0" minHeight="10.0" prefHeight="336.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="323.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -50,6 +50,13 @@
                   <MenuItem fx:id="reportMenu" mnemonicParsing="false" text="Izvještaj" />
             </items>
           </Menu>
+            <Menu mnemonicParsing="false" text="Opcije">
+               <items>
+                  <RadioMenuItem fx:id="radioChildren" mnemonicParsing="false" text="Djeca" />
+                  <RadioMenuItem fx:id="radioParent" mnemonicParsing="false" text="Roditelji" />
+                  <RadioMenuItem fx:id="radioWorker" mnemonicParsing="false" text="Uposlenici" />
+               </items>
+            </Menu>
           <Menu mnemonicParsing="false" text="Help">
             <items>
               <MenuItem fx:id="aboutMenu" mnemonicParsing="false" text="About" />
@@ -57,10 +64,10 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TableView fx:id="tableOfPersons" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="5">
+      <TableView fx:id="tableOfPersons" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="4">
         <columns>
-          <TableColumn fx:id="imeColumn" prefWidth="202.0" text="Ime" />
-            <TableColumn fx:id="prezimeColumn" minWidth="1.0" prefWidth="158.0" text="Prezime" />
+          <TableColumn fx:id="nameColumn" prefWidth="202.0" text="Ime" />
+            <TableColumn fx:id="surenameColumn" minWidth="1.0" prefWidth="158.0" text="Prezime" />
             <TableColumn fx:id="jmbgColumn" minWidth="0.0" prefWidth="181.0" text="Jmbg" />
         </columns>
       </TableView>
@@ -77,26 +84,17 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <TextField prefHeight="25.0" prefWidth="235.0" promptText="Pretraga" GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <TextField prefHeight="25.0" prefWidth="235.0" promptText="Pretraga" GridPane.columnIndex="1" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextField>
-      <Label text="Pretraga:" GridPane.columnSpan="2" GridPane.rowIndex="4">
+      <Label text="Pretraga:" GridPane.columnSpan="2" GridPane.rowIndex="3">
          <padding>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </padding>
       </Label>
-      <Label text="Kategorija:" GridPane.rowIndex="3">
-         <padding>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </padding></Label>
-      <ComboBox fx:id="categoryCombo" prefHeight="25.0" prefWidth="380.0" promptText="Odaberite kategoriju" GridPane.columnIndex="1" GridPane.rowIndex="3">
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
-      </ComboBox>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="4">
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
         <buttons>
           <Button fx:id="addPerson" minWidth="50.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="25.0">
                <graphic>
@@ -136,7 +134,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Početak" GridPane.columnIndex="5" GridPane.rowIndex="6">
+      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Početak" GridPane.columnIndex="5" GridPane.rowIndex="5">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>

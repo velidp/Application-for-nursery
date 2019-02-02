@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -16,15 +17,17 @@ public class MainController {
 
     public MenuItem closeMenu;
     public MenuItem removeMenu;
+    public RadioMenuItem radioChildren;
+    public RadioMenuItem radioParent;
+    public RadioMenuItem radioWorker;
     public MenuItem addMenu;
     public MenuItem reportMenu;
     public MenuItem aboutMenu;
     public TableView tableOfPersons;
-    public TableColumn imeColumn;
-    public TableColumn prezimeColumn;
+    public TableColumn nameColumn;
+    public TableColumn surenameColumn;
     public TableColumn jmbgColumn;
     public ComboBox groupCombo;
-    public ComboBox categoryCombo;
     public Button addPerson;
     public Button removePerson;
     public Button editPerson;
@@ -36,11 +39,116 @@ public class MainController {
     public KindergartenDAO base = new KindergartenDAO();
 
 
+
     public void initialize(){
         groupCombo.getItems().addAll("Grupa djece dobi od 1 do 2 godine", "Grupa djece dobi od 3 do 5 godina", "Grupa djece sa posebnim potremabma");
-        categoryCombo.getItems().addAll("Uposlenici", "Djeca");
 
         institutionCombo.setItems(base.getInstitutions());
+
+
+        nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
+        surenameColumn.setCellValueFactory(new PropertyValueFactory("surename"));
+        jmbgColumn.setCellValueFactory(new PropertyValueFactory("jmbg"));
+        radioChildren.setSelected(true);
+        radioParent.setSelected(false);
+        radioWorker.setSelected(false);
+
+        radioChildren.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(radioChildren.isSelected()){
+                    radioParent.setSelected(false);
+                    radioWorker.setSelected(false);
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
+                        tableOfPersons.setItems(base.getChildren12());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")){
+                        tableOfPersons.setItems(base.getChildren35());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")){
+                        tableOfPersons.setItems(base.getChildrenWithSpecialNeeds());
+                    }
+                }
+            }
+        });
+
+        radioWorker.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(radioWorker.isSelected()){
+                    radioParent.setSelected(false);
+                    radioChildren.setSelected(false);
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
+                        tableOfPersons.setItems(base.getEducators());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")){
+                        tableOfPersons.setItems(base.getEducators());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")){
+                        tableOfPersons.setItems(base.getSpecialEducators());
+                    }
+                }
+            }
+        });
+
+        radioParent.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(radioParent.isSelected()){
+                    radioChildren.setSelected(false);
+                    radioWorker.setSelected(false);
+
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
+                        tableOfPersons.setItems(base.getParents());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")){
+                        tableOfPersons.setItems(base.getParents());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")){
+                        tableOfPersons.setItems(base.getParents());
+                    }
+                }
+            }
+        });
+
+
+
+
+
+        groupCombo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
+                    if(radioChildren.isSelected()){
+                        tableOfPersons.setItems(base.getChildren12());
+                    }else if(radioWorker.isSelected()){
+                        tableOfPersons.setItems(base.getEducators());
+                    }else if(radioParent.isSelected()){
+                        tableOfPersons.setItems(base.getParents());
+                    }
+                }
+                else if(groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")){
+                    if(radioChildren.isSelected()){
+                        tableOfPersons.setItems(base.getChildren35());
+                    }else if(radioWorker.isSelected()){
+                        tableOfPersons.setItems(base.getEducators());
+                    }else if(radioParent.isSelected()){
+                        tableOfPersons.setItems(base.getParents());
+                    }
+                }else if(groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")){
+                    if(radioChildren.isSelected()){
+                        tableOfPersons.setItems(base.getChildrenWithSpecialNeeds());
+                    }else if(radioWorker.isSelected()){
+                        tableOfPersons.setItems(base.getSpecialEducators());
+                    }else if(radioParent.isSelected()){
+                        tableOfPersons.setItems(base.getParents());
+                    }
+                }
+            }
+        });
+
+
+
 
 
         editPerson.setOnAction(new EventHandler<ActionEvent>() {

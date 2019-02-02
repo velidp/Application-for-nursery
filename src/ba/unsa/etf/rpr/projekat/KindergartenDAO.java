@@ -4,16 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.sql.Date;
+import java.util.*;
 
 public class KindergartenDAO {
     private Connection con;
 
     private PreparedStatement getInstitutions, placeByID, getPlaces, addPlace, getDirectors, directorById,
-                                addInstitution, addDirector;
+                                addInstitution, addDirector, getEducators, getSpecialEducators, getChildrenWithSpecialNeeds,
+    getChildren12, getChildren35, getParents;
 
 
     {
@@ -27,6 +26,12 @@ public class KindergartenDAO {
             directorById = con.prepareStatement("select * from directors where id = ?");
             addInstitution = con.prepareStatement("insert into institutions (id, place, director) values (?, ?, ?)");
             addDirector = con.prepareStatement("insert into directors (id, name, surename, jmbg, date_of_birth, place) values (?, ?, ?, ?, ?, ?)");
+            getEducators = con.prepareStatement("select * from educators");
+            getSpecialEducators = con.prepareStatement("select * from specialEducators");
+            getChildrenWithSpecialNeeds = con.prepareStatement("select * from childeren_with_special_needs");
+            getChildren12 = con.prepareStatement("select * from children12");
+            getChildren35 = con.prepareStatement("select * from children35");
+            getParents = con.prepareStatement("select * from parents");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -209,5 +214,137 @@ public class KindergartenDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ObservableList getEducators() {
+        List<Person> list = new ArrayList<Person>();
+        ObservableList<Person> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getEducators.executeQuery();
+            while(rs.next()){
+                Person person = new Person();
+                person.setId(rs.getInt(1));
+                person.setName(rs.getString(2));
+                person.setSurename(rs.getString(3));
+                person.setJmbg(rs.getString(4));
+                person.setDateOfBirth(rs.getDate(5).toLocalDate());
+                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
+                list.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public ObservableList getSpecialEducators() {
+        List<Person> list = new ArrayList<Person>();
+        ObservableList<Person> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getSpecialEducators.executeQuery();
+            while(rs.next()){
+                Person person = new Person();
+                person.setId(rs.getInt(1));
+                person.setName(rs.getString(2));
+                person.setSurename(rs.getString(3));
+                person.setJmbg(rs.getString(4));
+                person.setDateOfBirth(rs.getDate(5).toLocalDate());
+                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
+                list.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public ObservableList getChildrenWithSpecialNeeds() {
+        List<Person> list = new ArrayList<Person>();
+        ObservableList<Person> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getChildrenWithSpecialNeeds.executeQuery();
+            while(rs.next()){
+                Person person = new Person();
+                person.setId(rs.getInt(1));
+                person.setName(rs.getString(2));
+                person.setSurename(rs.getString(3));
+                person.setJmbg(rs.getString(4));
+                person.setDateOfBirth(rs.getDate(5).toLocalDate());
+                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
+                list.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public ObservableList getChildren12() {
+        List<Person> list = new ArrayList<Person>();
+        ObservableList<Person> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getChildren12.executeQuery();
+            while(rs.next()){
+                Person person = new Person();
+                person.setId(rs.getInt(1));
+                person.setName(rs.getString(2));
+                person.setSurename(rs.getString(3));
+                person.setJmbg(rs.getString(4));
+                person.setDateOfBirth(rs.getDate(5).toLocalDate());
+                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
+                list.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public ObservableList getChildren35() {
+        List<Person> list = new ArrayList<Person>();
+        ObservableList<Person> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getChildren35.executeQuery();
+            while(rs.next()){
+                Person person = new Person();
+                person.setId(rs.getInt(1));
+                person.setName(rs.getString(2));
+                person.setSurename(rs.getString(3));
+                person.setJmbg(rs.getString(4));
+                person.setDateOfBirth(rs.getDate(5).toLocalDate());
+                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
+                list.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public ObservableList getParents() {
+        List<Person> list = new ArrayList<Person>();
+        ObservableList<Person> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getParents.executeQuery();
+            while(rs.next()){
+                Person person = new Person();
+                person.setId(rs.getInt(1));
+                person.setName(rs.getString(2));
+                person.setSurename(rs.getString(3));
+                person.setJmbg(rs.getString(4));
+                person.setDateOfBirth(rs.getDate(5).toLocalDate());
+                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
+                list.add(person);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
     }
 }

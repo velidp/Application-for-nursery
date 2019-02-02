@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("Aplikacija za vrtić");
         primaryStage.setScene(new Scene(root, 744, 522));
         primaryStage.show();
     }
@@ -22,4 +22,5 @@ public class Main extends Application {
 problemi do sad:
 isti direktor za više ustanova.
 validacija
+
  */
