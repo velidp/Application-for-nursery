@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -19,6 +20,7 @@ public class AddInstitutionController {
     public Button addPlaceOfInstitutionButton;
     public ComboBox directorCombo;
     public Button addDirectorButton;
+    public TextField nameOfInstitution;
 
 
     public KindergartenDAO base = new KindergartenDAO();
@@ -101,6 +103,7 @@ public class AddInstitutionController {
                 Institution institution = new Institution();
                 institution.setId(base.getMaxIdFromInstitutions());
                 institution.setPlace((Place)placeOfInstitutionCombo.getSelectionModel().getSelectedItem());
+                institution.setName(nameOfInstitution.getText().trim());
                 institution.setDirector((director));
                 base.addInstitution(institution);
                 Stage stage = (Stage) cancelButton.getScene().getWindow();

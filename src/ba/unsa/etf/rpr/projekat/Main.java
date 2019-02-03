@@ -19,17 +19,9 @@ public class Main extends Application {
     public static void main(String[] args) { launch(args); }
 }
 /*
-problemi do sad:
-isti direktor za više ustanova.
-validacija
-povezanost ustanove sa svim ostalim
-validacija nije nigdje uradjena
+problemi:
+-izmjene ponekad bacaju izuzetke.
+-sada ide glavno pitanje gdje pohraniti komentare i prisustvo
 
-uraditi ovo što sam zamislio pa onda ici na ono da se sve iskoristii
 
-plan:
-izmjene
-mnemonici
-forWork
-izvještaj
  */

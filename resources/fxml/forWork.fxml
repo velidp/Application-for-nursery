@@ -14,42 +14,45 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="415.0" prefWidth="757.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <columnConstraints>
     <ColumnConstraints maxWidth="214.0" minWidth="33.0" prefWidth="120.0" />
-      <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="39.0" />
-      <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="181.0" />
+      <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="84.0" />
+      <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="148.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="353.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="54.0" />
   </columnConstraints>
   <rowConstraints>
+      <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
     <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="98.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="127.0" minHeight="3.0" prefHeight="32.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="238.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="127.0" minHeight="3.0" prefHeight="43.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="227.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Datum:" />
-      <Label text="Vrijeme:" GridPane.rowIndex="1" />
-      <ProgressBar prefHeight="18.0" prefWidth="263.0" progress="0.07" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <TableView prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="3">
+      <Label text="Datum:" GridPane.rowIndex="3" />
+      <Label text="Vrijeme:" GridPane.rowIndex="4" />
+      <ProgressBar fx:id="progresBar" prefHeight="18.0" prefWidth="263.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+      <TableView fx:id="tableOfPersons" prefHeight="259.0" prefWidth="768.0" GridPane.columnSpan="5" GridPane.rowIndex="6">
         <columns>
-          <TableColumn prefWidth="75.0" text="Članski broj" />
-          <TableColumn prefWidth="75.0" text="Ime" />
-            <TableColumn prefWidth="75.0" text="Prezime" />
-            <TableColumn prefWidth="75.0" text="Prisutan" />
+          <TableColumn fx:id="memberNumberColumn" prefWidth="75.0" text="Članski broj" />
+          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Ime" />
+            <TableColumn fx:id="surenameColumn" prefWidth="75.0" text="Prezime" />
+            <TableColumn fx:id="apsentColumn" prefWidth="75.0" text="Prisutan" />
         </columns>
       </TableView>
-      <Label text="12:45" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="2">
+      <Label fx:id="timeLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ButtonBar>
-      <DatePicker prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.columnSpan="2" />
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
         <buttons>
-          <Button mnemonicParsing="false">
+          <Button fx:id="apsentButton" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -58,7 +61,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false">
+            <Button fx:id="notApsentButton" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -67,7 +70,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false">
+            <Button fx:id="addComentButton" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -76,7 +79,7 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button mnemonicParsing="false">
+            <Button fx:id="aboutButton" mnemonicParsing="false">
                <graphic>
                   <ImageView fitHeight="26.0" fitWidth="67.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -87,7 +90,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Button mnemonicParsing="false" GridPane.columnIndex="4">
+      <Button fx:id="settingsButton" mnemonicParsing="false" GridPane.columnIndex="4">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -96,6 +99,12 @@
             </ImageView>
          </graphic>
       </Button>
+      <Label text="Odgajatelj:" GridPane.rowIndex="1" />
+      <Label fx:id="educatorLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <Label text="Grupa:" GridPane.rowIndex="2" />
+      <Label text="Ustanova:" />
+      <Label fx:id="institutionLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" />
+      <Label fx:id="groupLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

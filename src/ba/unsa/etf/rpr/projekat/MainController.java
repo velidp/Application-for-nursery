@@ -156,16 +156,16 @@ public class MainController {
         editPerson.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if (tableOfPersons.getSelectionModel().isEmpty()) {
+                if(tableOfPersons.getSelectionModel().isEmpty()){
                     Alert alert = new Alert(Alert.AlertType.WARNING);
                     alert.setTitle("Warning Dialog");
                     alert.setHeaderText("Greška");
                     alert.setContentText("Niste odabrali niti jednu stavku");
 
                     alert.showAndWait();
-                } else if(radioChildren.isSelected()) {
+                } else if (radioChildren.isSelected()) {
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
-
+                    loader1.setController(new AddChildController((Person) tableOfPersons.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
                         root = loader1.load();
@@ -174,10 +174,60 @@ public class MainController {
                     }
 
                     Stage stage = new Stage();
-                    stage.setTitle("Izmjeni osobu");
+                    stage.setTitle("Dodaj djete");
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 451, 378));
                     stage.showAndWait();
+                    if (!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected()) {
+                            tableOfPersons.setItems(base.getChildren12());
+                        } else if (radioWorker.isSelected()) {
+                            tableOfPersons.setItems(base.getEducators());
+                        } else if (radioParent.isSelected()) {
+                            tableOfPersons.setItems(base.getParents());
+                        }
+                    } else if (!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        if (radioChildren.isSelected()) {
+                            tableOfPersons.setItems(base.getChildren35());
+                        } else if (radioWorker.isSelected()) {
+                            tableOfPersons.setItems(base.getEducators());
+                        } else if (radioParent.isSelected()) {
+                            tableOfPersons.setItems(base.getParents());
+                        }
+                    } else if (!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")) {
+                        if (radioChildren.isSelected()) {
+                            tableOfPersons.setItems(base.getChildrenWithSpecialNeeds());
+                        } else if (radioWorker.isSelected()) {
+                            tableOfPersons.setItems(base.getSpecialEducators());
+                        } else if (radioParent.isSelected()) {
+                            tableOfPersons.setItems(base.getParents());
+                        }
+                    }
+                } else if(radioWorker.isSelected()){
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
+                    loader1.setController(new AddEducatorController((Person) tableOfPersons.getSelectionModel().getSelectedItem()));
+                    Parent root = null;
+                    try {
+                        root = loader1.load();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Dodaj uposlenika");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root, 362, 282));
+                    stage.showAndWait();
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")){
+                        tableOfPersons.setItems(base.getEducators());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")){
+                        tableOfPersons.setItems(base.getEducators());
+                    }
+                    if(!groupCombo.getSelectionModel().isEmpty() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posebnim potremabma")){
+                        tableOfPersons.setItems(base.getSpecialEducators());
+                    }
+
                 }
             }
         });
@@ -187,7 +237,7 @@ public class MainController {
             public void handle(ActionEvent event) {
                 if (radioChildren.isSelected()) {
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
-
+                    loader1.setController(new AddChildController(null));
                     Parent root = null;
                     try {
                         root = loader1.load();
@@ -227,7 +277,7 @@ public class MainController {
                     }
             } else if(radioWorker.isSelected()){
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
-
+                    loader1.setController(new AddEducatorController(null));
                     Parent root = null;
                     try {
                         root = loader1.load();
@@ -257,20 +307,32 @@ public class MainController {
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/forWork.fxml"));
+                if(institutionCombo.getSelectionModel().isEmpty() || groupCombo.getSelectionModel().isEmpty() || !radioWorker.isSelected() || tableOfPersons.getSelectionModel().isEmpty()){
+                    Alert alert = new Alert(Alert.AlertType.WARNING);
+                    alert.setTitle("Warning Dialog");
+                    alert.setHeaderText("Greška");
+                    alert.setContentText("Da biste započeli sa radom odaberite ustanovu, grupu i odgajatelja.");
 
-                Parent root = null;
-                try {
-                    root = loader1.load();
-                } catch (IOException e1) {
-                    e1.printStackTrace();
+                    alert.showAndWait();
+                } else {
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/forWork.fxml"));
+                    loader1.setController(new ForWorkController(((Person)tableOfPersons.getSelectionModel().getSelectedItem()).getName() + " " + ((Person)tableOfPersons.getSelectionModel().getSelectedItem()).getSurename(), groupCombo.getSelectionModel().getSelectedItem().toString(), institutionCombo.getSelectionModel().getSelectedItem().toString()));
+                    Parent root = null;
+                    try {
+                        root = loader1.load();
+                    } catch (IOException e1) {
+                        e1.printStackTrace();
+                    }
+
+                    Stage stage = new Stage();
+                    stage.setTitle("Dodaj osobu");
+                    stage.setResizable(false);
+                    stage.setScene(new Scene(root, 778, 475));
+                    stage.show();
+                    Stage stage1 = (Stage) startButton.getScene().getWindow();
+                    stage1.close();
+
                 }
-
-                Stage stage = new Stage();
-                stage.setTitle("Dodaj osobu");
-                stage.setResizable(false);
-                stage.setScene(new Scene(root, 757, 415));
-                stage.showAndWait();
             }
         });
 
