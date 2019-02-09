@@ -33,7 +33,6 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
       <Label text="Ime:">
@@ -56,7 +55,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Mjesto rođenja:" GridPane.rowIndex="4">
+      <Label text="Mjesto stanovanja:" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
@@ -66,7 +65,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="13">
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="12">
         <buttons>
           <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
             <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
@@ -105,57 +104,52 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label text="Unesite podatke o roditelju:" GridPane.rowIndex="7">
+      <Label text="Ime roditelja:" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Ime:" GridPane.rowIndex="8">
+      <Label text="Prezime roditelja:" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Prezime:" GridPane.rowIndex="9">
+      <Label text="Jmbg roditelja:" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Jmbg:" GridPane.rowIndex="10">
+      <Label text="Datum rođenja roditelja:" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Datum rođenja:" GridPane.rowIndex="11">
+      <Label text="Broj telefona roditelja:" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Broj telefona:" GridPane.rowIndex="12">
-         <GridPane.margin>
-            <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-         </GridPane.margin>
-      </Label>
-      <TextField fx:id="nameParentField" GridPane.columnIndex="1" GridPane.rowIndex="8">
+      <TextField fx:id="nameParentField" GridPane.columnIndex="1" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="surenameParrentField" GridPane.columnIndex="1" GridPane.rowIndex="9">
+      <TextField fx:id="surenameParrentField" GridPane.columnIndex="1" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextField>
-      <TextField fx:id="jmbgParentField" GridPane.columnIndex="1" GridPane.rowIndex="10">
+      <TextField fx:id="jmbgParentField" GridPane.columnIndex="1" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextField>
-      <DatePicker fx:id="dateParrentField" prefHeight="25.0" prefWidth="274.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
+      <DatePicker fx:id="dateParrentField" prefHeight="25.0" prefWidth="274.0" GridPane.columnIndex="1" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </DatePicker>
-      <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="12">
+      <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>

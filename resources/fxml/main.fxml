@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.MainController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="522.0" prefWidth="744.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.ControllerMain">
   <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="125.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="268.0" minWidth="10.0" prefWidth="216.0" />
@@ -54,7 +54,6 @@
             <Menu mnemonicParsing="false" text="Opcije">
                <items>
                   <RadioMenuItem fx:id="radioChildren" mnemonicParsing="false" text="Djeca" />
-                  <RadioMenuItem fx:id="radioParent" mnemonicParsing="false" text="Roditelji" />
                   <RadioMenuItem fx:id="radioWorker" mnemonicParsing="false" text="Uposlenici" />
                </items>
             </Menu>

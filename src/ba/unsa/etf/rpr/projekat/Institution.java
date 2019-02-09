@@ -1,12 +1,20 @@
 package ba.unsa.etf.rpr.projekat;
 
-/*koje su bitne informacije za neku ustanovu*/
+import java.time.LocalDate;
 
 public class Institution {
     int id;
-    String name;
+    String name, phoneNumber, email, nameOfDirector, surenameOfDirector, jmbgOfDirector, phoneNumberOfDirector, emailOfDirector;
+    LocalDate dateOfBirthOfDirector;
     Place place;
-    Person director;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
@@ -16,12 +24,68 @@ public class Institution {
         this.name = name;
     }
 
-    public int getId() {
-        return id;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getNameOfDirector() {
+        return nameOfDirector;
+    }
+
+    public void setNameOfDirector(String nameOfDirector) {
+        this.nameOfDirector = nameOfDirector;
+    }
+
+    public String getSurenameOfDirector() {
+        return surenameOfDirector;
+    }
+
+    public void setSurenameOfDirector(String surenameOfDirector) {
+        this.surenameOfDirector = surenameOfDirector;
+    }
+
+    public String getJmbgOfDirector() {
+        return jmbgOfDirector;
+    }
+
+    public void setJmbgOfDirector(String jmbgOfDirector) {
+        this.jmbgOfDirector = jmbgOfDirector;
+    }
+
+    public String getPhoneNumberOfDirector() {
+        return phoneNumberOfDirector;
+    }
+
+    public void setPhoneNumberOfDirector(String phoneNumberOfDirector) {
+        this.phoneNumberOfDirector = phoneNumberOfDirector;
+    }
+
+    public String getEmailOfDirector() {
+        return emailOfDirector;
+    }
+
+    public void setEmailOfDirector(String emailOfDirector) {
+        this.emailOfDirector = emailOfDirector;
+    }
+
+    public LocalDate getDateOfBirthOfDirector() {
+        return dateOfBirthOfDirector;
+    }
+
+    public void setDateOfBirthOfDirector(LocalDate dateOfBirthOfDirector) {
+        this.dateOfBirthOfDirector = dateOfBirthOfDirector;
     }
 
     public Place getPlace() {
@@ -32,16 +96,7 @@ public class Institution {
         this.place = place;
     }
 
-    public Person getDirector() {
-        return director;
-    }
-
-    public void setDirector(Person director) {
-        this.director = director;
-    }
-
-    @Override
-    public String toString() {
+    public String toString(){
         return name;
     }
 }

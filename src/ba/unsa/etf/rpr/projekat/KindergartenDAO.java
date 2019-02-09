@@ -4,65 +4,123 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.*;
-import java.sql.Date;
-import java.util.*;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 public class KindergartenDAO {
+
     private Connection con;
 
-    private PreparedStatement getInstitutions, placeByID, getPlaces, addPlace, getDirectors, directorById,
-                                addInstitution, addDirector, getEducators, getSpecialEducators, getChildrenWithSpecialNeeds,
-    getChildren12, getChildren35, getParents, removeChildren12, removeChildren35, removeChildrenWithSpecilaNeeds,
-    removeEducator, removeSpecialEducator, removeParent, addChildWithSpecialNeeds, addChild12, addChild35, addParrent,
-    addEducator, addSpecialEducator, editParrent, editChildWithSpecialNeeds, editChild12, editChild35;
-
+    private PreparedStatement getChildren, addEducator, getEducators, getInstitutions, addChild, placeById, addInstitution, getPlaces, addPlace, institutionById;
 
     {
         try {
             con = DriverManager.getConnection("jdbc:sqlite:base.db");
+            getChildren = con.prepareStatement("select * from children order by id");
             getInstitutions = con.prepareStatement("select * from institutions");
-            editChildWithSpecialNeeds = con.prepareStatement("update childeren_with_special_needs set id=?, name=?, surename=?, jmbg=?, date_of_birth=?, place=?, parent=?, institution=?, type=? where id=?");
-            editChild12 = con.prepareStatement("update children12 set name=?, surename=?, jmbg=?, date_of_birth=?, place=?, parent=?, institution=?, type=? where id=?");
-            editChild35 = con.prepareStatement("update children35 set name=?, surename=?, jmbg=?, date_of_birth=?, place=?, parent=?, institution=?, type=? where id=?");
-            getDirectors = con.prepareStatement("select * from directors");
-            placeByID = con.prepareStatement("select * from places where id = ?");
+            placeById = con.prepareStatement("select * from places where id = ?");
+            addInstitution = con.prepareStatement("insert into institutions (id, name, place, phone_number, email, name_of_director, surename_of_director, jmbg_of_director, date_of_birth_of_director, phone_number_of_director, email_of_director) values (?,?,?,?,?,?,?,?,?,?,?)");
             getPlaces = con.prepareStatement("select * from places");
-            addPlace = con.prepareStatement("insert into places (id, name, adress, zipCode) values (?, ?, ?, ?)");
-            directorById = con.prepareStatement("select * from directors where id = ?");
-            addInstitution = con.prepareStatement("insert into institutions (id, place, director, name) values (?, ?, ?, ?)");
-            addDirector = con.prepareStatement("insert into directors (id, name, surename, jmbg, date_of_birth, place) values (?, ?, ?, ?, ?, ?)");
+            addPlace = con.prepareStatement("insert into places (id, name, adress, zip_code) values (?,?,?,?)");
+            institutionById = con.prepareStatement("select * from institutions where id = ?");
+            addEducator = con.prepareStatement("insert into educators (id,name,surename,jmbg,date_of_birth,place,institution,special_needs) values (?,?,?,?,?,?,?,?)");
+            addChild = con.prepareStatement("insert into children (id,name,surename,date_of_birth,jmbg,place,institution,special_needs,parents_name,parents_surename, parents_jmbg,parents_date_of_birth,parents_phone_number) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             getEducators = con.prepareStatement("select * from educators");
-            getSpecialEducators = con.prepareStatement("select * from specialEducators");
-            getChildrenWithSpecialNeeds = con.prepareStatement("select * from childeren_with_special_needs");
-            getChildren12 = con.prepareStatement("select * from children12");
-            getChildren35 = con.prepareStatement("select * from children35");
-            getParents = con.prepareStatement("select * from parents");
-            removeChildren35 = con.prepareStatement("delete from children35 where id = ?");
-            removeChildren12 = con.prepareStatement("delete from children12 where id = ?");
-            removeChildrenWithSpecilaNeeds = con.prepareStatement("delete from childeren_with_special_needs where id = ?");
-            removeEducator = con.prepareStatement("delete from educators where id = ?");
-            removeSpecialEducator = con.prepareStatement("delete from specialEducators where id = ?");
-            removeParent = con.prepareStatement("delete from parents where id = ?");
-            addChildWithSpecialNeeds = con.prepareStatement("insert into childeren_with_special_needs (id, name, surename, jmbg, date_of_birth, place, parent, institution, type) values (?, ?, ?,?,?,?,?,?,?)");
-            editParrent = con.prepareStatement("update parents set name=?, surename=?, jmbg=?, date_of_birth=?, phone_number=? where id=?");
-            addChild12 = con.prepareStatement("insert into children12 (id, name, surename, jmbg, date_of_birth, place, parent, institution, type) values (?, ?, ?,?,?,?,?,?,?)");
-            addEducator = con.prepareStatement("insert into educators (id, name, surename, jmbg, date_of_birth, institution, type) values (?, ?, ?, ?, ?, ?, ?)");
-            addSpecialEducator = con.prepareStatement("insert into specialEducators (id, name, surename, jmbg, date_of_birth, institution, type) values (?, ?, ?, ?, ?, ?, ?)");
-            addParrent = con.prepareStatement("insert into parents (id, name,surename, jmbg, date_of_birth, phone_number) values(?,?,?,?,?,?)");
-            addChild35 = con.prepareStatement("insert into children35 (id, name, surename, jmbg, date_of_birth, place, parent, institution, type) values (?, ?, ?,?,?,?,?,?,?)");
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public ObservableList<Place> getPlaces(){
+    public ObservableList<Institution> getInstitutions() {
+        List<Institution> list = new ArrayList<Institution>();
+        ObservableList<Institution> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getInstitutions.executeQuery();
+            while(rs.next()){
+                Institution institution = new Institution();
+                institution.setId(rs.getInt(1));
+                institution.setName(rs.getString(2));
+                institution.setPlace(this.placeById(rs.getInt(3)));
+                institution.setPhoneNumber(rs.getString(4));
+                institution.setEmail(rs.getString(5));
+                institution.setNameOfDirector(rs.getString(6));
+                institution.setSurenameOfDirector(rs.getString(7));
+                institution.setJmbgOfDirector(rs.getString(8));
+                institution.setDateOfBirthOfDirector(rs.getDate(9).toLocalDate());
+                institution.setPhoneNumberOfDirector(rs.getString(10));
+                institution.setEmailOfDirector(rs.getString(11));
+                list.add(institution);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public Place placeById(int anInt) {
+        Place place = new Place();
+        try {
+            placeById.setInt(1, anInt);
+            ResultSet rs = placeById.executeQuery();
+            while (rs.next()){
+                place.setId(rs.getInt(1));
+                place.setName(rs.getString(2));
+                place.setAdress(rs.getString(3));
+                place.setZipCode(rs.getString(4));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return place;
+    }
+
+    public int getMaxIdFromInstitutions() {
+        ArrayList lista = new ArrayList<Integer>();
+        Iterator it = this.getInstitutions().iterator();
+        while (it.hasNext()){
+            Institution vlasnik1 = (Institution) it.next();
+            lista.add(vlasnik1.getId());
+        }
+        if(!lista.isEmpty()) {
+            return (int) Collections.max(lista) + 1;
+        }
+        return 1;
+    }
+
+    public void addInstitiution(Institution institution) {
+        try {
+            addInstitution.setInt(1, institution.getId());
+            addInstitution.setString(2, institution.getName());
+            addInstitution.setInt(3, institution.getPlace().getId());
+            addInstitution.setString(4, institution.getPhoneNumber());
+            addInstitution.setString(5, institution.getEmail());
+            addInstitution.setString(6, institution.getNameOfDirector());
+            addInstitution.setString(7, institution.getSurenameOfDirector());
+            addInstitution.setString(8, institution.getJmbgOfDirector());
+            addInstitution.setDate(9, Date.valueOf(institution.getDateOfBirthOfDirector()));
+            addInstitution.setString(10, institution.getPhoneNumberOfDirector());
+            addInstitution.setString(11, institution.getEmailOfDirector());
+
+            addInstitution.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public ObservableList getPlaces() {
         List<Place> list = new ArrayList<Place>();
         ObservableList<Place> observableList = FXCollections.observableList(list);
-
         ResultSet rs = null;
-        try{
+        try {
             rs = getPlaces.executeQuery();
-            while (rs.next()){
+            while(rs.next()){
                 Place place = new Place();
                 place.setId(rs.getInt(1));
                 place.setName(rs.getString(2));
@@ -76,104 +134,24 @@ public class KindergartenDAO {
         return observableList;
     }
 
-    public ObservableList<Person> getDirectors(){
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
 
-        ResultSet rs = null;
-        try {
-            rs = getDirectors.executeQuery();
-            while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                list.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+
+    public int getMaxIdFromPlaces() {
+        ArrayList lista = new ArrayList<Integer>();
+        Iterator it = this.getPlaces().iterator();
+        while (it.hasNext()){
+            Place place = (Place) it.next();
+            lista.add(place.getId());
         }
-        return observableList;
-    }
-
-
-    public ObservableList<Institution> getInstitutions(){
-        List<Institution> list = new ArrayList<Institution>();
-        ObservableList<Institution> observableList = FXCollections.observableList(list);
-
-        ResultSet rs = null;
-        try {
-            rs = getInstitutions.executeQuery();
-            while(rs.next()){
-                Institution institution = new Institution();
-                institution.setId(rs.getInt(1));
-                institution.setDirector(directorById(rs.getInt(3)));
-                institution.setPlace(placeByID(rs.getInt(2)));
-                institution.setName(rs.getString(4));
-                list.add(institution);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(!lista.isEmpty()) {
+            return (int) Collections.max(lista) + 1;
         }
-        return observableList;
-    }
-
-    private Person directorById(int idOfDirector) {
-        Person director = new Person();
-        try {
-            directorById.setInt(1, idOfDirector);
-            ResultSet rs = directorById.executeQuery();
-            while (rs.next()){
-                director.setId(idOfDirector);
-                director.setName(rs.getString(2));
-                director.setSurename(rs.getString(3));
-                director.setJmbg(rs.getString(4));
-                director.setDateOfBirth(rs.getDate(5).toLocalDate());
-                director.setPlaceOfBirth(placeByID(rs.getInt(6)));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return director;
-    }
-
-    private Place placeByID(int idOfPlace) {
-        Place place = new Place();
-
-        try {
-            placeByID.setInt(1, idOfPlace);
-            ResultSet rs = placeByID.executeQuery();
-            while (rs.next()){
-                place.setId(rs.getInt(1));
-                place.setName(rs.getString(2));
-                place.setAdress(rs.getString(3));
-                place.setZipCode(rs.getString(4));
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return place;
-    }
-
-    public int getMaxIdFromPlaces(){
-            ArrayList lista = new ArrayList<Integer>();
-            Iterator it = this.getPlaces().iterator();
-            while (it.hasNext()){
-                Place place = (Place) it.next();
-                lista.add(place.getId());
-            }
-            if(!lista.isEmpty()) {
-                return (int) Collections.max(lista) + 1;
-            }
-            return 1;
+        return 1;
     }
 
     public void addPlace(Place place) {
         try {
-            addPlace.setInt(1, this.getMaxIdFromPlaces());
+            addPlace.setInt(1, place.getId());
             addPlace.setString(2, place.getName());
             addPlace.setString(3, place.getAdress());
             addPlace.setString(4, place.getZipCode());
@@ -181,76 +159,72 @@ public class KindergartenDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
     }
 
-    public int getMaxIdFromInstitutions() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getInstitutions().iterator();
-        while (it.hasNext()){
-            Institution institution = (Institution) it.next();
-            lista.add(institution.getId());
-        }
-        if(!lista.isEmpty()) {
-            return (int) Collections.max(lista) + 1;
-        }
-        return 1;
-    }
-
-
-    public void addInstitution(Institution institution) {
+    public ObservableList getChildren(Institution institution, int a) {
+        /*
+        1 -12
+        2 -35
+        3 -sn
+         */
+        List<Child> list = new ArrayList<Child>();
+        ObservableList<Child> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
         try {
-            addInstitution.setInt(1, this.getMaxIdFromInstitutions());
-            addInstitution.setInt(2, institution.getPlace().getId());
-            addInstitution.setInt(3, institution.getDirector().getId());
-            addInstitution.setString(4, institution.getName());
-            addInstitution.executeUpdate();
+            rs = getChildren.executeQuery();
+            while(rs.next()){
+                Child child = new Child();
+
+                child.setId(rs.getInt(1));
+                child.setName(rs.getString(2));
+                child.setSurename(rs.getString(3));
+                child.setDateOfBirth(rs.getDate(4).toLocalDate());
+                child.setJmbg(rs.getString(5));
+                child.setDwelling(this.placeById(rs.getInt(6)));
+                child.setInstitution(this.institutionById(rs.getInt(7)));
+                child.setChildWithSpecialNeeds(rs.getBoolean(8));
+                child.setParentsName(rs.getString(9));
+                child.setParentsSurename(rs.getString(10));
+                child.setParentsJmbg(rs.getString(11));
+                child.setParentsDateOfBirth(rs.getDate(12).toLocalDate());
+                child.setPhoneNumber(rs.getString(13));
+
+                if(a==1 && child.getInstitution().getId() == institution.getId() && Period.between(child.getDateOfBirth(), LocalDate.now()).getYears() <=2 && Period.between(child.getDateOfBirth(), LocalDate.now()).getYears() >=1) {
+                    list.add(child);
+                } else if(a==2 && child.getInstitution().getId() == institution.getId() && Period.between(child.getDateOfBirth(), LocalDate.now()).getYears() <6 && Period.between(child.getDateOfBirth(), LocalDate.now()).getYears() >=3){
+                    list.add(child);
+                } else if(a==3 && child.getInstitution().getId() == institution.getId() && child.isChildWithSpecialNeeds()){
+                    list.add(child);
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return observableList;
     }
 
-    public int getMaxIdFromDirecotors() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getDirectors().iterator();
-        while (it.hasNext()){
-            Person dircetro = (Person) it.next();
-            lista.add(dircetro.getId());
-        }
-        if(!lista.isEmpty()) {
-            return (int) Collections.max(lista) + 1;
-        }
-        return 1;
-    }
-
-    public void addDirector(Person director){
-        try {
-            addDirector.setInt(1, this.getMaxIdFromDirecotors());
-            addDirector.setString(2, director.getName());
-            addDirector.setString(3, director.getSurename());
-            addDirector.setString(4, director.getJmbg());
-            addDirector.setDate(5, Date.valueOf(director.getDateOfBirth()));
-            addDirector.setInt(6, director.getPlaceOfBirth().getId());
-            addDirector.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public ObservableList getEducators() {
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
+    public ObservableList getEducators(){
+        List<Educator> list = new ArrayList<Educator>();
+        ObservableList<Educator> observableList = FXCollections.observableList(list);
         ResultSet rs = null;
         try {
             rs = getEducators.executeQuery();
             while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                list.add(person);
+                Educator educator = new Educator();
+
+                educator.setId(rs.getInt(1));
+                educator.setName(rs.getString(2));
+                educator.setSurename(rs.getString(3));
+                educator.setJmbg(rs.getString(4));
+                educator.setDateOfBirth(rs.getDate(5).toLocalDate());
+                educator.setDweling(this.placeById(rs.getInt(6)));
+                educator.setInstitution(this.institutionById(rs.getInt(7)));
+                educator.setEducatorForChildrenForSpecialNeeds(rs.getBoolean(8));
+
+
+                list.add(educator);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -258,21 +232,32 @@ public class KindergartenDAO {
         return observableList;
     }
 
-    public ObservableList getSpecialEducators() {
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
+
+    public ObservableList getAllChildren() {
+        List<Child> list = new ArrayList<Child>();
+        ObservableList<Child> observableList = FXCollections.observableList(list);
         ResultSet rs = null;
         try {
-            rs = getSpecialEducators.executeQuery();
+            rs = getChildren.executeQuery();
             while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                list.add(person);
+                Child child = new Child();
+
+                child.setId(rs.getInt(1));
+                child.setName(rs.getString(2));
+                child.setSurename(rs.getString(3));
+                child.setDateOfBirth(rs.getDate(4).toLocalDate());
+                child.setJmbg(rs.getString(5));
+                child.setDwelling(this.placeById(rs.getInt(6)));
+                child.setInstitution(this.institutionById(rs.getInt(7)));
+                child.setChildWithSpecialNeeds(rs.getBoolean(8));
+                child.setParentsName(rs.getString(9));
+                child.setParentsSurename(rs.getString(10));
+                child.setParentsJmbg(rs.getString(11));
+                child.setParentsDateOfBirth(rs.getDate(12).toLocalDate());
+                child.setPhoneNumber(rs.getString(13));
+
+                list.add(child);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -280,222 +265,36 @@ public class KindergartenDAO {
         return observableList;
     }
 
-    public ObservableList getChildrenWithSpecialNeeds() {
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
-        ResultSet rs = null;
+    private Institution institutionById(int anInt) {
+        Institution institution = new Institution();
         try {
-            rs = getChildrenWithSpecialNeeds.executeQuery();
-            while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                person.setType(rs.getInt(9) != 0);
-                list.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return observableList;
-    }
-
-    public ObservableList getChildren12() {
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
-        ResultSet rs = null;
-        try {
-            rs = getChildren12.executeQuery();
-            while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                person.setType(rs.getInt(9) != 0);
-                list.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return observableList;
-    }
-
-    public ObservableList getChildren35() {
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
-        ResultSet rs = null;
-        try {
-            rs = getChildren35.executeQuery();
-            while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                person.setType(rs.getInt(9) != 0);
-                list.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return observableList;
-    }
-
-    public ObservableList getParents() {
-        List<Person> list = new ArrayList<Person>();
-        ObservableList<Person> observableList = FXCollections.observableList(list);
-        ResultSet rs = null;
-        try {
-            rs = getParents.executeQuery();
-            while(rs.next()){
-                Person person = new Person();
-                person.setId(rs.getInt(1));
-                person.setName(rs.getString(2));
-                person.setSurename(rs.getString(3));
-                person.setJmbg(rs.getString(4));
-                person.setDateOfBirth(rs.getDate(5).toLocalDate());
-                person.setPlaceOfBirth(placeByID(rs.getInt(6)));
-                list.add(person);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return observableList;
-    }
-
-    public void removeEducator(Person educator){
-        try {
-            removeEducator.setInt(1, educator.getId());
-            removeEducator.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-
-    }
-    public void removeSpecialEducator(Person educator){
-        try {
-            removeSpecialEducator.setInt(1, educator.getId());
-            removeSpecialEducator.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void removeChildren12(Person child){
-        try {
-            removeChildren12.setInt(1, child.getId());
-            removeParent.setInt(1, this.getIdOfParent(child));
-            removeParent.executeUpdate();
-            removeChildren12.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private int getIdOfParent(Person child) {
-        ResultSet rs = null;
-        try {
-            rs = getChildren12.executeQuery();
+            institutionById.setInt(1, anInt);
+            ResultSet rs = institutionById.executeQuery();
             while (rs.next()){
-                if(child.getId() == rs.getInt(1)){
-                    return rs.getInt(7);
-                }
-            }
-            rs = getChildren35.executeQuery();
-            while (rs.next()){
-                if(child.getId() == rs.getInt(1)){
-                    return rs.getInt(7);
-                }
-            }
-            rs = getChildrenWithSpecialNeeds.executeQuery();
-            while (rs.next()){
-                if(child.getId() == rs.getInt(1)){
-                    return rs.getInt(7);
-                }
-            }
+                institution.setId(rs.getInt(1));
+                institution.setName(rs.getString(2));
+                institution.setPlace(this.placeById(rs.getInt(3)));
+                institution.setPhoneNumber(rs.getString(4));
+                institution.setEmail(rs.getString(5));
+                institution.setNameOfDirector(rs.getString(6));
+                institution.setSurenameOfDirector(rs.getString(7));
+                institution.setJmbgOfDirector(rs.getString(8));
+                institution.setDateOfBirthOfDirector(rs.getDate(9).toLocalDate());
+                institution.setPhoneNumberOfDirector(rs.getString(10));
+                institution.setEmailOfDirector(rs.getString(11));
 
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return -1;
-
-    }
-
-    public void removeChildren35(Person child){
-        try {
-            removeChildren35.setInt(1, child.getId());
-            removeParent.setInt(1, this.getIdOfParent(child));
-            removeParent.executeUpdate();
-            removeChildren35.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Person getParentt(Person child) {
-        Person parentt = new Person();
-        int idOfParrent = this.getIdOfParent(child);
-
-        ResultSet rs = null;
-
-        try {
-            rs = getParents.executeQuery();
-            while (rs.next()) {
-                if (rs.getInt(1) == idOfParrent) {
-                    parentt.setId(idOfParrent);
-                    parentt.setName(rs.getString(2));
-                    parentt.setSurename(rs.getString(3));
-                    parentt.setJmbg(rs.getString(4));
-                    parentt.setDateOfBirth(rs.getDate(5).toLocalDate());
-                    parentt.setPhoneNumber(rs.getString(6));
-                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
-        return parentt;
+        return institution;
     }
 
-        public void removeChildrenWithSpecilaNeeds(Person child){
-
-        try {
-            removeChildrenWithSpecilaNeeds.setInt(1, child.getId());
-            removeParent.setInt(1, this.getIdOfParent(child));
-            removeParent.executeUpdate();
-            removeChildrenWithSpecilaNeeds.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public int getMaxIdFromParents() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getParents().iterator();
+    public int getMaxIdFromChildren() {
+        ArrayList lista = new ArrayList<Child>();
+        Iterator it = this.getAllChildren().iterator();
         while (it.hasNext()){
-            Person parent = (Person) it.next();
-            lista.add(parent.getId());
-        }
-        if(!lista.isEmpty()) {
-            return (int) Collections.max(lista) + 1;
-        }
-        return 1;
-    }
-
-    public int getMaxIdFromChildrenWithSpecialNeeds() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getChildrenWithSpecialNeeds().iterator();
-        while (it.hasNext()){
-            Person child = (Person) it.next();
+            Child child = (Child) it.next();
             lista.add(child.getId());
         }
         if(!lista.isEmpty()) {
@@ -504,92 +303,23 @@ public class KindergartenDAO {
         return 1;
     }
 
-    public void addChildWithSpecialNeeds(Child child) {
+    public void addChild(Child child) {
         try {
-            addChildWithSpecialNeeds.setInt(1, child.getId());
-            addChildWithSpecialNeeds.setString(2, child.getName());
-            addChildWithSpecialNeeds.setString(3, child.getSurename());
-            addChildWithSpecialNeeds.setString(4, child.getJmbg());
-            addChildWithSpecialNeeds.setDate(5, Date.valueOf(child.getDateOfBirth()));
-            addChildWithSpecialNeeds.setInt(6, child.getPlaceOfBirth().getId());
-            addChildWithSpecialNeeds.setInt(7, child.getParentt().getId());
-            addChildWithSpecialNeeds.setInt(8, child.getInstitution().getId());
-            addChildWithSpecialNeeds.setInt(9, child.isType() ? 1:0);
-            addChildWithSpecialNeeds.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+            addChild.setInt(1, child.getId());
+            addChild.setString(2, child.getName());
+            addChild.setString(3, child.getSurename());
+            addChild.setDate(4, Date.valueOf(child.getDateOfBirth()));
+            addChild.setString(5, child.getJmbg());
+            addChild.setInt(6, child.getDwelling().getId());
+            addChild.setInt(7, child.getInstitution().getId());
+            addChild.setBoolean(8, child.isChildWithSpecialNeeds());
+            addChild.setString(9, child.getParentsName());
+            addChild.setString(10, child.getParentsSurename());
+            addChild.setString(11, child.getJmbg());
+            addChild.setDate(12, Date.valueOf(child.getParentsDateOfBirth()));
+            addChild.setString(13, child.getPhoneNumber());
 
-    public int getMaxIdFromChildren12() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getChildren12().iterator();
-        while (it.hasNext()){
-            Person child = (Person) it.next();
-            lista.add(child.getId());
-        }
-        if(!lista.isEmpty()) {
-            return (int) Collections.max(lista) + 1;
-        }
-        return 1;
-    }
-
-    public void addChild12(Child child) {
-        try {
-            addChild12.setInt(1, child.getId());
-            addChild12.setString(2, child.getName());
-            addChild12.setString(3, child.getSurename());
-            addChild12.setString(4, child.getJmbg());
-            addChild12.setDate(5, Date.valueOf(child.getDateOfBirth()));
-            addChild12.setInt(6, child.getPlaceOfBirth().getId());
-            addChild12.setInt(7, child.getParentt().getId());
-            addChild12.setInt(8, child.getInstitution().getId());
-            addChild12.setInt(9, child.isType() ? 1:0);
-            addChild12.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public int getMaxIdFromChildren35() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getChildren35().iterator();
-        while (it.hasNext()){
-            Person child = (Person) it.next();
-            lista.add(child.getId());
-        }
-        if(!lista.isEmpty()) {
-            return (int) Collections.max(lista) + 1;
-        }
-        return 1;
-    }
-
-    public void addChild35(Child child) {
-        try {
-            addChild35.setInt(1, child.getId());
-            addChild35.setString(2, child.getName());
-            addChild35.setString(3, child.getSurename());
-            addChild35.setString(4, child.getJmbg());
-            addChild35.setDate(5, Date.valueOf(child.getDateOfBirth()));
-            addChild35.setInt(6, child.getPlaceOfBirth().getId());
-            addChild35.setInt(7, child.getParentt().getId());
-            addChild35.setInt(8, child.getInstitution().getId());
-            addChild35.setInt(9, child.isType() ? 1:0);
-            addChild35.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void addParrent(Parentt parentt) {
-        try {
-            addParrent.setInt(1, parentt.getId());
-            addParrent.setString(2, parentt.getName());
-            addParrent.setString(3, parentt.getSurename());
-            addParrent.setString(4, parentt.getJmbg());
-            addParrent.setDate(5, Date.valueOf(parentt.getDateOfBirth()));
-            addParrent.setString(6, parentt.getPhoneNumber());
-            addParrent.executeUpdate();
+            addChild.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -597,11 +327,11 @@ public class KindergartenDAO {
     }
 
     public int getMaxIdFromEducators() {
-        ArrayList lista = new ArrayList<Integer>();
+        ArrayList lista = new ArrayList<Educator>();
         Iterator it = this.getEducators().iterator();
         while (it.hasNext()){
-            Person child = (Person) it.next();
-            lista.add(child.getId());
+            Educator educator = (Educator) it.next();
+            lista.add(educator.getId());
         }
         if(!lista.isEmpty()) {
             return (int) Collections.max(lista) + 1;
@@ -609,18 +339,6 @@ public class KindergartenDAO {
         return 1;
     }
 
-    public int getMaxIdFromSpecialEducators() {
-        ArrayList lista = new ArrayList<Integer>();
-        Iterator it = this.getSpecialEducators().iterator();
-        while (it.hasNext()){
-            Person child = (Person) it.next();
-            lista.add(child.getId());
-        }
-        if(!lista.isEmpty()) {
-            return (int) Collections.max(lista) + 1;
-        }
-        return 1;
-    }
 
     public void addEducator(Educator educator) {
         try {
@@ -629,94 +347,10 @@ public class KindergartenDAO {
             addEducator.setString(3, educator.getSurename());
             addEducator.setString(4, educator.getJmbg());
             addEducator.setDate(5, Date.valueOf(educator.getDateOfBirth()));
-            addEducator.setInt(6, educator.getInstitution().getId());
-            addEducator.setInt(7, 0);
+            addEducator.setInt(6, educator.getDweling().getId());
+            addEducator.setInt(7, educator.getInstitution().getId());
+            addEducator.setBoolean(8, educator.isEducatorForChildrenForSpecialNeeds());
             addEducator.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void addSpecialEducator(Educator educator) {
-        try {
-            addSpecialEducator.setInt(1, educator.getId());
-            addSpecialEducator.setString(2, educator.getName());
-            addSpecialEducator.setString(3, educator.getSurename());
-            addSpecialEducator.setString(4, educator.getJmbg());
-            addSpecialEducator.setDate(5, Date.valueOf(educator.getDateOfBirth()));
-            addSpecialEducator.setInt(6, educator.getInstitution().getId());
-            addSpecialEducator.setInt(7, 1);
-            addSpecialEducator.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void editParrent(Parentt parentt) {
-
-        try {
-            editParrent.setString(1, parentt.getName());
-            editParrent.setString(2, parentt.getSurename());
-            editParrent.setString(3, parentt.getJmbg());
-            editParrent.setDate(4, Date.valueOf(parentt.getDateOfBirth()));
-            editParrent.setString(5, parentt.getPhoneNumber());
-            editParrent.setInt(6, parentt.getId());
-            editParrent.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void editChildWithSpecialNeeds(Child child) {
-
-        try {
-            editChildWithSpecialNeeds.setString(1, child.getName());
-            editChildWithSpecialNeeds.setString(2, child.getSurename());
-            editChildWithSpecialNeeds.setString(3, child.getJmbg());
-            editChildWithSpecialNeeds.setDate(4, Date.valueOf(child.getDateOfBirth()));
-            editChildWithSpecialNeeds.setInt(5, child.getPlaceOfBirth().getId());
-            editChildWithSpecialNeeds.setInt(6, child.getParentt().getId());
-            editChildWithSpecialNeeds.setInt(7, child.getInstitution().getId());
-            editChildWithSpecialNeeds.setInt(9, child.getId());
-            editChildWithSpecialNeeds.setInt(8, child.isType() ? 1:0);
-            editChildWithSpecialNeeds.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-    }
-
-    public void editChild12(Child child) {
-        try {
-            editChild12.setString(1, child.getName());
-            editChild12.setString(2, child.getSurename());
-            editChild12.setString(3, child.getJmbg());
-            editChild12.setDate(4, Date.valueOf(child.getDateOfBirth()));
-            editChild12.setInt(5, child.getPlaceOfBirth().getId());
-            editChild12.setInt(6, child.getParentt().getId());
-            editChild12.setInt(7, child.getInstitution().getId());
-            editChild12.setInt(9, child.getId());
-            editChild12.setInt(8, child.isType() ? 1:0);
-            editChild12.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void editChild35(Child child) {
-        try {
-            editChild35.setString(1, child.getName());
-            editChild35.setString(2, child.getSurename());
-            editChild35.setString(3, child.getJmbg());
-            editChild35.setDate(4, Date.valueOf(child.getDateOfBirth()));
-            editChild35.setInt(5, child.getPlaceOfBirth().getId());
-            editChild35.setInt(6, child.getParentt().getId());
-            editChild35.setInt(7, child.getInstitution().getId());
-            editChild35.setInt(9, child.getId());
-            editChild35.setInt(8, child.isType() ? 1:0);
-            editChild35.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }

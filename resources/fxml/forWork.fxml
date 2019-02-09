@@ -15,12 +15,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
-  <columnConstraints>
+    <columnConstraints>
     <ColumnConstraints maxWidth="214.0" minWidth="33.0" prefWidth="120.0" />
       <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="84.0" />
       <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="148.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="353.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="54.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="166.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="250.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
@@ -35,14 +35,6 @@
       <Label text="Datum:" GridPane.rowIndex="3" />
       <Label text="Vrijeme:" GridPane.rowIndex="4" />
       <ProgressBar fx:id="progresBar" prefHeight="18.0" prefWidth="263.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-      <TableView fx:id="tableOfPersons" prefHeight="259.0" prefWidth="768.0" GridPane.columnSpan="5" GridPane.rowIndex="6">
-        <columns>
-          <TableColumn fx:id="memberNumberColumn" prefWidth="75.0" text="Članski broj" />
-          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Ime" />
-            <TableColumn fx:id="surenameColumn" prefWidth="75.0" text="Prezime" />
-            <TableColumn fx:id="apsentColumn" prefWidth="75.0" text="Prisutan" />
-        </columns>
-      </TableView>
       <Label fx:id="timeLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
          <GridPane.margin>
@@ -90,7 +82,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Button fx:id="settingsButton" mnemonicParsing="false" GridPane.columnIndex="4">
+      <Button fx:id="settingsButton" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.halignment="RIGHT">
          <graphic>
             <ImageView fitHeight="24.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -105,6 +97,14 @@
       <Label text="Ustanova:" />
       <Label fx:id="institutionLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" />
       <Label fx:id="groupLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+      <TableView fx:id="tableOfChildren" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="6">
+        <columns>
+          <TableColumn fx:id="memberNumberColumn" prefWidth="75.0" text="Članski broj" />
+          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Ime" />
+            <TableColumn fx:id="surenameColumn" prefWidth="75.0" text="Prezime" />
+            <TableColumn fx:id="presenceColumn" prefWidth="75.0" text="Prisutan" />
+        </columns>
+      </TableView>
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

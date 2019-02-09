@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -12,27 +13,34 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="157.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.AddInstitutionController">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.ControllerAddInstitution">
   <columnConstraints>
-    <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="62.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="307.0" />
+    <ColumnConstraints hgrow="SOMETIMES" maxWidth="188.0" minWidth="10.0" prefWidth="140.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="367.0" minWidth="10.0" prefWidth="292.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="23.0" minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="36.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Mjesto:" GridPane.rowIndex="1" />
-      <Label text="Direktor:" GridPane.rowIndex="2" />
-      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+      <Label text="Mjesto ustanove:" GridPane.rowIndex="1" />
+      <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
         <buttons>
           <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
             <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
         </buttons>
       </ButtonBar>
-      <ComboBox fx:id="placeOfInstitutionCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+      <ComboBox fx:id="placeOfInstitutionCombo" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="addPlaceOfInstitutionButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <graphic>
             <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
@@ -42,18 +50,24 @@
             </ImageView>
          </graphic>
       </Button>
-      <Button fx:id="addDirectorButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="2">
-         <graphic>
-            <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../img/Actions-list-add-user-icon.png" />
-               </image>
-            </ImageView>
-         </graphic>
-      </Button>
-      <ComboBox fx:id="directorCombo" prefHeight="25.0" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-      <Label text="Naziv:" />
+      <Label text="Naziv ustanove:" />
       <TextField fx:id="nameOfInstitution" GridPane.columnIndex="1" />
+      <Label text="Ime direktora:" GridPane.rowIndex="5" />
+      <Label text="Prezime direktora:" GridPane.rowIndex="6" />
+      <Label text="Jmbg direktora:" GridPane.rowIndex="7" />
+      <DatePicker fx:id="dateOfBirthOfDirectorField" prefHeight="25.0" prefWidth="327.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+      <Label text="Datum rođenja direktora:" GridPane.rowIndex="8" />
+      <TextField fx:id="nameOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+      <TextField fx:id="surenameOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+      <TextField fx:id="jmbgOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+      <Label text="Kontakt telefon:" GridPane.rowIndex="2" />
+      <Label text="E-mail ustanove:" GridPane.rowIndex="3" />
+      <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+      <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+      <Label text="Broj telefona direktora:" GridPane.rowIndex="9" />
+      <Label text="E-mail direktora:" GridPane.rowIndex="10" />
+      <TextField fx:id="phoneNumberOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+      <TextField fx:id="emailOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

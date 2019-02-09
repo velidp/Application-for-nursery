@@ -18,10 +18,3 @@ public class Main extends Application {
 
     public static void main(String[] args) { launch(args); }
 }
-/*
-problemi:
--izmjene ponekad bacaju izuzetke.
--sada ide glavno pitanje gdje pohraniti komentare i prisustvo
-
-
- */
