@@ -18,3 +18,11 @@ public class Main extends Application {
 
     public static void main(String[] args) { launch(args); }
 }
+/*
+Agenda:
+->progres bar
+->information i serijalizacija
+->validacija
+->izvještavanje
+->šminkanje (pod ovim podrazumjevam naći način da upotrebim sve ostale stvari)
+ */

@@ -15,6 +15,7 @@ public class ControllerAddChild {
 
     public Button okButton;
     public Button cancelButton;
+
     public TextField nameField;
     public TextField surenameField;
     public TextField jmbgField;
@@ -31,10 +32,10 @@ public class ControllerAddChild {
     public RadioButton specialNeedsYes;
 
     private KindergartenDAO base = new KindergartenDAO();
-    private Child child;
+    public Child chilD;
 
     public ControllerAddChild(Child child){
-        this.child = child;
+        this.chilD = child;
     }
 
     public void initialize(){
@@ -77,6 +78,23 @@ public class ControllerAddChild {
             }
         });
 
+        if(chilD != null){
+            nameField.setText(chilD.getName());
+            surenameField.setText(chilD.getSurename());
+            jmbgField.setText(chilD.getJmbg());
+            dateField.setValue(chilD.getDateOfBirth());
+            placeCombo.getSelectionModel().select(chilD.getDwelling());
+            institutionCombo.getSelectionModel().select(chilD.getInstitution());
+            nameParentField.setText(chilD.getParentsName());
+            surenameParrentField.setText(chilD.getParentsSurename());
+            jmbgParentField.setText(chilD.getJmbg());
+            dateParrentField.setValue(chilD.getParentsDateOfBirth());
+            phoneNumberField.setText(chilD.getPhoneNumber());
+            if(chilD.isChildWithSpecialNeeds()) specialNeedsYes.setSelected(true);
+            else if(!chilD.isChildWithSpecialNeeds()) specialNeedsNo.setSelected(true);
+
+        }
+
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -88,7 +106,7 @@ public class ControllerAddChild {
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(child == null){
+                if(chilD == null){
                     Child child = new Child();
 
                     child.setId(base.getMaxIdFromChildren());
@@ -111,7 +129,28 @@ public class ControllerAddChild {
                     stage.close();
 
                 } else {
+                    Child child = new Child();
 
+                    base.removeChild(chilD.getId());
+
+                    child.setId(base.getMaxIdFromChildren());
+                    child.setName(nameField.getText());
+                    child.setSurename(surenameField.getText());
+                    child.setDateOfBirth(dateField.getValue());
+                    child.setJmbg(jmbgField.getText());
+                    child.setDwelling((Place)placeCombo.getSelectionModel().getSelectedItem());
+                    child.setInstitution((Institution) institutionCombo.getSelectionModel().getSelectedItem());
+                    child.setChildWithSpecialNeeds(specialNeedsYes.isSelected());
+                    child.setParentsName(nameParentField.getText());
+                    child.setParentsSurename(surenameParrentField.getText());
+                    child.setParentsJmbg(jmbgParentField.getText());
+                    child.setParentsDateOfBirth(dateParrentField.getValue());
+                    child.setPhoneNumber(phoneNumberField.getText());
+
+                    base.addChild(child);
+
+                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    stage.close();
                 }
             }
         });

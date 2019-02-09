@@ -15,7 +15,7 @@ public class KindergartenDAO {
 
     private Connection con;
 
-    private PreparedStatement getChildren, addEducator, getEducators, getInstitutions, addChild, placeById, addInstitution, getPlaces, addPlace, institutionById;
+    private PreparedStatement getChildren, removeChild, removeEducator, addEducator, getEducators, getInstitutions, addChild, placeById, addInstitution, getPlaces, addPlace, institutionById;
 
     {
         try {
@@ -30,6 +30,8 @@ public class KindergartenDAO {
             addEducator = con.prepareStatement("insert into educators (id,name,surename,jmbg,date_of_birth,place,institution,special_needs) values (?,?,?,?,?,?,?,?)");
             addChild = con.prepareStatement("insert into children (id,name,surename,date_of_birth,jmbg,place,institution,special_needs,parents_name,parents_surename, parents_jmbg,parents_date_of_birth,parents_phone_number) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             getEducators = con.prepareStatement("select * from educators");
+            removeEducator = con.prepareStatement("delete from educators where id = ?");
+            removeChild = con.prepareStatement("delete from children where id = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -204,7 +206,11 @@ public class KindergartenDAO {
         return observableList;
     }
 
-    public ObservableList getEducators(){
+    public ObservableList getEducators(Institution institution, int a){
+        /*
+        1 - obični
+        2 - special needs
+         */
         List<Educator> list = new ArrayList<Educator>();
         ObservableList<Educator> observableList = FXCollections.observableList(list);
         ResultSet rs = null;
@@ -222,9 +228,36 @@ public class KindergartenDAO {
                 educator.setInstitution(this.institutionById(rs.getInt(7)));
                 educator.setEducatorForChildrenForSpecialNeeds(rs.getBoolean(8));
 
+                if(educator.getInstitution().getId() == institution.getId() && a == 1 && !educator.isEducatorForChildrenForSpecialNeeds())
+                list.add(educator);
+                else if(educator.getInstitution().getId() == institution.getId() && a == 2 && educator.isEducatorForChildrenForSpecialNeeds())
+                list.add(educator);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return observableList;
+    }
+
+    public ObservableList getAllEducators(){
+        List<Educator> list = new ArrayList<Educator>();
+        ObservableList<Educator> observableList = FXCollections.observableList(list);
+        ResultSet rs = null;
+        try {
+            rs = getEducators.executeQuery();
+            while(rs.next()){
+                Educator educator = new Educator();
+
+                educator.setId(rs.getInt(1));
+                educator.setName(rs.getString(2));
+                educator.setSurename(rs.getString(3));
+                educator.setJmbg(rs.getString(4));
+                educator.setDateOfBirth(rs.getDate(5).toLocalDate());
+                educator.setDweling(this.placeById(rs.getInt(6)));
+                educator.setInstitution(this.institutionById(rs.getInt(7)));
+                educator.setEducatorForChildrenForSpecialNeeds(rs.getBoolean(8));
 
                 list.add(educator);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -328,7 +361,7 @@ public class KindergartenDAO {
 
     public int getMaxIdFromEducators() {
         ArrayList lista = new ArrayList<Educator>();
-        Iterator it = this.getEducators().iterator();
+        Iterator it = this.getAllEducators().iterator();
         while (it.hasNext()){
             Educator educator = (Educator) it.next();
             lista.add(educator.getId());
@@ -354,5 +387,26 @@ public class KindergartenDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void removeChild(int id) {
+        try {
+            removeChild.setInt(1, id);
+            removeChild.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void removeEducator(int id) {
+        try {
+            removeEducator.setInt(1, id);
+            removeEducator.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }
