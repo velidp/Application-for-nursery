@@ -154,7 +154,7 @@ public class ControllerMain {
             @Override
             public void handle(ActionEvent event) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
+                alert.setTitle("About");
                 alert.setHeaderText("Aplikacija za vrtić");
                 alert.setContentText("Autor: Velid Poško");
                 alert.showAndWait();

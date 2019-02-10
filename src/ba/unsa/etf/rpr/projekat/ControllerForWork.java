@@ -21,6 +21,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class ControllerForWork {
 
@@ -46,6 +47,7 @@ public class ControllerForWork {
     String group;
 
 
+
     public ControllerForWork(String group, Educator educator, Institution institution){
         this.group = group;
         this.educator = educator;
@@ -56,11 +58,7 @@ public class ControllerForWork {
 
     public void initialize(){
 
-
-
-
-
-
+        notApsentButton.setDisable(true);
         institutionLabel.setText(institution.getName());
         groupLabel.setText(group);
         educatorLabel.setText(educator.getName() + " " + educator.getSurename());
@@ -116,6 +114,25 @@ public class ControllerForWork {
                 }));
         timeline.setCycleCount( Animation.INDEFINITE );
         timeline.play();
+
+        apsentButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(listView.getSelectionModel().isEmpty()){
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Niste odabrali niti jedno djete");
+
+                    alert.showAndWait();
+                } else {
+
+
+                    apsentButton.setDisable(true);
+                    notApsentButton.setDisable(false);
+                }
+            }
+        });
     }
 
     public class MoneyFormatCell extends ListCell<Child> {

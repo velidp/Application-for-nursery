@@ -10,8 +10,9 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
-import java.io.File;
+import java.io.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Child {
@@ -24,10 +25,18 @@ public class Child {
 
 
 
+
+
+
+
+
+
+
     public Child(String name, String surename, int id){
         this.id = id;
         this.name = name;
         this.surename = surename;
+
 
         File f = new File(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
         if(!(f.exists() && !f.isDirectory())) {
@@ -156,6 +165,6 @@ public class Child {
     }
 
     public boolean isPrisutan() {
-        return false;
+        return true;
     }
 }
