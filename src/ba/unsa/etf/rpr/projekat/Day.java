@@ -1,11 +1,12 @@
-/*package ba.unsa.etf.rpr.projekat;
+package ba.unsa.etf.rpr.projekat;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-public class Day {
+public class Day implements Serializable {
     LocalDate date;
     boolean apsent;
     LocalDateTime arrivalTime;
@@ -60,4 +61,4 @@ public class Day {
 
         return str;
     }
-}*/
+}

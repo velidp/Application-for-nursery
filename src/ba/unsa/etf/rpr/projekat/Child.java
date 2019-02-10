@@ -23,9 +23,38 @@ public class Child {
     private Institution institution;
     private Place dwelling;
 
+    ArrayList<Day> days = new ArrayList<Day>();
+
+    public void serialize(ArrayList<Day> lista){
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(lista);
+            out.close();
+            fileOut.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        }
+    }
 
 
-
+    public ArrayList<Day> desrialize(){
+        ArrayList<Day> komentari = null;
+        try {
+            FileInputStream fileIn = new FileInputStream(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
+            ObjectInputStream in = new ObjectInputStream(fileIn);
+            komentari = (ArrayList<Day>) in.readObject();
+            in.close();
+            fileIn.close();
+        } catch (IOException i) {
+            i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            System.out.println("Employee class not found");
+            c.printStackTrace();
+        }
+        return komentari;
+    }
 
 
 
@@ -36,6 +65,20 @@ public class Child {
         this.id = id;
         this.name = name;
         this.surename = surename;
+
+        Day day = new Day();
+
+        day.setDepartureTime(LocalDateTime.now());
+        day.setComments(new ArrayList<String>());
+        day.setDate(LocalDate.now());
+        day.setApsent(false);
+        day.setArrivalTime(LocalDateTime.now());
+
+        days.add(day);
+
+        this.serialize(days);
+
+
 
 
         File f = new File(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
@@ -164,7 +207,7 @@ public class Child {
         this.dwelling = dwelling;
     }
 
-    public boolean isPrisutan() {
-        return true;
+    public String toString(){
+        return String.valueOf(id) + " " + name + surename;
     }
 }
