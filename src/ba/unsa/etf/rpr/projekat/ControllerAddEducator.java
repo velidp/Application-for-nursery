@@ -84,11 +84,9 @@ public class ControllerAddEducator {
             @Override
             public void handle(ActionEvent event) {
                 if(educatoR == null) {
-                    Educator educator = new Educator();
+                    Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
 
-                    educator.setId(base.getMaxIdFromEducators());
-                    educator.setName(nameField.getText());
-                    educator.setSurename(surenameField.getText());
+
                     educator.setJmbg(jmbgField.getText());
                     educator.setDateOfBirth(dateField.getValue());
                     educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
@@ -103,12 +101,9 @@ public class ControllerAddEducator {
                     Stage stage = (Stage) okButton.getScene().getWindow();
                     stage.close();
                 } else if (educatoR != null){
-                    Educator educator = new Educator();
-                    base.removeEducator(educatoR.getId());
+                    base.removeEducator(educatoR);
+                    Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
 
-                    educator.setId(base.getMaxIdFromEducators());
-                    educator.setName(nameField.getText());
-                    educator.setSurename(surenameField.getText());
                     educator.setJmbg(jmbgField.getText());
                     educator.setDateOfBirth(dateField.getValue());
                     educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());

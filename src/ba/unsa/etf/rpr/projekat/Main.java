@@ -20,7 +20,6 @@ public class Main extends Application {
 }
 /*
 Agenda:
-->progres bar
 ->information i serijalizacija
 ->validacija
 ->izvještavanje

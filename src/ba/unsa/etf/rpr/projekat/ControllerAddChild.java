@@ -107,11 +107,9 @@ public class ControllerAddChild {
             @Override
             public void handle(ActionEvent event) {
                 if(chilD == null){
-                    Child child = new Child();
+                    Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
 
-                    child.setId(base.getMaxIdFromChildren());
-                    child.setName(nameField.getText());
-                    child.setSurename(surenameField.getText());
+
                     child.setDateOfBirth(dateField.getValue());
                     child.setJmbg(jmbgField.getText());
                     child.setDwelling((Place)placeCombo.getSelectionModel().getSelectedItem());
@@ -129,13 +127,9 @@ public class ControllerAddChild {
                     stage.close();
 
                 } else {
-                    Child child = new Child();
+                    base.removeChild(chilD);
+                    Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
 
-                    base.removeChild(chilD.getId());
-
-                    child.setId(base.getMaxIdFromChildren());
-                    child.setName(nameField.getText());
-                    child.setSurename(surenameField.getText());
                     child.setDateOfBirth(dateField.getValue());
                     child.setJmbg(jmbgField.getText());
                     child.setDwelling((Place)placeCombo.getSelectionModel().getSelectedItem());

@@ -5,9 +5,8 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -97,14 +96,7 @@
       <Label text="Ustanova:" />
       <Label fx:id="institutionLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" />
       <Label fx:id="groupLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-      <TableView fx:id="tableOfChildren" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="6">
-        <columns>
-          <TableColumn fx:id="memberNumberColumn" prefWidth="75.0" text="Članski broj" />
-          <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Ime" />
-            <TableColumn fx:id="surenameColumn" prefWidth="75.0" text="Prezime" />
-            <TableColumn fx:id="presenceColumn" prefWidth="75.0" text="Prisutan" />
-        </columns>
-      </TableView>
+      <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="6" />
    </children>
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

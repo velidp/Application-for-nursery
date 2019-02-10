@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.File;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -176,11 +177,9 @@ public class KindergartenDAO {
         try {
             rs = getChildren.executeQuery();
             while(rs.next()){
-                Child child = new Child();
+                Child child = new Child(rs.getString(2), rs.getString(3), rs.getInt(1));
 
-                child.setId(rs.getInt(1));
-                child.setName(rs.getString(2));
-                child.setSurename(rs.getString(3));
+
                 child.setDateOfBirth(rs.getDate(4).toLocalDate());
                 child.setJmbg(rs.getString(5));
                 child.setDwelling(this.placeById(rs.getInt(6)));
@@ -217,11 +216,8 @@ public class KindergartenDAO {
         try {
             rs = getEducators.executeQuery();
             while(rs.next()){
-                Educator educator = new Educator();
+                Educator educator = new Educator(rs.getString(2), rs.getString(3), rs.getInt(1));
 
-                educator.setId(rs.getInt(1));
-                educator.setName(rs.getString(2));
-                educator.setSurename(rs.getString(3));
                 educator.setJmbg(rs.getString(4));
                 educator.setDateOfBirth(rs.getDate(5).toLocalDate());
                 educator.setDweling(this.placeById(rs.getInt(6)));
@@ -246,11 +242,8 @@ public class KindergartenDAO {
         try {
             rs = getEducators.executeQuery();
             while(rs.next()){
-                Educator educator = new Educator();
+                Educator educator = new Educator(rs.getString(2), rs.getString(3), rs.getInt(1));
 
-                educator.setId(rs.getInt(1));
-                educator.setName(rs.getString(2));
-                educator.setSurename(rs.getString(3));
                 educator.setJmbg(rs.getString(4));
                 educator.setDateOfBirth(rs.getDate(5).toLocalDate());
                 educator.setDweling(this.placeById(rs.getInt(6)));
@@ -273,11 +266,8 @@ public class KindergartenDAO {
         try {
             rs = getChildren.executeQuery();
             while(rs.next()){
-                Child child = new Child();
+                Child child = new Child(rs.getString(2), rs.getString(3), rs.getInt(1));
 
-                child.setId(rs.getInt(1));
-                child.setName(rs.getString(2));
-                child.setSurename(rs.getString(3));
                 child.setDateOfBirth(rs.getDate(4).toLocalDate());
                 child.setJmbg(rs.getString(5));
                 child.setDwelling(this.placeById(rs.getInt(6)));
@@ -389,9 +379,11 @@ public class KindergartenDAO {
         }
     }
 
-    public void removeChild(int id) {
+    public void removeChild(Child child) {
+        File file = new File(child.getName()+child.getSurename()+child.getId()+".xml");
+        file.delete();
         try {
-            removeChild.setInt(1, id);
+            removeChild.setInt(1, child.getId());
             removeChild.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -400,10 +392,13 @@ public class KindergartenDAO {
 
     }
 
-    public void removeEducator(int id) {
+    public void removeEducator(Educator educator) {
+        File file = new File(educator.getName()+educator.getSurename()+educator.getId()+".xml");
+        file.delete();
         try {
-            removeEducator.setInt(1, id);
+            removeEducator.setInt(1, educator.getId());
             removeEducator.executeUpdate();
+
         } catch (SQLException e) {
             e.printStackTrace();
         }

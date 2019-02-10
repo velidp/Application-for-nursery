@@ -10,7 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import javafx.util.Duration;
 
 import java.io.IOException;
@@ -32,33 +35,51 @@ public class ControllerForWork {
     public Label educatorLabel;
     public Label institutionLabel;
     public Label groupLabel;
-    public TableView tableOfChildren;
-    public TableColumn memberNumberColumn;
-    public TableColumn nameColumn;
-    public TableColumn surenameColumn;
-    public TableColumn presenceColumn;
+    public ListView listView;
+
+
 
     private KindergartenDAO base = new KindergartenDAO();
 
-    String group, educator, institution;
-    ObservableList list;
+    Educator educator;
+    Institution institution;
+    String group;
 
-    public ControllerForWork(String group, String educator, String institution, ObservableList list){
+
+    public ControllerForWork(String group, Educator educator, Institution institution){
         this.group = group;
         this.educator = educator;
         this.institution = institution;
-        this.list = list;
     }
 
 
 
     public void initialize(){
 
-        institutionLabel.setText(institution);
+
+
+
+
+
+        institutionLabel.setText(institution.getName());
         groupLabel.setText(group);
-        educatorLabel.setText(educator);
-        tableOfChildren.setItems(list);
+        educatorLabel.setText(educator.getName() + " " + educator.getSurename());
+
+        if(group.equals("Grupa djece dobi od 1 do 2 godine"))
+            listView.setItems(base.getChildren(this.institution, 1));
+        else if(group.equals("Grupa djece dobi od 3 do 5 godina"))
+            listView.setItems(base.getChildren(this.institution, 2));
+        else if(group.equals("Grupa djece sa posbenim potrebama"))
+            listView.setItems(base.getChildren(this.institution, 3));
+
         datePicker.setValue(LocalDate.now());
+
+
+        listView.setCellFactory(new Callback<ListView<Child>, ListCell<Child>>() {
+            @Override public ListCell<Child> call(ListView<Child> list) {
+                return new MoneyFormatCell();
+            }
+        });
 
 
         settingsButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -89,10 +110,23 @@ public class ControllerForWork {
         final Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis( 500 ), event -> {
                     timeLabel.setText( timeFormat.format( System.currentTimeMillis() ) );
+                    if(LocalDateTime.now().getHour() >= 7 && LocalDateTime.now().getHour() <=18){
+                        progresBar.setProgress(0.0909 * (LocalDateTime.now().getHour() - 7));
+                    } else progresBar.setProgress(0);
                 }));
         timeline.setCycleCount( Animation.INDEFINITE );
         timeline.play();
+    }
 
-
+    public class MoneyFormatCell extends ListCell<Child> {
+        public MoneyFormatCell() {    }
+        @Override protected void updateItem(Child item, boolean empty) {
+            super.updateItem(item, empty);
+            setText(item == null ? "" : String.valueOf(item.getId()) + " " + item.getName() + " " + item.getSurename());
+            if (item != null) {
+                //double value = item.doubleValue();
+                setTextFill(item.isPrisutan() ? Color.GREEN : Color.RED);
+            }
+        }
     }
 }

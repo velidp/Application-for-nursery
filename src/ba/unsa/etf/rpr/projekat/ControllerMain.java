@@ -525,7 +525,7 @@ public class ControllerMain {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
-                        base.removeChild(((Child)tableOfPersons.getSelectionModel().getSelectedItem()).getId());
+                        base.removeChild(((Child)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
                             if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
@@ -555,7 +555,7 @@ public class ControllerMain {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
-                        base.removeEducator(((Educator)tableOfPersons.getSelectionModel().getSelectedItem()).getId());
+                        base.removeEducator(((Educator)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
                             if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
@@ -599,7 +599,7 @@ public class ControllerMain {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
-                        base.removeChild(((Child)tableOfPersons.getSelectionModel().getSelectedItem()).getId());
+                        base.removeChild(((Child)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
                             if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
@@ -629,7 +629,7 @@ public class ControllerMain {
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
-                        base.removeEducator(((Educator)tableOfPersons.getSelectionModel().getSelectedItem()).getId());
+                        base.removeEducator(((Educator)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
                             if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
@@ -666,7 +666,7 @@ public class ControllerMain {
                     alert.showAndWait();
                 } else {
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/forWork.fxml"));
-                    loader1.setController(new ControllerForWork(groupCombo.getSelectionModel().getSelectedItem().toString(), ((Educator) tableOfPersons.getSelectionModel().getSelectedItem()).getName(), ((Institution) institutionCombo.getSelectionModel().getSelectedItem()).getName(), tableOfPersons.getItems()));
+                    loader1.setController(new ControllerForWork(groupCombo.getSelectionModel().getSelectedItem().toString(), (Educator) tableOfPersons.getSelectionModel().getSelectedItem(), (Institution)institutionCombo.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
                         root = loader1.load();
