@@ -13,7 +13,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
+        setUserAgentStylesheet(STYLESHEET_CASPIAN);
         Locale.setDefault(new Locale("bs", "BA"));
         ResourceBundle bundle = ResourceBundle.getBundle("Trn");
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"), bundle);
@@ -24,25 +24,11 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
-
     }
 }
 /*
-Agenda:
-->internacionalizacija
-->testovi
-->alati za automatsku izgradnju koda
-
-Dakle, imam još uraditi sljedeće.
-1. U glavnom prozoru dadati odabir jezika tj. bosanski ili engleski.
-I prilagodit da se koristi jezik koji je odabran. Vidjeti još one prevode.
-
-2. Vidjeti alate za automatsku izgradnju koda tj. posljednje što treba uraditi u nekom projektu.
-
-3. Ručno istestirati sve. Koristit aplikaciju. Popraviti greške.
-
-4. Dodati testovo.
-
-5. Napisati izvještaj i poslati ga.
-
+1. Testirati program. Poravljati greške.
+2. Napraviti testove.
+3. Alati za automatsku izgradnju koda.
+4. Napisati izvještaj i poslati ga.
  */

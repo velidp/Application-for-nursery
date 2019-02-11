@@ -13,6 +13,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 public class ControllerAddEducator {
 
@@ -28,6 +29,7 @@ public class ControllerAddEducator {
     public ComboBox placeCombo;
     public Button addPlaceButton;
     private KindergartenDAO base = new KindergartenDAO();
+    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 
     private Educator educatoR;
 
@@ -64,7 +66,7 @@ public class ControllerAddEducator {
         addPlaceButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPlace.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPlace.fxml"), bundle);
                 Parent root = null;
                 try {
                     root = loader1.load();

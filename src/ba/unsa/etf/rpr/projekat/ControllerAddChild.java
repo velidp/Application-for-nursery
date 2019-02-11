@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 public class ControllerAddChild {
 
@@ -34,6 +35,7 @@ public class ControllerAddChild {
 
     private KindergartenDAO base = new KindergartenDAO();
     public Child chilD;
+    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 
     public ControllerAddChild(Child child){
         this.chilD = child;
@@ -48,7 +50,7 @@ public class ControllerAddChild {
         addPlaceButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPlace.fxml"));
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addPlace.fxml"), bundle);
                 Parent root = null;
                 try {
                     root = loader1.load();

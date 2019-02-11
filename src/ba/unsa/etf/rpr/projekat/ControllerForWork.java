@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.ResourceBundle;
 
 public class ControllerForWork {
 
@@ -36,7 +37,7 @@ public class ControllerForWork {
     public ListView listView;
 
 
-
+    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 
 
     private KindergartenDAO base = new KindergartenDAO();
@@ -103,7 +104,7 @@ public class ControllerForWork {
             settingsButton.setOnAction(new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(ActionEvent event) {
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/main.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/main.fxml"),bundle);
 
                     Parent root = null;
                     try {
@@ -225,7 +226,7 @@ public class ControllerForWork {
 
                         alert.showAndWait();
                     } else {
-                        FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/AddComent.fxml"));
+                        FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/AddComent.fxml"),bundle);
                         loader1.setController(new ControllerAddComment((Child)listView.getSelectionModel().getSelectedItem()));
                         Parent root = null;
                         try {
@@ -301,7 +302,7 @@ public class ControllerForWork {
 
                         alert.showAndWait();
                     } else {
-                        FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Status.fxml"));
+                        FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/Status.fxml"),bundle);
                         loader1.setController(new ControllerStatus((Child) listView.getSelectionModel().getSelectedItem(), datePicker.getValue()));
                         Parent root = null;
                         try {

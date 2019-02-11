@@ -1,17 +1,20 @@
 package ba.unsa.etf.rpr.projekat;
 
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.swing.JRViewer;
+
 
 import javax.swing.*;
 import java.io.IOException;
@@ -48,12 +51,13 @@ public class ControllerMain {
     public Menu helpMenu;
     public ComboBox languageCombo;
 
+    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
+
     KindergartenDAO base = new KindergartenDAO();
 
+
+
     public void initialize(){
-
-
-
 
 
         radioChildren.setSelected(true);
@@ -87,7 +91,7 @@ public class ControllerMain {
                     primaryStage.show();
                     Stage stage = (Stage) languageCombo.getScene().getWindow();
                     stage.close();
-
+                    Locale.setDefault(new Locale("bs", "BA"));
                 } else if((languageCombo.getSelectionModel().getSelectedItem().equals("Engleski"))){
                     Locale.setDefault(new Locale("en", "US"));
                     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
@@ -103,6 +107,7 @@ public class ControllerMain {
                     primaryStage.show();
                     Stage stage = (Stage) languageCombo.getScene().getWindow();
                     stage.close();
+                    Locale.setDefault(new Locale("en", "US"));
                 }
             }
         });
@@ -221,7 +226,8 @@ public class ControllerMain {
         addInstitutionButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addInstitution.fxml"));
+
+                FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addInstitution.fxml"),bundle);
                 Parent root = null;
                 try {
                     root = loader1.load();
@@ -251,7 +257,6 @@ public class ControllerMain {
                     alert.showAndWait();
                 }
                 else if(radioChildren.isSelected()){
-                    Locale.setDefault(new Locale("en", "US"));
                     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"), bundle);
                     loader1.setController(new ControllerAddChild(null));
@@ -285,7 +290,7 @@ public class ControllerMain {
                     }
 
                 } else if(radioWorker.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"),bundle);
                     loader1.setController(new ControllerAddEducator(null));
                     Parent root = null;
                     try {
@@ -330,7 +335,8 @@ public class ControllerMain {
                     alert.showAndWait();
                 }
                 else if(radioChildren.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
+                    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"), bundle);
                     loader1.setController(new ControllerAddChild(null));
                     Parent root = null;
                     try {
@@ -362,7 +368,7 @@ public class ControllerMain {
                     }
 
                 } else if(radioWorker.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"),bundle);
                     loader1.setController(new ControllerAddEducator(null));
                     Parent root = null;
                     try {
@@ -414,7 +420,7 @@ public class ControllerMain {
                     alert.setContentText("Niste odabrali niti jednu stavku.");
                     alert.showAndWait();
                 } else if(radioChildren.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"),bundle);
                     loader1.setController(new ControllerAddChild((Child)tableOfPersons.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
@@ -446,7 +452,7 @@ public class ControllerMain {
                     }
 
                 } else if(radioWorker.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"),bundle);
                     loader1.setController(new ControllerAddEducator((Educator)tableOfPersons.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
@@ -497,7 +503,7 @@ public class ControllerMain {
                     alert.setContentText("Niste odabrali niti jednu stavku.");
                     alert.showAndWait();
                 } else if(radioChildren.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"),bundle);
                     loader1.setController(new ControllerAddChild((Child)tableOfPersons.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
@@ -529,7 +535,7 @@ public class ControllerMain {
                     }
 
                 } else if(radioWorker.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addEducator.fxml"),bundle);
                     loader1.setController(new ControllerAddEducator((Educator)tableOfPersons.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
@@ -748,7 +754,7 @@ public class ControllerMain {
 
                     alert.showAndWait();
                 } else {
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/forWork.fxml"));
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/forWork.fxml"),bundle);
                     loader1.setController(new ControllerForWork(groupCombo.getSelectionModel().getSelectedItem().toString(), (Educator) tableOfPersons.getSelectionModel().getSelectedItem(), (Institution)institutionCombo.getSelectionModel().getSelectedItem()));
                     Parent root = null;
                     try {
