@@ -46,6 +46,7 @@ public class ControllerMain {
     public Menu editMenu;
     public Menu optionsMenu;
     public Menu helpMenu;
+    public ComboBox languageCombo;
 
     KindergartenDAO base = new KindergartenDAO();
 
@@ -61,12 +62,50 @@ public class ControllerMain {
 
         groupCombo.getItems().addAll("Grupa djece dobi od 1 do 2 godine", "Grupa djece dobi od 3 do 5 godina", "Grupa djece sa posbenim potrebama");
 
+        languageCombo.getItems().addAll("Bosanski", "Engleski");
+
 
         nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         surenameColumn.setCellValueFactory(new PropertyValueFactory("surename"));
         jmbgColumn.setCellValueFactory(new PropertyValueFactory("jmbg"));
 
+        languageCombo.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                if(languageCombo.getSelectionModel().getSelectedItem().equals("Bosanski")){
+                    Locale.setDefault(new Locale("bs", "BA"));
+                    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"), bundle);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Stage primaryStage = new Stage();
+                    primaryStage.setTitle("Aplikacija za vrtić");
+                    primaryStage.setScene(new Scene(root, 800, 600));
+                    primaryStage.show();
+                    Stage stage = (Stage) languageCombo.getScene().getWindow();
+                    stage.close();
 
+                } else if((languageCombo.getSelectionModel().getSelectedItem().equals("Engleski"))){
+                    Locale.setDefault(new Locale("en", "US"));
+                    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"), bundle);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    Stage primaryStage = new Stage();
+                    primaryStage.setTitle("Aplikacija za vrtić");
+                    primaryStage.setScene(new Scene(root, 800, 600));
+                    primaryStage.show();
+                    Stage stage = (Stage) languageCombo.getScene().getWindow();
+                    stage.close();
+                }
+            }
+        });
 
 
         groupCombo.setOnAction(new EventHandler<ActionEvent>() {
