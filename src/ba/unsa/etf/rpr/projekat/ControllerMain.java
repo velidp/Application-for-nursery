@@ -9,8 +9,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.swing.JRViewer;
 
+import javax.swing.*;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Optional;
 
 public class ControllerMain {
@@ -654,6 +662,18 @@ public class ControllerMain {
             }
         });
 
+        reportButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    new PrintReport().showReport(DriverManager.getConnection("jdbc:sqlite:base.db"));
+                } catch (JRException | SQLException e1) {
+                    e1.printStackTrace();
+                }
+
+            }
+        });
+
         startButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -684,4 +704,8 @@ public class ControllerMain {
             }
         });
     }
+
+
+
+
 }

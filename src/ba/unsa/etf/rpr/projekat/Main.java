@@ -23,14 +23,9 @@ public class Main extends Application {
 }
 /*
 Agenda:
-->validacija
-->izvještavanje
-->šminkanje (pod ovim podrazumjevam naći način da upotrebim sve ostale stvari)
+->internacionalizacija
+->mnemonici
+->testovi
 
 
-šta treba validirati:
--dodaj djete
--dodaj odgajatelja
--registruj ustanovu
--dodaj mjesto
  */
