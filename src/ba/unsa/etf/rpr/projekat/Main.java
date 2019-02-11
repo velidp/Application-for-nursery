@@ -23,9 +23,9 @@ public class Main extends Application {
 }
 /*
 Agenda:
-->internacionalizacija
 ->mnemonici
 ->testovi
+->internacionalizacija
 
 
  */

@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
 import net.sf.jasperreports.swing.JRViewer;
@@ -43,9 +44,19 @@ public class ControllerMain {
     public Button startButton;
     public ComboBox institutionCombo;
     public Button addInstitutionButton;
+    public Menu fileMenu;
+    public Menu editMenu;
+    public Menu optionsMenu;
+    public Menu helpMenu;
+
     KindergartenDAO base = new KindergartenDAO();
 
     public void initialize(){
+
+
+
+
+
         radioChildren.setSelected(true);
 
         institutionCombo.setItems(base.getInstitutions());
@@ -56,6 +67,7 @@ public class ControllerMain {
         nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
         surenameColumn.setCellValueFactory(new PropertyValueFactory("surename"));
         jmbgColumn.setCellValueFactory(new PropertyValueFactory("jmbg"));
+
 
 
 
@@ -659,6 +671,18 @@ public class ControllerMain {
                     }
 
                 }
+            }
+        });
+
+        reportMenu.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                try {
+                    new PrintReport().showReport(DriverManager.getConnection("jdbc:sqlite:base.db"));
+                } catch (JRException | SQLException e1) {
+                    e1.printStackTrace();
+                }
+
             }
         });
 
