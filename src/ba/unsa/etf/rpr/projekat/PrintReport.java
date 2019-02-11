@@ -15,10 +15,6 @@ import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.swing.JRViewer;
 
 public class PrintReport extends JFrame {
-
-    /**
-     *
-     */
     private static final long serialVersionUID = 1L;
 
     public void showReport(Connection conn) throws JRException {
@@ -27,7 +23,6 @@ public class PrintReport extends JFrame {
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 
-        // Fields for resources path
         HashMap<String, Object> parameters = new HashMap<String, Object>();
         parameters.put("reportsDirPath", reportsDir);
 

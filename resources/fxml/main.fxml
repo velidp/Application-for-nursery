@@ -44,7 +44,7 @@
         <menus>
           <Menu fx:id="fileMenu" text="_File">
             <items>
-              <MenuItem fx:id="closeMenu" text="_Zatvori">
+              <MenuItem fx:id="closeMenu" text="%Exit">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -55,19 +55,19 @@
           </Menu>
           <Menu fx:id="editMenu" text="_Edit">
             <items>
-              <MenuItem fx:id="removeMenu" text="_Ukloni">
+              <MenuItem fx:id="removeMenu" text="%remove">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="D" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem fx:id="addMenu" text="_Dodaj">
+                  <MenuItem fx:id="addMenu" text="%add">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem fx:id="menuChange" text="_Izmjeni">
+                  <MenuItem fx:id="menuChange" text="%change">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="M" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
-                  <MenuItem fx:id="reportMenu" text="_Izvještaj">
+                  <MenuItem fx:id="reportMenu" text="%report">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="R" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -76,13 +76,13 @@
                   <KeyCodeCombination alt="DOWN" code="E" control="UP" meta="UP" shift="UP" shortcut="UP" />
                </accelerator>
           </Menu>
-            <Menu fx:id="optionsMenu" text="_Opcije">
+            <Menu fx:id="optionsMenu" text="_Options">
                <items>
-                  <RadioMenuItem fx:id="radioChildren" text="_Djeca">
+                  <RadioMenuItem fx:id="radioChildren" text="%children">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="C" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></RadioMenuItem>
-                  <RadioMenuItem fx:id="radioWorker" text="_Uposlenici">
+                  <RadioMenuItem fx:id="radioWorker" text="%worker">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="W" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></RadioMenuItem>
@@ -106,17 +106,17 @@
       </MenuBar>
       <TableView fx:id="tableOfPersons" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="4">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="202.0" text="Ime" />
-            <TableColumn fx:id="surenameColumn" minWidth="1.0" prefWidth="158.0" text="Prezime" />
-            <TableColumn fx:id="jmbgColumn" minWidth="0.0" prefWidth="181.0" text="Jmbg" />
+          <TableColumn fx:id="nameColumn" prefWidth="202.0" text="%nameCoumn" />
+            <TableColumn fx:id="surenameColumn" minWidth="1.0" prefWidth="158.0" text="%surenameColumn" />
+            <TableColumn fx:id="jmbgColumn" minWidth="0.0" prefWidth="181.0" text="%jmbgColumn" />
         </columns>
       </TableView>
-      <ComboBox fx:id="groupCombo" prefHeight="25.0" prefWidth="243.0" promptText="Odaberite grupu" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ComboBox fx:id="groupCombo" prefHeight="25.0" prefWidth="243.0" promptText="%choseGroupCombo" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label text="Odaberite grupu:" GridPane.rowIndex="2">
+      <Label text="%choseGroup" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -164,7 +164,7 @@
             </Button>
         </buttons>
       </ButtonBar>
-      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="Početak" GridPane.columnIndex="5" GridPane.rowIndex="5">
+      <Button fx:id="startButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="90.0" text="%start" GridPane.columnIndex="5" GridPane.rowIndex="5">
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -172,11 +172,11 @@
                </image>
             </ImageView>
          </graphic></Button>
-      <Label text="Odaberite ustanovu:" GridPane.rowIndex="1">
+      <Label text="%choseinstitution" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></Label>
-      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="255.0" promptText="Odaberite ustanovu" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="255.0" promptText="%choseInstitutionCombo" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>

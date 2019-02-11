@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -13,17 +14,16 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import java.net.URL?>
-<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/validiranje.css" />
     </stylesheets>
     <columnConstraints>
     <ColumnConstraints maxWidth="214.0" minWidth="33.0" prefWidth="120.0" />
       <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="84.0" />
-      <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="148.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="166.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="250.0" />
+      <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="165.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="353.0" minWidth="10.0" prefWidth="44.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="327.0" minWidth="10.0" prefWidth="80.0" />
   </columnConstraints>
   <rowConstraints>
       <RowConstraints maxHeight="52.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
@@ -35,8 +35,8 @@
       <RowConstraints maxHeight="324.0" minHeight="10.0" prefHeight="227.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Datum:" GridPane.rowIndex="3" />
-      <Label text="Vrijeme:" GridPane.rowIndex="4" />
+      <Label text="%date" GridPane.rowIndex="3" />
+      <Label text="%time" GridPane.rowIndex="4" />
       <ProgressBar fx:id="progresBar" prefHeight="18.0" prefWidth="263.0" progress="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
       <Label fx:id="timeLabel" GridPane.columnIndex="1" GridPane.rowIndex="4" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="4" GridPane.rowIndex="5">
@@ -94,10 +94,10 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label text="Odgajatelj:" GridPane.rowIndex="1" />
+      <Label text="%educator" GridPane.rowIndex="1" />
       <Label fx:id="educatorLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-      <Label text="Grupa:" GridPane.rowIndex="2" />
-      <Label text="Ustanova:" />
+      <Label text="%group" GridPane.rowIndex="2" />
+      <Label text="%institution" />
       <Label fx:id="institutionLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" />
       <Label fx:id="groupLabel" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
       <ListView fx:id="listView" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="5" GridPane.rowIndex="6" />

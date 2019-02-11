@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -13,7 +14,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="442.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ba.unsa.etf.rpr.projekat.ControllerAddInstitution">
     <stylesheets>
         <URL value="@/css/validiranje.css" />
@@ -37,7 +37,7 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Mjesto ustanove:" GridPane.rowIndex="1" />
+      <Label text="%placeOfInstitution" GridPane.rowIndex="1" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
         <buttons>
           <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
@@ -54,22 +54,22 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label text="Naziv ustanove:" />
+      <Label text="%nameOfInstitution" />
       <TextField fx:id="nameOfInstitution" GridPane.columnIndex="1" />
-      <Label text="Ime direktora:" GridPane.rowIndex="5" />
-      <Label text="Prezime direktora:" GridPane.rowIndex="6" />
-      <Label text="Jmbg direktora:" GridPane.rowIndex="7" />
+      <Label text="%nameOfDirector" GridPane.rowIndex="5" />
+      <Label text="%surenameOfDirector" GridPane.rowIndex="6" />
+      <Label text="%jmbgOfDIrector" GridPane.rowIndex="7" />
       <DatePicker fx:id="dateOfBirthOfDirectorField" prefHeight="25.0" prefWidth="327.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-      <Label text="Datum rođenja direktora:" GridPane.rowIndex="8" />
+      <Label text="%dateOfBirthOfDirector" GridPane.rowIndex="8" />
       <TextField fx:id="nameOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
       <TextField fx:id="surenameOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <TextField fx:id="jmbgOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-      <Label text="Kontakt telefon:" GridPane.rowIndex="2" />
-      <Label text="E-mail ustanove:" GridPane.rowIndex="3" />
+      <Label text="%contactPhone" GridPane.rowIndex="2" />
+      <Label text="%emailOfInstitution" GridPane.rowIndex="3" />
       <TextField fx:id="phoneNumberField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
       <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-      <Label text="Broj telefona direktora:" GridPane.rowIndex="9" />
-      <Label text="E-mail direktora:" GridPane.rowIndex="10" />
+      <Label text="%phoneNumberOfDirector" GridPane.rowIndex="9" />
+      <Label text="%emealOfDIrector" GridPane.rowIndex="10" />
       <TextField fx:id="phoneNumberOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="9" />
       <TextField fx:id="emailOfDirectorField" GridPane.columnIndex="1" GridPane.rowIndex="10" />
    </children>

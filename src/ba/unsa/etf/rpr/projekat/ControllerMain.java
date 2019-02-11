@@ -18,9 +18,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Optional;
+import java.util.*;
 
 public class ControllerMain {
 
@@ -214,7 +212,9 @@ public class ControllerMain {
                     alert.showAndWait();
                 }
                 else if(radioChildren.isSelected()){
-                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"));
+                    Locale.setDefault(new Locale("en", "US"));
+                    ResourceBundle bundle = ResourceBundle.getBundle("Trn");
+                    FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"), bundle);
                     loader1.setController(new ControllerAddChild(null));
                     Parent root = null;
                     try {
@@ -720,7 +720,8 @@ public class ControllerMain {
                     Stage stage = new Stage();
                     stage.setTitle("Rad");
                     stage.setResizable(false);
-                    stage.setScene(new Scene(root, 778, 475));
+                    stage.setScene(new Scene(root, 365, 485));
+                    stage.setResizable(false);
                     stage.show();
                     Stage stage1 = (Stage) startButton.getScene().getWindow();
                     stage1.close();

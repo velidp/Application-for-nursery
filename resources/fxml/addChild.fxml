@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
@@ -14,7 +15,6 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
         <URL value="@/css/validiranje.css" />
@@ -39,32 +39,32 @@
       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Label text="Ime:">
+      <Label text="%name">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Prezime:" GridPane.rowIndex="1">
+      <Label text="%surename" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Jmbg:" GridPane.rowIndex="2">
+      <Label text="%jmbg" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Datum rođenja:" GridPane.rowIndex="3">
+      <Label text="%dateOfBirth" GridPane.rowIndex="3">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Mjesto stanovanja:" GridPane.rowIndex="4">
+      <Label text="%place" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Ustanova:" GridPane.rowIndex="5">
+      <Label text="%institution" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
@@ -98,37 +98,37 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </DatePicker>
-      <ComboBox fx:id="placeCombo" prefHeight="25.0" prefWidth="208.0" promptText="Odaberite mjesto " GridPane.columnIndex="1" GridPane.rowIndex="4">
+      <ComboBox fx:id="placeCombo" prefHeight="25.0" prefWidth="208.0" promptText="%chosePlace" GridPane.columnIndex="1" GridPane.rowIndex="4">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="268.0" promptText="Odaberite ustanovu" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="268.0" promptText="%choseInstitution" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label text="Ime roditelja:" GridPane.rowIndex="7">
+      <Label text="%parentName" GridPane.rowIndex="7">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Prezime roditelja:" GridPane.rowIndex="8">
+      <Label text="%parentSurename" GridPane.rowIndex="8">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Jmbg roditelja:" GridPane.rowIndex="9">
+      <Label text="%jmbgParrent" GridPane.rowIndex="9">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Datum rođenja roditelja:" GridPane.rowIndex="10">
+      <Label text="%dateParrent" GridPane.rowIndex="10">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </Label>
-      <Label text="Broj telefona roditelja:" GridPane.rowIndex="11">
+      <Label text="%phoneNumber" GridPane.rowIndex="11">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
@@ -170,14 +170,14 @@
             </ImageView>
          </graphic>
       </Button>
-      <Label text="Da li djete ima posebne potrebe:" GridPane.rowIndex="6">
+      <Label text="%specialNeeds" GridPane.rowIndex="6">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></Label>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="6">
         <buttons>
-            <RadioButton fx:id="specialNeedsNo" mnemonicParsing="false" text="Ne" />
-            <RadioButton fx:id="specialNeedsYes" mnemonicParsing="false" text="Da" />
+            <RadioButton fx:id="specialNeedsNo" mnemonicParsing="false" text="%no" />
+            <RadioButton fx:id="specialNeedsYes" mnemonicParsing="false" text="%yes" />
         </buttons>
       </ButtonBar>
    </children>
