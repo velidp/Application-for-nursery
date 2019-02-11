@@ -30,7 +30,14 @@ public class ControllerAddComment {
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-
+                ArrayList<Day> days = child.desrialize();
+                Day day = days.get(days.size()-1);
+                day.getComments().add(comentArea.getText());
+                days.remove(days.size()-1);
+                days.add(day);
+                child.serialize(days);
+                Stage stage = (Stage) okButton.getScene().getWindow();
+                stage.close();
             }
         });
 

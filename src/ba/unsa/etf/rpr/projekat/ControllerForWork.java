@@ -217,8 +217,27 @@ public class ControllerForWork {
                         alert.setContentText("Niste odabrali niti jedno djete.");
 
                         alert.showAndWait();
-                    } else {
+                    } else if(!((Child)listView.getSelectionModel().getSelectedItem()).desrialize().get(((Child)listView.getSelectionModel().getSelectedItem()).desrialize().size()-1).isApsent()){
+                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                        alert.setTitle("Informacija");
+                        alert.setHeaderText(null);
+                        alert.setContentText("Ne možete dadati komentar za odsutno djete.");
 
+                        alert.showAndWait();
+                    } else {
+                        FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/AddComent.fxml"));
+                        loader1.setController(new ControllerAddComment((Child)listView.getSelectionModel().getSelectedItem()));
+                        Parent root = null;
+                        try {
+                            root = loader1.load();
+                        } catch (IOException e1) {
+                            e1.printStackTrace();
+                        }
+                        Stage stage = new Stage();
+                        stage.setTitle("Dodajte komentar");
+                        stage.setResizable(false);
+                        stage.setScene(new Scene(root, 407, 236));
+                        stage.show();
                     }
                 }
             });
@@ -302,26 +321,3 @@ public class ControllerForWork {
 
     }
 }
-/*
-dakle, ako se nalzimo izvan radnog vremena dugmad apsent, notApsent i dodaj komentar nece biti dostupna, bice neaktivan
-sada posmatramo sljedecu situacijau: u radnom vremenu smo, prvi put je otvoren radni prozor,
-klik na dugme apsent, notApsent ili addComment nema fajde ako nije ništa izabrano iz listViewa
-
-dobro ideja je sljedeca:
-prilikom ulsaka u radnu kreira se novi dan, postavlja se datum, postavlja se odsutan.
-taj dan se dodaje svoj djeci i on ce naravno biti zadnji
-
-prilikom klika na dugme apsentButton provjerava se da li je odabrano djete vec prisutno, ako jeste ispisuje se poruka
-ako nije dodaje se datum dolaska.
-
-prilikom klika na dugme notApsentButton provjerava se da li je djete odsutno ako jest ispisuje se poruka
-ako nije dodaje se datum odlaska.
-
-prilikom klika na dugme za dodavanje komentara provjerava se da li je djete prisutno
-ako jest doda se komentar ako nije ispisuje se poruka da se ne moze dodati komentar za odustno djete.
-
-klikom na dugme status ispisuje prikazuje se status za određeni datum.
-
-
-
- */
