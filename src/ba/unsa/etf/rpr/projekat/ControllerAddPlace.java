@@ -27,17 +27,32 @@ public class ControllerAddPlace {
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                Place place = new Place();
-                place.setId(base.getMaxIdFromPlaces());
-                place.setName(nameOfPlaceField.getText());
-                place.setAdress(adressOfPlaceField.getText());
-                place.setZipCode(zipCodeField.getText());
+                boolean sveOk = validirajPrazno(nameOfPlaceField);
+                sveOk &= validirajPrazno(zipCodeField);
+                sveOk &= validirajPrazno(adressOfPlaceField);
 
-                base.addPlace(place);
-
-                Stage stage = (Stage) okButton.getScene().getWindow();
-                stage.close();
+                if(sveOk) {
+                    Place place = new Place();
+                    place.setId(base.getMaxIdFromPlaces());
+                    place.setName(nameOfPlaceField.getText());
+                    place.setAdress(adressOfPlaceField.getText());
+                    place.setZipCode(zipCodeField.getText());
+                    base.addPlace(place);
+                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    stage.close();
+                }
             }
         });
+    }
+    private boolean validirajPrazno(TextField polje) {
+        if (polje.getText().trim().isEmpty()) {
+            polje.getStyleClass().removeAll("poljeIspravno");
+            polje.getStyleClass().add("poljeNijeIspravno");
+            return false;
+        } else {
+            polje.getStyleClass().removeAll("poljeNijeIspravno");
+            polje.getStyleClass().add("poljeIspravno");
+        }
+        return true;
     }
 }

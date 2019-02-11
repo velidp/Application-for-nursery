@@ -13,7 +13,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
+<?import java.net.URL?>
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="475.0" prefWidth="778.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <stylesheets>
+        <URL value="@/css/validiranje.css" />
+    </stylesheets>
     <columnConstraints>
     <ColumnConstraints maxWidth="214.0" minWidth="33.0" prefWidth="120.0" />
       <ColumnConstraints maxWidth="329.0" minWidth="33.0" prefWidth="84.0" />

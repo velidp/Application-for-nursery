@@ -12,6 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class ControllerAddEducator {
 
@@ -84,42 +85,188 @@ public class ControllerAddEducator {
             @Override
             public void handle(ActionEvent event) {
                 if(educatoR == null) {
-                    Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
+
+                    boolean sveOk = validirajPrazno(nameField);
+                    sveOk &= validirajPrazno(surenameField);
 
 
-                    educator.setJmbg(jmbgField.getText());
-                    educator.setDateOfBirth(dateField.getValue());
-                    educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
-                    educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
-                    if (typeCombo.getSelectionModel().getSelectedItem() == "Odgajatelj za djecu sa posebnim potrebama")
-                        educator.setEducatorForChildrenForSpecialNeeds(true);
-                    else if (typeCombo.getSelectionModel().getSelectedItem() == "Obični odgajatelj")
-                        educator.setEducatorForChildrenForSpecialNeeds(false);
+                    if (placeCombo.getSelectionModel().isEmpty()) {
+                        placeCombo.getStyleClass().removeAll("poljeIspravno");
+                        placeCombo.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                        placeCombo.getStyleClass().add("poljeIspravno");
+                    }
 
-                    base.addEducator(educator);
+                    if (institutionsCombo.getSelectionModel().isEmpty()) {
+                        institutionsCombo.getStyleClass().removeAll("poljeIspravno");
+                        institutionsCombo.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        institutionsCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                        institutionsCombo.getStyleClass().add("poljeIspravno");
+                    }
 
-                    Stage stage = (Stage) okButton.getScene().getWindow();
-                    stage.close();
+                    if (typeCombo.getSelectionModel().isEmpty()) {
+                        typeCombo.getStyleClass().removeAll("poljeIspravno");
+                        typeCombo.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        typeCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                        typeCombo.getStyleClass().add("poljeIspravno");
+                    }
+
+                    if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
+                        dateField.getStyleClass().removeAll("poljeIspravno");
+                        dateField.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        dateField.getStyleClass().removeAll("poljeNijeIspravno");
+                        dateField.getStyleClass().add("poljeIspravno");
+                    }
+
+                    if (!validateJmbgP(jmbgField.getText())) {
+                        jmbgField.getStyleClass().removeAll("poljeIspravno");
+                        jmbgField.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
+                        jmbgField.getStyleClass().add("poljeIspravno");
+                    }
+
+
+                    if(sveOk) {
+                        Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
+
+                        educator.setJmbg(jmbgField.getText());
+                        educator.setDateOfBirth(dateField.getValue());
+                        educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
+                        educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
+                        if (typeCombo.getSelectionModel().getSelectedItem() == "Odgajatelj za djecu sa posebnim potrebama")
+                            educator.setEducatorForChildrenForSpecialNeeds(true);
+                        else if (typeCombo.getSelectionModel().getSelectedItem() == "Obični odgajatelj")
+                            educator.setEducatorForChildrenForSpecialNeeds(false);
+
+                        base.addEducator(educator);
+
+                        Stage stage = (Stage) okButton.getScene().getWindow();
+                        stage.close();
+                    }
+
                 } else if (educatoR != null){
                     base.removeEducator(educatoR);
-                    Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
 
-                    educator.setJmbg(jmbgField.getText());
-                    educator.setDateOfBirth(dateField.getValue());
-                    educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
-                    educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
-                    if (typeCombo.getSelectionModel().getSelectedItem() == "Odgajatelj za djecu sa posebnim potrebama")
-                        educator.setEducatorForChildrenForSpecialNeeds(true);
-                    else if (typeCombo.getSelectionModel().getSelectedItem() == "Obični odgajatelj")
-                        educator.setEducatorForChildrenForSpecialNeeds(false);
+                    boolean sveOk = validirajPrazno(nameField);
+                    sveOk &= validirajPrazno(surenameField);
 
-                    base.addEducator(educator);
 
-                    Stage stage = (Stage) okButton.getScene().getWindow();
-                    stage.close();
+                    if (placeCombo.getSelectionModel().isEmpty()) {
+                        placeCombo.getStyleClass().removeAll("poljeIspravno");
+                        placeCombo.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                        placeCombo.getStyleClass().add("poljeIspravno");
+                    }
+
+                    if (institutionsCombo.getSelectionModel().isEmpty()) {
+                        institutionsCombo.getStyleClass().removeAll("poljeIspravno");
+                        institutionsCombo.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        institutionsCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                        institutionsCombo.getStyleClass().add("poljeIspravno");
+                    }
+
+                    if (typeCombo.getSelectionModel().isEmpty()) {
+                        typeCombo.getStyleClass().removeAll("poljeIspravno");
+                        typeCombo.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        typeCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                        typeCombo.getStyleClass().add("poljeIspravno");
+                    }
+
+                    if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
+                        dateField.getStyleClass().removeAll("poljeIspravno");
+                        dateField.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        dateField.getStyleClass().removeAll("poljeNijeIspravno");
+                        dateField.getStyleClass().add("poljeIspravno");
+                    }
+
+                    if (!validateJmbgP(jmbgField.getText())) {
+                        jmbgField.getStyleClass().removeAll("poljeIspravno");
+                        jmbgField.getStyleClass().add("poljeNijeIspravno");
+                        sveOk = false;
+                    } else {
+                        jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
+                        jmbgField.getStyleClass().add("poljeIspravno");
+                    }
+
+
+
+                    if(sveOk) {
+                        Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
+
+                        educator.setJmbg(jmbgField.getText());
+                        educator.setDateOfBirth(dateField.getValue());
+                        educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
+                        educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
+                        if (typeCombo.getSelectionModel().getSelectedItem() == "Odgajatelj za djecu sa posebnim potrebama")
+                            educator.setEducatorForChildrenForSpecialNeeds(true);
+                        else if (typeCombo.getSelectionModel().getSelectedItem() == "Obični odgajatelj")
+                            educator.setEducatorForChildrenForSpecialNeeds(false);
+
+                        base.addEducator(educator);
+
+                        Stage stage = (Stage) okButton.getScene().getWindow();
+                        stage.close();
+                    }
                 }
             }
         });
 
+    }
+
+    private boolean validateJmbgP(String jmbg) {
+        if (jmbg.length() != 13)
+            return false;
+
+        LocalDate datum = dateField.getValue();
+        if (datum.getDayOfMonth() != Integer.parseInt(jmbg.substring(0, 2)))
+            return false;
+        else if (datum.getMonthValue() != Integer.parseInt(jmbg.substring(2, 4)))
+            return false;
+
+        int godina = Integer.parseInt(jmbg.substring(4, 7));
+        if (godina > 500) godina += 1000; else godina += 2000;
+        if (datum.getYear() != godina)
+            return false;
+
+        int[] br = new int[13];
+        for (int i=0; i<13; i++) {
+            br[i] = jmbg.charAt(i);
+            br[i] -= 48;
+        }
+        int sum = 7*(br[0]+br[6]) + 6*(br[1]+br[7]) + 5*(br[2]+br[8]) + 4*(br[3]+br[9]) + 3*(br[4]+br[10]) + 2*(br[5]+br[11]);
+        sum = 11 - (sum % 11);
+        if (sum > 9) sum = 0;
+        if (br[12] != sum) return false;
+        return true;
+    }
+
+    private boolean validirajPrazno(TextField polje) {
+        if (polje.getText().trim().isEmpty()) {
+            polje.getStyleClass().removeAll("poljeIspravno");
+            polje.getStyleClass().add("poljeNijeIspravno");
+            return false;
+        } else {
+            polje.getStyleClass().removeAll("poljeNijeIspravno");
+            polje.getStyleClass().add("poljeIspravno");
+        }
+        return true;
     }
 }

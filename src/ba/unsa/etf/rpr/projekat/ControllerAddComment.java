@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -30,16 +31,32 @@ public class ControllerAddComment {
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                ArrayList<Day> days = child.desrialize();
-                Day day = days.get(days.size()-1);
-                day.getComments().add(comentArea.getText());
-                days.remove(days.size()-1);
-                days.add(day);
-                child.serialize(days);
-                Stage stage = (Stage) okButton.getScene().getWindow();
-                stage.close();
+                boolean sveOk = validirajPrazno(comentArea);
+
+                if(sveOk) {
+                    ArrayList<Day> days = child.desrialize();
+                    Day day = days.get(days.size() - 1);
+                    day.getComments().add(comentArea.getText());
+                    days.remove(days.size() - 1);
+                    days.add(day);
+                    child.serialize(days);
+                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    stage.close();
+                }
             }
         });
 
+    }
+
+    private boolean validirajPrazno(TextArea polje) {
+        if (polje.getText().trim().isEmpty()) {
+            polje.getStyleClass().removeAll("poljeIspravno");
+            polje.getStyleClass().add("poljeNijeIspravno");
+            return false;
+        } else {
+            polje.getStyleClass().removeAll("poljeNijeIspravno");
+            polje.getStyleClass().add("poljeIspravno");
+        }
+        return true;
     }
 }

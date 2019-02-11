@@ -28,7 +28,9 @@ Agenda:
 ->šminkanje (pod ovim podrazumjevam naći način da upotrebim sve ostale stvari)
 
 
-dakle prvo cu napraviti scenario kao da je radna otvorena prvi put u toku radnog vremena
-zatim cu napraviti scenario u kojem se provjerava da li je zaista radna otvorena prvi put u toku radnog vremena
-mislim da ce ovo drugo biti strasno komplikovano...
+šta treba validirati:
+-dodaj djete
+-dodaj odgajatelja
+-registruj ustanovu
+-dodaj mjesto
  */
