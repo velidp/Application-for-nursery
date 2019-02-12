@@ -23,12 +23,12 @@ public class Child {
     private Institution institution;
     private Place dwelling;
 
-    ArrayList<Day> days = new ArrayList<Day>();
+    private ArrayList<Day> days = new ArrayList<Day>();
 
     public void serialize(ArrayList<Day> lista){
 
         try {
-            FileOutputStream fileOut = new FileOutputStream(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
+            FileOutputStream fileOut = new FileOutputStream(this.getName() + this.getSurename() + this.id + ".xml");
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(lista);
             out.close();
@@ -36,13 +36,14 @@ public class Child {
         } catch (IOException i) {
             i.printStackTrace();
         }
+        System.out.println("Izvrsena serijalizacija");
     }
 
 
     public ArrayList<Day> desrialize(){
         ArrayList<Day> komentari = null;
         try {
-            FileInputStream fileIn = new FileInputStream(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
+            FileInputStream fileIn = new FileInputStream(this.getName() + this.getSurename() + this.id + ".xml");
             ObjectInputStream in = new ObjectInputStream(fileIn);
             komentari = (ArrayList<Day>) in.readObject();
             in.close();
@@ -63,22 +64,20 @@ public class Child {
 
         Day day = new Day();
 
-        day.setDepartureTime(LocalDateTime.now());
+        day.setDepartureTime(LocalDateTime.MIN);
         day.setComments(new ArrayList<String>());
-        day.setDate(LocalDate.now());
+        day.setDate(LocalDate.MIN);
         day.setApsent(false);
-        day.setArrivalTime(LocalDateTime.now());
+        day.setArrivalTime(LocalDateTime.MIN);
 
         days.add(day);
 
-        this.serialize(days);
 
 
-
-
-        File f = new File(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
+        File f = new File(this.getName() + this.getSurename() + this.id + ".xml");
         if(!(f.exists() && !f.isDirectory())) {
             try {
+                System.out.println("Kreirana datoteka!");
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder;
                 Document doc;
@@ -88,13 +87,24 @@ public class Child {
                 Transformer transformer = null;
                 transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml"));
+                StreamResult result = new StreamResult(new File(this.getName() + this.getSurename() + this.id + ".xml"));
                 transformer.transform(source, result);
+                try {
+                    FileOutputStream fileOut = new FileOutputStream(this.getName() + this.getSurename() + this.id + ".xml");
+                    ObjectOutputStream out = new ObjectOutputStream(fileOut);
+                    out.writeObject(days);
+                    out.close();
+                    fileOut.close();
+                    System.out.println("to je ta prva");
+                } catch (IOException i) {
+                    i.printStackTrace();
+                }
             } catch (
                     ParserConfigurationException | TransformerException pce) {
                 pce.printStackTrace();
             }
         }
+
     }
 
 
@@ -202,7 +212,15 @@ public class Child {
         this.dwelling = dwelling;
     }
 
+    public ArrayList<Day> getDays() {
+        return days;
+    }
+
+    public void setDays(ArrayList<Day> days) {
+        this.days = days;
+    }
+
     public String toString(){
-        return String.valueOf(id) + " " + name + surename;
+        return id + " " + name + surename;
     }
 }

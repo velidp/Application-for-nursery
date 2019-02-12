@@ -7,21 +7,17 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyCombination;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.swing.JRViewer;
+import net.sf.jasperreports.engine.JRException;
 
-
-import javax.swing.*;
 import java.io.IOException;
-import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
 public class ControllerMain {
 
@@ -607,8 +603,6 @@ public class ControllerMain {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
-                    } else {
-                        // ... user chose CANCEL or closed the dialog
                     }
 
                 } else if (radioWorker.isSelected()){
@@ -637,8 +631,6 @@ public class ControllerMain {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
-                    } else {
-                        // ... user chose CANCEL or closed the dialog
                     }
 
                 }
@@ -681,8 +673,6 @@ public class ControllerMain {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
-                    } else {
-                        // ... user chose CANCEL or closed the dialog
                     }
 
                 } else if (radioWorker.isSelected()){
@@ -711,8 +701,6 @@ public class ControllerMain {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
-                    } else {
-                        // ... user chose CANCEL or closed the dialog
                     }
 
                 }

@@ -62,6 +62,11 @@ public class KindergartenDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return observableList;
     }
 
@@ -76,9 +81,11 @@ public class KindergartenDAO {
                 place.setAdress(rs.getString(3));
                 place.setZipCode(rs.getString(4));
             }
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         return place;
     }
 
@@ -134,6 +141,11 @@ public class KindergartenDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        try {
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return observableList;
     }
 
@@ -166,11 +178,7 @@ public class KindergartenDAO {
     }
 
     public ObservableList getChildren(Institution institution, int a) {
-        /*
-        1 -12
-        2 -35
-        3 -sn
-         */
+
         List<Child> list = new ArrayList<Child>();
         ObservableList<Child> observableList = FXCollections.observableList(list);
         ResultSet rs = null;

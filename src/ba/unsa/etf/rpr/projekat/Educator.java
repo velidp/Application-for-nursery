@@ -26,7 +26,7 @@ public class Educator {
         this.name = name;
         this.surename = surename;
 
-        File f = new File(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml");
+        File f = new File(getName() + getSurename() + id + ".xml");
         if(!(f.exists() && !f.isDirectory())) {
             try {
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
@@ -38,7 +38,7 @@ public class Educator {
                 Transformer transformer = null;
                 transformer = transformerFactory.newTransformer();
                 DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(this.getName() + this.getSurename() + String.valueOf(this.id) + ".xml"));
+                StreamResult result = new StreamResult(new File(this.getName() + this.getSurename() + this.id + ".xml"));
                 transformer.transform(source, result);
             } catch (
                     ParserConfigurationException | TransformerException pce) {

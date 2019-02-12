@@ -3,7 +3,6 @@ package ba.unsa.etf.rpr.projekat;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Day implements Serializable {
@@ -11,7 +10,7 @@ public class Day implements Serializable {
     boolean apsent;
     LocalDateTime arrivalTime;
     LocalDateTime departureTime;
-    ArrayList<String> comments = new ArrayList<String>();
+    ArrayList comments = new ArrayList<String>();
 
     public LocalDate getDate() {
         return date;
@@ -45,20 +44,15 @@ public class Day implements Serializable {
         this.departureTime = departureTime;
     }
 
-    public ArrayList<String> getComments() {
+    public ArrayList getComments() {
         return comments;
     }
 
-    public void setComments(ArrayList<String> comments) {
+    public void setComments(ArrayList comments) {
         this.comments = comments;
     }
 
     public String toString(){
-        String str = "Datum: " + date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-        if(apsent) str = str + "\nPrisutan: Da";
-        else if (!apsent) str = str + "\nPrisutan: Ne";
-        str = str + " \nVrijeme dolaska: " + arrivalTime + "\nVrijeme odlaska: " + departureTime + comments;
-
-        return str;
+        return "DaDatum: " + date;
     }
 }

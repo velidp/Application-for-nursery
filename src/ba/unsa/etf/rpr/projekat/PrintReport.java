@@ -1,18 +1,12 @@
 package ba.unsa.etf.rpr.projekat;
 
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.swing.JRViewer;
+
+import javax.swing.*;
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import javax.swing.JFrame;
-
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperCompileManager;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.JasperReport;
-import net.sf.jasperreports.swing.JRViewer;
 
 public class PrintReport extends JFrame {
     private static final long serialVersionUID = 1L;

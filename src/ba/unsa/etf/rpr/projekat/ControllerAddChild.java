@@ -107,83 +107,169 @@ public class ControllerAddChild {
             }
         });
 
-        okButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                if(chilD == null){
-                    boolean sveOk = validirajPrazno(nameField);
-                    sveOk &= validirajPrazno(surenameField);
-                    sveOk &= validirajPrazno(nameParentField);
-                    sveOk &= validirajPrazno(surenameParrentField);
-                    sveOk &= validirajPrazno(phoneNumberField);
+        okButton.setOnAction(event -> {
+            if(chilD == null){
+                boolean sveOk = validirajPrazno(nameField);
+                sveOk &= validirajPrazno(surenameField);
+                sveOk &= validirajPrazno(nameParentField);
+                sveOk &= validirajPrazno(surenameParrentField);
+                sveOk &= validirajPrazno(phoneNumberField);
 
-                    if (placeCombo.getSelectionModel().isEmpty()) {
-                        placeCombo.getStyleClass().removeAll("poljeIspravno");
-                        placeCombo.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                        placeCombo.getStyleClass().add("poljeIspravno");
-                    }
+                if (placeCombo.getSelectionModel().isEmpty()) {
+                    placeCombo.getStyleClass().removeAll("poljeIspravno");
+                    placeCombo.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                    placeCombo.getStyleClass().add("poljeIspravno");
+                }
 
 
-                    if (institutionCombo.getSelectionModel().isEmpty()) {
-                        institutionCombo.getStyleClass().removeAll("poljeIspravno");
-                        institutionCombo.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        institutionCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                        institutionCombo.getStyleClass().add("poljeIspravno");
-                    }
+                if (institutionCombo.getSelectionModel().isEmpty()) {
+                    institutionCombo.getStyleClass().removeAll("poljeIspravno");
+                    institutionCombo.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    institutionCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                    institutionCombo.getStyleClass().add("poljeIspravno");
+                }
 
-                    if(!specialNeedsYes.isSelected() && !specialNeedsNo.isSelected()){
-                        sveOk = false;
-                    }
+                if(!specialNeedsYes.isSelected() && !specialNeedsNo.isSelected()){
+                    sveOk = false;
+                }
 
-                    if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now()) || Period.between(dateField.getValue(), LocalDate.now()).getYears() > 5 || Period.between(dateField.getValue(), LocalDate.now()).getYears() < 1) {
-                        dateField.getStyleClass().removeAll("poljeIspravno");
-                        dateField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        dateField.getStyleClass().removeAll("poljeNijeIspravno");
-                        dateField.getStyleClass().add("poljeIspravno");
-                    }
+                if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now()) || Period.between(dateField.getValue(), LocalDate.now()).getYears() > 5 || Period.between(dateField.getValue(), LocalDate.now()).getYears() < 1) {
+                    dateField.getStyleClass().removeAll("poljeIspravno");
+                    dateField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    dateField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateField.getStyleClass().add("poljeIspravno");
+                }
 
-                    if (dateParrentField.getValue() == null || dateParrentField.getValue().isAfter(LocalDate.now())) {
-                        dateParrentField.getStyleClass().removeAll("poljeIspravno");
-                        dateParrentField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        dateParrentField.getStyleClass().removeAll("poljeNijeIspravno");
-                        dateParrentField.getStyleClass().add("poljeIspravno");
-                    }
+                if (dateParrentField.getValue() == null || dateParrentField.getValue().isAfter(LocalDate.now())) {
+                    dateParrentField.getStyleClass().removeAll("poljeIspravno");
+                    dateParrentField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    dateParrentField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateParrentField.getStyleClass().add("poljeIspravno");
+                }
 
 
-                    /*
-                    if (!validateJmbgC(jmbgField.getText())) {
-                        jmbgField.getStyleClass().removeAll("poljeIspravno");
-                        jmbgField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
-                        jmbgField.getStyleClass().add("poljeIspravno");
-                    }
+                /*
+                if (!validateJmbgC(jmbgField.getText())) {
+                    jmbgField.getStyleClass().removeAll("poljeIspravno");
+                    jmbgField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbgField.getStyleClass().add("poljeIspravno");
+                }
 
-                    if (!validateJmbgP(jmbgParentField.getText())) {
-                        jmbgParentField.getStyleClass().removeAll("poljeIspravno");
-                        jmbgParentField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
-                        jmbgParentField.getStyleClass().add("poljeIspravno");
-                    }*/
+                if (!validateJmbgP(jmbgParentField.getText())) {
+                    jmbgParentField.getStyleClass().removeAll("poljeIspravno");
+                    jmbgParentField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbgParentField.getStyleClass().add("poljeIspravno");
+                }*/
 
 
 
+
+            if(sveOk) {
+
+                Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
+                child.setDateOfBirth(dateField.getValue());
+                child.setJmbg(jmbgField.getText());
+                child.setDwelling((Place) placeCombo.getSelectionModel().getSelectedItem());
+                child.setInstitution((Institution) institutionCombo.getSelectionModel().getSelectedItem());
+                child.setChildWithSpecialNeeds(specialNeedsYes.isSelected());
+                child.setParentsName(nameParentField.getText());
+                child.setParentsSurename(surenameParrentField.getText());
+                child.setParentsJmbg(jmbgParentField.getText());
+                child.setParentsDateOfBirth(dateParrentField.getValue());
+                child.setPhoneNumber(phoneNumberField.getText());
+
+                base.addChild(child);
+
+                Stage stage = (Stage) okButton.getScene().getWindow();
+                stage.close();
+            }
+
+            } else {
+                base.removeChild(chilD);
+
+                boolean sveOk = validirajPrazno(nameField);
+                sveOk &= validirajPrazno(surenameField);
+                sveOk &= validirajPrazno(nameParentField);
+                sveOk &= validirajPrazno(surenameParrentField);
+                sveOk &= validirajPrazno(phoneNumberField);
+
+                if (placeCombo.getSelectionModel().isEmpty()) {
+                    placeCombo.getStyleClass().removeAll("poljeIspravno");
+                    placeCombo.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                    placeCombo.getStyleClass().add("poljeIspravno");
+                }
+
+
+                if (institutionCombo.getSelectionModel().isEmpty()) {
+                    institutionCombo.getStyleClass().removeAll("poljeIspravno");
+                    institutionCombo.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    institutionCombo.getStyleClass().removeAll("poljeNijeIspravno");
+                    institutionCombo.getStyleClass().add("poljeIspravno");
+                }
+
+                if(!specialNeedsYes.isSelected() && !specialNeedsNo.isSelected()){
+                    sveOk = false;
+                }
+
+                if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
+                    dateField.getStyleClass().removeAll("poljeIspravno");
+                    dateField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    dateField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateField.getStyleClass().add("poljeIspravno");
+                }
+
+                if (dateParrentField.getValue() == null || dateParrentField.getValue().isAfter(LocalDate.now())) {
+                    dateParrentField.getStyleClass().removeAll("poljeIspravno");
+                    dateParrentField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    dateParrentField.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateParrentField.getStyleClass().add("poljeIspravno");
+                }
+
+                if (!validateJmbgC(jmbgField.getText())) {
+                    jmbgField.getStyleClass().removeAll("poljeIspravno");
+                    jmbgField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbgField.getStyleClass().add("poljeIspravno");
+                }
+
+                if (!validateJmbgP(jmbgParentField.getText())) {
+                    jmbgParentField.getStyleClass().removeAll("poljeIspravno");
+                    jmbgParentField.getStyleClass().add("poljeNijeIspravno");
+                    sveOk = false;
+                } else {
+                    jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
+                    jmbgParentField.getStyleClass().add("poljeIspravno");
+                }
 
                 if(sveOk) {
-
                     Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
+
                     child.setDateOfBirth(dateField.getValue());
                     child.setJmbg(jmbgField.getText());
                     child.setDwelling((Place) placeCombo.getSelectionModel().getSelectedItem());
@@ -199,95 +285,6 @@ public class ControllerAddChild {
 
                     Stage stage = (Stage) okButton.getScene().getWindow();
                     stage.close();
-                }
-
-                } else {
-                    base.removeChild(chilD);
-
-                    boolean sveOk = validirajPrazno(nameField);
-                    sveOk &= validirajPrazno(surenameField);
-                    sveOk &= validirajPrazno(nameParentField);
-                    sveOk &= validirajPrazno(surenameParrentField);
-                    sveOk &= validirajPrazno(phoneNumberField);
-
-                    if (placeCombo.getSelectionModel().isEmpty()) {
-                        placeCombo.getStyleClass().removeAll("poljeIspravno");
-                        placeCombo.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                        placeCombo.getStyleClass().add("poljeIspravno");
-                    }
-
-
-                    if (institutionCombo.getSelectionModel().isEmpty()) {
-                        institutionCombo.getStyleClass().removeAll("poljeIspravno");
-                        institutionCombo.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        institutionCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                        institutionCombo.getStyleClass().add("poljeIspravno");
-                    }
-
-                    if(!specialNeedsYes.isSelected() && !specialNeedsNo.isSelected()){
-                        sveOk = false;
-                    }
-
-                    if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
-                        dateField.getStyleClass().removeAll("poljeIspravno");
-                        dateField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        dateField.getStyleClass().removeAll("poljeNijeIspravno");
-                        dateField.getStyleClass().add("poljeIspravno");
-                    }
-
-                    if (dateParrentField.getValue() == null || dateParrentField.getValue().isAfter(LocalDate.now())) {
-                        dateParrentField.getStyleClass().removeAll("poljeIspravno");
-                        dateParrentField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        dateParrentField.getStyleClass().removeAll("poljeNijeIspravno");
-                        dateParrentField.getStyleClass().add("poljeIspravno");
-                    }
-
-                    if (!validateJmbgC(jmbgField.getText())) {
-                        jmbgField.getStyleClass().removeAll("poljeIspravno");
-                        jmbgField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
-                        jmbgField.getStyleClass().add("poljeIspravno");
-                    }
-
-                    if (!validateJmbgP(jmbgParentField.getText())) {
-                        jmbgParentField.getStyleClass().removeAll("poljeIspravno");
-                        jmbgParentField.getStyleClass().add("poljeNijeIspravno");
-                        sveOk = false;
-                    } else {
-                        jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
-                        jmbgParentField.getStyleClass().add("poljeIspravno");
-                    }
-
-                    if(sveOk) {
-                        Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
-
-                        child.setDateOfBirth(dateField.getValue());
-                        child.setJmbg(jmbgField.getText());
-                        child.setDwelling((Place) placeCombo.getSelectionModel().getSelectedItem());
-                        child.setInstitution((Institution) institutionCombo.getSelectionModel().getSelectedItem());
-                        child.setChildWithSpecialNeeds(specialNeedsYes.isSelected());
-                        child.setParentsName(nameParentField.getText());
-                        child.setParentsSurename(surenameParrentField.getText());
-                        child.setParentsJmbg(jmbgParentField.getText());
-                        child.setParentsDateOfBirth(dateParrentField.getValue());
-                        child.setPhoneNumber(phoneNumberField.getText());
-
-                        base.addChild(child);
-
-                        Stage stage = (Stage) okButton.getScene().getWindow();
-                        stage.close();
-                    }
                 }
             }
         });

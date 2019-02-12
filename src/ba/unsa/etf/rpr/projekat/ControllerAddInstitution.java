@@ -14,7 +14,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
-import java.util.regex.Pattern;
 
 public class ControllerAddInstitution {
 
@@ -47,77 +46,74 @@ public class ControllerAddInstitution {
             }
         });
 
-        okButton.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                boolean sveOk = validirajPrazno(nameOfInstitution);
-                sveOk &= validirajPrazno(nameOfDirectorField);
-                sveOk &= validirajPrazno(surenameOfDirectorField);
-                sveOk &= validirajPrazno(phoneNumberOfDirectorField);
-                sveOk &= validirajPrazno(phoneNumberField);
+        okButton.setOnAction(event -> {
+            boolean sveOk = validirajPrazno(nameOfInstitution);
+            sveOk &= validirajPrazno(nameOfDirectorField);
+            sveOk &= validirajPrazno(surenameOfDirectorField);
+            sveOk &= validirajPrazno(phoneNumberOfDirectorField);
+            sveOk &= validirajPrazno(phoneNumberField);
 
 
 
 
-                if(placeOfInstitutionCombo.getSelectionModel().isEmpty()){
-                    sveOk = false;
-                }
+            if(placeOfInstitutionCombo.getSelectionModel().isEmpty()){
+                sveOk = false;
+            }
 
-                if (dateOfBirthOfDirectorField.getValue() == null || dateOfBirthOfDirectorField.getValue().isAfter(LocalDate.now())) {
-                    dateOfBirthOfDirectorField.getStyleClass().removeAll("poljeIspravno");
-                    dateOfBirthOfDirectorField.getStyleClass().add("poljeNijeIspravno");
-                    sveOk = false;
-                } else {
-                    dateOfBirthOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
-                    dateOfBirthOfDirectorField.getStyleClass().add("poljeIspravno");
-                }
+            if (dateOfBirthOfDirectorField.getValue() == null || dateOfBirthOfDirectorField.getValue().isAfter(LocalDate.now())) {
+                dateOfBirthOfDirectorField.getStyleClass().removeAll("poljeIspravno");
+                dateOfBirthOfDirectorField.getStyleClass().add("poljeNijeIspravno");
+                sveOk = false;
+            } else {
+                dateOfBirthOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
+                dateOfBirthOfDirectorField.getStyleClass().add("poljeIspravno");
+            }
 
-                if (!validateEmail(emailField.getText())) {
-                    emailField.getStyleClass().removeAll("poljeIspravno");
-                    emailField.getStyleClass().add("poljeNijeIspravno");
-                    sveOk = false;
-                } else {
-                    emailField.getStyleClass().removeAll("poljeNijeIspravno");
-                    emailField.getStyleClass().add("poljeIspravno");
-                }
+            if (!validateEmail(emailField.getText())) {
+                emailField.getStyleClass().removeAll("poljeIspravno");
+                emailField.getStyleClass().add("poljeNijeIspravno");
+                sveOk = false;
+            } else {
+                emailField.getStyleClass().removeAll("poljeNijeIspravno");
+                emailField.getStyleClass().add("poljeIspravno");
+            }
 
-                if (!validateEmail(emailOfDirectorField.getText())) {
-                    emailOfDirectorField.getStyleClass().removeAll("poljeIspravno");
-                    emailOfDirectorField.getStyleClass().add("poljeNijeIspravno");
-                    sveOk = false;
-                } else {
-                    emailOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
-                    emailOfDirectorField.getStyleClass().add("poljeIspravno");
-                }
+            if (!validateEmail(emailOfDirectorField.getText())) {
+                emailOfDirectorField.getStyleClass().removeAll("poljeIspravno");
+                emailOfDirectorField.getStyleClass().add("poljeNijeIspravno");
+                sveOk = false;
+            } else {
+                emailOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
+                emailOfDirectorField.getStyleClass().add("poljeIspravno");
+            }
 
-                if (!validateJmbgC(jmbgOfDirectorField.getText())) {
-                    jmbgOfDirectorField.getStyleClass().removeAll("poljeIspravno");
-                    jmbgOfDirectorField.getStyleClass().add("poljeNijeIspravno");
-                    sveOk = false;
-                } else {
-                    jmbgOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
-                    jmbgOfDirectorField.getStyleClass().add("poljeIspravno");
-                }
+            if (!validateJmbgC(jmbgOfDirectorField.getText())) {
+                jmbgOfDirectorField.getStyleClass().removeAll("poljeIspravno");
+                jmbgOfDirectorField.getStyleClass().add("poljeNijeIspravno");
+                sveOk = false;
+            } else {
+                jmbgOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
+                jmbgOfDirectorField.getStyleClass().add("poljeIspravno");
+            }
 
 
-                if(sveOk) {
-                    Institution institution = new Institution();
-                    institution.setId(base.getMaxIdFromInstitutions());
-                    institution.setName(nameOfInstitution.getText());
-                    institution.setPlace((Place) placeOfInstitutionCombo.getSelectionModel().getSelectedItem());
-                    institution.setPhoneNumber(phoneNumberField.getText());
-                    institution.setEmail(emailField.getText());
-                    institution.setNameOfDirector(nameOfDirectorField.getText());
-                    institution.setSurenameOfDirector(surenameOfDirectorField.getText());
-                    institution.setJmbgOfDirector(jmbgOfDirectorField.getText());
-                    institution.setDateOfBirthOfDirector(dateOfBirthOfDirectorField.getValue());
-                    institution.setPhoneNumber(phoneNumberOfDirectorField.getText());
-                    institution.setEmailOfDirector(emailOfDirectorField.getText());
+            if(sveOk) {
+                Institution institution = new Institution();
+                institution.setId(base.getMaxIdFromInstitutions());
+                institution.setName(nameOfInstitution.getText());
+                institution.setPlace((Place) placeOfInstitutionCombo.getSelectionModel().getSelectedItem());
+                institution.setPhoneNumber(phoneNumberField.getText());
+                institution.setEmail(emailField.getText());
+                institution.setNameOfDirector(nameOfDirectorField.getText());
+                institution.setSurenameOfDirector(surenameOfDirectorField.getText());
+                institution.setJmbgOfDirector(jmbgOfDirectorField.getText());
+                institution.setDateOfBirthOfDirector(dateOfBirthOfDirectorField.getValue());
+                institution.setPhoneNumber(phoneNumberOfDirectorField.getText());
+                institution.setEmailOfDirector(emailOfDirectorField.getText());
 
-                    base.addInstitiution(institution);
-                    Stage stage = (Stage) okButton.getScene().getWindow();
-                    stage.close();
-                }
+                base.addInstitiution(institution);
+                Stage stage = (Stage) okButton.getScene().getWindow();
+                stage.close();
             }
         });
 

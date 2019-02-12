@@ -25,23 +25,17 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
     }
 }
 /*
-1. Testirati program. Poravljati greške.
 2. Napraviti testove.
 3. Alati za automatsku izgradnju koda.
+5. QAPlug
 4. Napisati izvještaj i poslati ga.
  */
 /*
-Problemi:
-Dakle u glavnom prozoru radi sve kako i treba i to je sve bazirano na radu sa bazom
 
-Sada treba uskladiti prozor za rad:
-1. dugme prisutan i odsutan se može upotrijebiti samo jednom u toku radnoga dana
-2. ponovni ulazak u bazu
-
- */
 /*
 VALIDACIJA JMBG
  */
