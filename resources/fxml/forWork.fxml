@@ -16,7 +16,7 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="485.0" prefWidth="365.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@/css/validiranje.css" />
+        <URL value="@/css/validation.css" />
     </stylesheets>
     <columnConstraints>
     <ColumnConstraints maxWidth="214.0" minWidth="33.0" prefWidth="120.0" />

@@ -64,9 +64,9 @@ public class ControllerMain {
 
         institutionCombo.setItems(base.getInstitutions());
 
-        groupCombo.getItems().addAll("Grupa djece dobi od 1 do 2 godine", "Grupa djece dobi od 3 do 5 godina", "Grupa djece sa posbenim potrebama");
+        groupCombo.getItems().addAll(bundle.getString("Grupa12"), bundle.getString("Grupa35"), bundle.getString("GrupaSN"));
 
-        languageCombo.getItems().addAll("Bosanski", "Engleski");
+        languageCombo.getItems().addAll(bundle.getString("Bosanski"), bundle.getString("Engleski"));
 
 
         nameColumn.setCellValueFactory(new PropertyValueFactory("name"));
@@ -76,7 +76,7 @@ public class ControllerMain {
         languageCombo.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                if(languageCombo.getSelectionModel().getSelectedItem().equals("Bosanski")){
+                if(languageCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Bosanski"))){
                     Locale.setDefault(new Locale("bs", "BA"));
                     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
                     Parent root = null;
@@ -86,13 +86,13 @@ public class ControllerMain {
                         e.printStackTrace();
                     }
                     Stage primaryStage = new Stage();
-                    primaryStage.setTitle("Aplikacija za vrtić");
+                    primaryStage.setTitle(bundle.getString("appName"));
                     primaryStage.setScene(new Scene(root, 800, 600));
                     primaryStage.show();
                     Stage stage = (Stage) languageCombo.getScene().getWindow();
                     stage.close();
                     Locale.setDefault(new Locale("bs", "BA"));
-                } else if((languageCombo.getSelectionModel().getSelectedItem().equals("Engleski"))){
+                } else if((languageCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Engleski")))){
                     Locale.setDefault(new Locale("en", "US"));
                     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
                     Parent root = null;
@@ -102,7 +102,7 @@ public class ControllerMain {
                         e.printStackTrace();
                     }
                     Stage primaryStage = new Stage();
-                    primaryStage.setTitle("Aplikacija za vrtić");
+                    primaryStage.setTitle(bundle.getString("appName"));
                     primaryStage.setScene(new Scene(root, 800, 600));
                     primaryStage.show();
                     Stage stage = (Stage) languageCombo.getScene().getWindow();
@@ -117,18 +117,18 @@ public class ControllerMain {
             @Override
             public void handle(ActionEvent event) {
                 if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                     }
                 }
@@ -139,18 +139,18 @@ public class ControllerMain {
             @Override
             public void handle(ActionEvent event) {
                 if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                     }
                 }
@@ -163,18 +163,18 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(radioChildren.isSelected()) radioWorker.setSelected(false);
                 if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                     }
                 }
@@ -186,18 +186,18 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(radioWorker.isSelected()) radioChildren.setSelected(false);
                 if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                    if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                    } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                    } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                         tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                     }
                 }
@@ -217,8 +217,8 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("About");
-                alert.setHeaderText("Aplikacija za vrtić");
-                alert.setContentText("Autor: Velid Poško");
+                alert.setHeaderText(bundle.getString("appName"));
+                alert.setContentText(bundle.getString("Autor") + "Velid Poško");
                 alert.showAndWait();
             }
         });
@@ -235,7 +235,7 @@ public class ControllerMain {
                     e1.printStackTrace();
                 }
                 Stage stage = new Stage();
-                stage.setTitle("Registruj ustanovu");
+                stage.setTitle(bundle.getString("registerInstitution"));
                 stage.setResizable(false);
                 stage.setScene(new Scene(root, 443, 333));
                 stage.showAndWait();
@@ -250,9 +250,9 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(!radioChildren.isSelected() && !radioWorker.isSelected()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Nije ništa odabrano u opcijama");
+                    alert.setContentText(bundle.getString("noChose"));
 
                     alert.showAndWait();
                 }
@@ -267,24 +267,24 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Dodaj djete");
+                    stage.setTitle(bundle.getString("addChild"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 470, 379));
                     stage.showAndWait();
 
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -299,23 +299,23 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Dodaj odgajatelja");
+                    stage.setTitle(bundle.getString("addEducator"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 362, 282));
                     stage.showAndWait();
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -328,9 +328,9 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(!radioChildren.isSelected() && !radioWorker.isSelected()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Nije ništa odabrano u opcijama");
+                    alert.setContentText(bundle.getString("noChose"));
 
                     alert.showAndWait();
                 }
@@ -345,24 +345,24 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Dodaj djete");
+                    stage.setTitle(bundle.getString("addChild"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 470, 379));
                     stage.showAndWait();
 
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -377,23 +377,23 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Dodaj odgajatelja");
+                    stage.setTitle(bundle.getString("addEducator"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 362, 282));
                     stage.showAndWait();
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -408,16 +408,16 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(!radioChildren.isSelected() && !radioWorker.isSelected()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Nije ništa odabrano u opcijama");
+                    alert.setContentText(bundle.getString("noChose"));
 
                     alert.showAndWait();
                 } else if(tableOfPersons.getSelectionModel().isEmpty()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Niste odabrali niti jednu stavku.");
+                    alert.setContentText(bundle.getString("noItem"));
                     alert.showAndWait();
                 } else if(radioChildren.isSelected()){
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"),bundle);
@@ -429,24 +429,24 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Izmjeni djete");
+                    stage.setTitle(bundle.getString("updateChild"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 470, 379));
                     stage.showAndWait();
 
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -461,23 +461,23 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Dodaj odgajatelja");
+                    stage.setTitle(bundle.getString("addEducator"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 362, 282));
                     stage.showAndWait();
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -491,16 +491,16 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(!radioChildren.isSelected() && !radioWorker.isSelected()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Nije ništa odabrano u opcijama");
+                    alert.setContentText(bundle.getString("noChose"));
 
                     alert.showAndWait();
                 } else if(tableOfPersons.getSelectionModel().isEmpty()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Niste odabrali niti jednu stavku.");
+                    alert.setContentText(bundle.getString("noItem"));
                     alert.showAndWait();
                 } else if(radioChildren.isSelected()){
                     FXMLLoader loader1 = new FXMLLoader(getClass().getClassLoader().getResource("fxml/addChild.fxml"),bundle);
@@ -512,24 +512,24 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Izmjeni djete");
+                    stage.setTitle(bundle.getString("updateChild"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 470, 379));
                     stage.showAndWait();
 
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -544,23 +544,23 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Dodaj odgajatelja");
+                    stage.setTitle(bundle.getString("addEducator"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 362, 282));
                     stage.showAndWait();
                     if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                        if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                        } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                        } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                             tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                         }
                     }
@@ -576,34 +576,34 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(tableOfPersons.getSelectionModel().isEmpty()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Niste odabrali niti jednu stavku.");
+                    alert.setContentText(bundle.getString("noItem"));
 
                     alert.showAndWait();
                 } else if(radioChildren.isSelected()){
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
                     alert.setHeaderText("");
-                    alert.setContentText("Da li zaista želite izbrisati odabranu stavku?");
+                    alert.setContentText(bundle.getString("dialog"));
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         base.removeChild(((Child)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
@@ -615,25 +615,25 @@ public class ControllerMain {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
                     alert.setHeaderText("");
-                    alert.setContentText("Da li zaista želite izbrisati odabranu stavku?");
+                    alert.setContentText(bundle.getString("dialog"));
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         base.removeEducator(((Educator)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
@@ -650,34 +650,34 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if(tableOfPersons.getSelectionModel().isEmpty()){
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Niste odabrali niti jednu stavku.");
+                    alert.setContentText(bundle.getString("noItem"));
 
                     alert.showAndWait();
                 } else if(radioChildren.isSelected()){
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
                     alert.setHeaderText("");
-                    alert.setContentText("Da li zaista želite izbrisati odabranu stavku?");
+                    alert.setContentText(bundle.getString("dialog"));
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         base.removeChild(((Child)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
@@ -689,25 +689,25 @@ public class ControllerMain {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Confirmation Dialog");
                     alert.setHeaderText("");
-                    alert.setContentText("Da li zaista želite izbrisati odabranu stavku?");
+                    alert.setContentText(bundle.getString("dialog"));
 
                     Optional<ButtonType> result = alert.showAndWait();
                     if (result.get() == ButtonType.OK){
                         // ... user chose OK
                         base.removeEducator(((Educator)tableOfPersons.getSelectionModel().getSelectedItem()));
                         if(!institutionCombo.getSelectionModel().isEmpty() && !groupCombo.getSelectionModel().isEmpty()) {
-                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine")) {
+                            if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
-                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioChildren.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getChildren((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 3));
 
-                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 1 do 2 godine"))) {
+                            } else if ((radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa12")))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece dobi od 3 do 5 godina")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("Grupa35"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 1));
-                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals("Grupa djece sa posbenim potrebama")) {
+                            } else if (radioWorker.isSelected() && groupCombo.getSelectionModel().getSelectedItem().equals(bundle.getString("GrupaSN"))) {
                                 tableOfPersons.setItems(base.getEducators((Institution) institutionCombo.getSelectionModel().getSelectedItem(), 2));
                             }
                         }
@@ -748,9 +748,9 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 if (!radioWorker.isSelected() || tableOfPersons.getSelectionModel().isEmpty() || institutionCombo.getSelectionModel().isEmpty()) {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Informacija");
+                    alert.setTitle("Alert");
                     alert.setHeaderText(null);
-                    alert.setContentText("Da biste započeli sa radom odaberite ustanovu, odgajatelja i grupu.");
+                    alert.setContentText(bundle.getString("startWork"));
 
                     alert.showAndWait();
                 } else {
@@ -763,7 +763,7 @@ public class ControllerMain {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Rad");
+                    stage.setTitle(bundle.getString("work"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 365, 485));
                     stage.setResizable(false);

@@ -17,7 +17,7 @@
 
 <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="379.0" prefWidth="470.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <stylesheets>
-        <URL value="@/css/validiranje.css" />
+        <URL value="@/css/validation.css" />
     </stylesheets>
     <columnConstraints>
     <ColumnConstraints hgrow="SOMETIMES" maxWidth="215.0" minWidth="10.0" prefWidth="185.0" />
@@ -103,7 +103,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ComboBox>
-      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="268.0" promptText="%choseInstitution" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="268.0" promptText="%choseinstitution" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>

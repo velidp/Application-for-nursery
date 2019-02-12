@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ResourceBundle;
 
 public class ControllerAddChild {
@@ -58,7 +59,7 @@ public class ControllerAddChild {
                     e1.printStackTrace();
                 }
                 Stage stage = new Stage();
-                stage.setTitle("Dodaj mjesto");
+                stage.setTitle(bundle.getString("addPlace"));
                 stage.setResizable(false);
                 stage.setScene(new Scene(root, 304, 159));
                 stage.showAndWait();
@@ -139,7 +140,7 @@ public class ControllerAddChild {
                         sveOk = false;
                     }
 
-                    if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
+                    if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now()) || Period.between(dateField.getValue(), LocalDate.now()).getYears() > 5 || Period.between(dateField.getValue(), LocalDate.now()).getYears() < 1) {
                         dateField.getStyleClass().removeAll("poljeIspravno");
                         dateField.getStyleClass().add("poljeNijeIspravno");
                         sveOk = false;
@@ -157,6 +158,8 @@ public class ControllerAddChild {
                         dateParrentField.getStyleClass().add("poljeIspravno");
                     }
 
+
+                    /*
                     if (!validateJmbgC(jmbgField.getText())) {
                         jmbgField.getStyleClass().removeAll("poljeIspravno");
                         jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -173,7 +176,7 @@ public class ControllerAddChild {
                     } else {
                         jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
                         jmbgParentField.getStyleClass().add("poljeIspravno");
-                    }
+                    }*/
 
 
 

@@ -40,7 +40,7 @@ public class ControllerAddEducator {
     public void initialize(){
         institutionsCombo.setItems(base.getInstitutions());
         placeCombo.setItems(base.getPlaces());
-        typeCombo.getItems().addAll("Obični odgajatelj", "Odgajatelj za djecu sa posebnim potrebama");
+        typeCombo.getItems().addAll(bundle.getString("ordinary"), bundle.getString("educatorSn"));
 
         if(educatoR != null){
             nameField.setText(educatoR.getName());
@@ -74,7 +74,7 @@ public class ControllerAddEducator {
                     e1.printStackTrace();
                 }
                 Stage stage = new Stage();
-                stage.setTitle("Dodaj mjesto");
+                stage.setTitle(bundle.getString("addPlace"));
                 stage.setResizable(false);
                 stage.setScene(new Scene(root, 304, 159));
                 stage.showAndWait();
@@ -128,6 +128,7 @@ public class ControllerAddEducator {
                         dateField.getStyleClass().add("poljeIspravno");
                     }
 
+                    /*
                     if (!validateJmbgP(jmbgField.getText())) {
                         jmbgField.getStyleClass().removeAll("poljeIspravno");
                         jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -135,7 +136,7 @@ public class ControllerAddEducator {
                     } else {
                         jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
                         jmbgField.getStyleClass().add("poljeIspravno");
-                    }
+                    }*/
 
 
                     if(sveOk) {
@@ -145,9 +146,9 @@ public class ControllerAddEducator {
                         educator.setDateOfBirth(dateField.getValue());
                         educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
                         educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
-                        if (typeCombo.getSelectionModel().getSelectedItem() == "Odgajatelj za djecu sa posebnim potrebama")
+                        if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("educatorSn"))
                             educator.setEducatorForChildrenForSpecialNeeds(true);
-                        else if (typeCombo.getSelectionModel().getSelectedItem() == "Obični odgajatelj")
+                        else if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("ordinary"))
                             educator.setEducatorForChildrenForSpecialNeeds(false);
 
                         base.addEducator(educator);
@@ -199,6 +200,7 @@ public class ControllerAddEducator {
                         dateField.getStyleClass().add("poljeIspravno");
                     }
 
+                    /*
                     if (!validateJmbgP(jmbgField.getText())) {
                         jmbgField.getStyleClass().removeAll("poljeIspravno");
                         jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -206,7 +208,7 @@ public class ControllerAddEducator {
                     } else {
                         jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
                         jmbgField.getStyleClass().add("poljeIspravno");
-                    }
+                    }*/
 
 
 
@@ -217,9 +219,9 @@ public class ControllerAddEducator {
                         educator.setDateOfBirth(dateField.getValue());
                         educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
                         educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
-                        if (typeCombo.getSelectionModel().getSelectedItem() == "Odgajatelj za djecu sa posebnim potrebama")
+                        if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("educatorSn"))
                             educator.setEducatorForChildrenForSpecialNeeds(true);
-                        else if (typeCombo.getSelectionModel().getSelectedItem() == "Obični odgajatelj")
+                        else if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("ordinary"))
                             educator.setEducatorForChildrenForSpecialNeeds(false);
 
                         base.addEducator(educator);

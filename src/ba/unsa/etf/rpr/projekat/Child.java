@@ -50,15 +50,10 @@ public class Child {
         } catch (IOException i) {
             i.printStackTrace();
         } catch (ClassNotFoundException c) {
-            System.out.println("Employee class not found");
             c.printStackTrace();
         }
         return komentari;
     }
-
-
-
-
 
 
     public Child(String name, String surename, int id){

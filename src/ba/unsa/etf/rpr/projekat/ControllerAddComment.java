@@ -8,6 +8,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 public class ControllerAddComment {
     public Button okButton;
@@ -18,6 +19,8 @@ public class ControllerAddComment {
     public ControllerAddComment(Child child){
         this.child = child;
     }
+
+
 
     public void initialize(){
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {

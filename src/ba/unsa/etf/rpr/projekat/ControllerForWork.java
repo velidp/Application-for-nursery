@@ -69,11 +69,11 @@ public class ControllerForWork {
             groupLabel.setText(group);
             educatorLabel.setText(educator.getName() + " " + educator.getSurename());
 
-            if (group.equals("Grupa djece dobi od 1 do 2 godine"))
+            if (group.equals(bundle.getString("Grupa12")))
                 listView.setItems(base.getChildren(this.institution, 1));
-            else if (group.equals("Grupa djece dobi od 3 do 5 godina"))
+            else if (group.equals(bundle.getString("Grupa35")))
                 listView.setItems(base.getChildren(this.institution, 2));
-            else if (group.equals("Grupa djece sa posbenim potrebama"))
+            else if (group.equals(bundle.getString("GrupaSN")))
                 listView.setItems(base.getChildren(this.institution, 3));
 
             datePicker.setValue(LocalDate.now());
@@ -83,9 +83,9 @@ public class ControllerForWork {
                 public void handle(ActionEvent event) {
                     if(datePicker.getValue().isAfter(LocalDate.now())){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Informacija");
+                        alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("Ne možete odabrati datum iz budućnosti.");
+                        alert.setContentText(bundle.getString("FututreDate"));
                         alert.showAndWait();
                         datePicker.setValue(LocalDate.now());
                     }
@@ -113,7 +113,7 @@ public class ControllerForWork {
                         e1.printStackTrace();
                     }
                     Stage stage = new Stage();
-                    stage.setTitle("Aplikacija za vrtić.");
+                    stage.setTitle(bundle.getString("appName"));
                     stage.setResizable(false);
                     stage.setScene(new Scene(root, 744, 522));
                     stage.show();
@@ -131,10 +131,9 @@ public class ControllerForWork {
                             progresBar.setProgress(0.0909 * (LocalDateTime.now().getHour() - 7));
                         } else {
                             progresBar.setProgress(0);
-                        /*
-                        apsentButton.setDisable(true);
-                        notApsentButton.setDisable(true);
-                        addComentButton.setDisable(true);*/
+                            apsentButton.setDisable(true);
+                            notApsentButton.setDisable(true);
+                            addComentButton.setDisable(true);
                         }
                     }));
             timeline.setCycleCount(Animation.INDEFINITE);
@@ -160,14 +159,14 @@ public class ControllerForWork {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Informacija");
                         alert.setHeaderText(null);
-                        alert.setContentText("Niste odabrali niti jedno djete.");
+                        alert.setContentText(bundle.getString("noChild"));
 
                         alert.showAndWait();
                     } else if(!((Child)listView.getSelectionModel().getSelectedItem()).desrialize().get(((Child)listView.getSelectionModel().getSelectedItem()).desrialize().size()-1).isApsent()){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Informacija");
                         alert.setHeaderText(null);
-                        alert.setContentText("Odabrano djete je već odsutno.");
+                        alert.setContentText(bundle.getString("noapsentChild"));
 
                         alert.showAndWait();
                     } else {
@@ -215,14 +214,14 @@ public class ControllerForWork {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Informacija");
                         alert.setHeaderText(null);
-                        alert.setContentText("Niste odabrali niti jedno djete.");
+                        alert.setContentText(bundle.getString("noChild"));
 
                         alert.showAndWait();
                     } else if(!((Child)listView.getSelectionModel().getSelectedItem()).desrialize().get(((Child)listView.getSelectionModel().getSelectedItem()).desrialize().size()-1).isApsent()){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Informacija");
+                        alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("Ne možete dadati komentar za odsutno djete.");
+                        alert.setContentText(bundle.getString("noComent"));
 
                         alert.showAndWait();
                     } else {
@@ -235,7 +234,7 @@ public class ControllerForWork {
                             e1.printStackTrace();
                         }
                         Stage stage = new Stage();
-                        stage.setTitle("Dodajte komentar");
+                        stage.setTitle(bundle.getString("addComent"));
                         stage.setResizable(false);
                         stage.setScene(new Scene(root, 407, 236));
                         stage.show();
@@ -248,16 +247,16 @@ public class ControllerForWork {
                 public void handle(ActionEvent event) {
                     if (listView.getSelectionModel().isEmpty()) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Informacija");
+                        alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("Niste odabrali niti jedno djete.");
+                        alert.setContentText(bundle.getString("noChild"));
 
                         alert.showAndWait();
                     } else if(((Child)listView.getSelectionModel().getSelectedItem()).desrialize().get(((Child)listView.getSelectionModel().getSelectedItem()).desrialize().size()-1).isApsent()){
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Informacija");
+                        alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("Odabrano djete je već prisutno");
+                        alert.setContentText(bundle.getString("apsentChild"));
 
                         alert.showAndWait();
                     } else {
@@ -296,9 +295,9 @@ public class ControllerForWork {
 
                     if (listView.getSelectionModel().isEmpty()) {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Informacija");
+                        alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("Niste odabrali niti jedno djete.");
+                        alert.setContentText(bundle.getString("noChild"));
 
                         alert.showAndWait();
                     } else {
