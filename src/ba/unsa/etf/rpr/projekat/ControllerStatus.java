@@ -64,7 +64,7 @@ public class ControllerStatus {
                 String str = "";
                 Iterator it2 = day.getComments().iterator();
                 while (it2.hasNext()){
-                    str = str + (String) it2.next();
+                    str = str + (String) it2.next() + "\n";
                 }
                 commentsArea.setText(str);
             }

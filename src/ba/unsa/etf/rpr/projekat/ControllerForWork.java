@@ -18,6 +18,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.ResourceBundle;
@@ -37,6 +38,10 @@ public class ControllerForWork {
     public Label groupLabel;
     public ListView listView;
 
+    boolean alerted = true;
+
+    LocalDateTime start = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 8, 53, 0);
+    LocalDateTime end = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 18, 46, 0);
 
     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 
@@ -65,7 +70,7 @@ public class ControllerForWork {
         day.setArrivalTime(null);
         day.setComments(new ArrayList<String>());
 
-
+        alerted = true;
         //radno otvorena prvi put u toku radnog vremena...
 
         institutionLabel.setText(institution.getName());
@@ -96,10 +101,41 @@ public class ControllerForWork {
                     apsentButton.setDisable(true);
                     notApsentButton.setDisable(true);
                     addComentButton.setDisable(true);
+
+                    listView.setCellFactory(param -> new ListCell<Child>() {
+                        @Override
+                        protected void updateItem(Child item, boolean empty) {
+                            super.updateItem(item, empty);
+
+                            if (empty || item == null) {
+                                setText(null);
+                                setStyle(null);
+                            } else {
+                                setText(item.getId() + " " + item.getName() + " " + item.getSurename());
+                                //setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                            }
+                        }
+                    });
+
                 } else if (LocalDate.now().equals(datePicker.getValue())) {
                     apsentButton.setDisable(false);
                     addComentButton.setDisable(false);
                     notApsentButton.setDisable(false);
+
+                    listView.setCellFactory(param -> new ListCell<Child>() {
+                        @Override
+                        protected void updateItem(Child item, boolean empty) {
+                            super.updateItem(item, empty);
+
+                            if (empty || item == null) {
+                                setText(null);
+                                setStyle(null);
+                            } else {
+                                setText(item.getId() + " " + item.getName() + " " + item.getSurename());
+                                setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                            }
+                        }
+                    });
                 }
             }
         });
@@ -127,22 +163,64 @@ public class ControllerForWork {
 
 
         DateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
+
+
         final Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(500), event -> {
                     timeLabel.setText(timeFormat.format(System.currentTimeMillis()));
-                    if (LocalDateTime.now().getHour() >= 7 && LocalDateTime.now().getHour() <= 18) {
+                    if (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end)) {
                         progresBar.setProgress(0.0909 * (LocalDateTime.now().getHour() - 7));
+                        apsentButton.setDisable(false);
+                        notApsentButton.setDisable(false);
+                        addComentButton.setDisable(false);
                     } else {
+                        ///////////////////////////
+                        /*ako je radno vrijeme zavr?eno a ima djece koja su prisutna
+                        * treba ih postaviti tako da budu odsutna*/
+                        Iterator it = listView.getItems().iterator();
+                        while (it.hasNext()){
+                            Child childTemp = (Child) it.next();
+                            ArrayList<Day> daysTemp = childTemp.desrialize();
+                            Day day1 = daysTemp.get(daysTemp.size()-1);
+                            if(day1.getDepartureTime() == null && day1.getArrivalTime() != null){
+                                day1.setDepartureTime(LocalDateTime.now());
+                                day1.setApsent(false);
+                            }
+                            daysTemp.remove(daysTemp.size()-1);
+                            daysTemp.add(day1);
+                            childTemp.serialize(daysTemp);
+
+                        }
+                        ////////////////////////////
                         progresBar.setProgress(0);
                         apsentButton.setDisable(true);
                         notApsentButton.setDisable(true);
                         addComentButton.setDisable(true);
-                        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                        alert.setTitle("Alert");
-                        alert.setHeaderText(null);
-                        alert.setContentText(bundle.getString("worktime"));
+                        if(alerted){
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Information Dialog");
+                            alert.setHeaderText(null);
+                            alert.setContentText(bundle.getString("worktime"));
+                            alert.show();
+                            alerted = false;
 
-                        alert.showAndWait();
+                            listView.setCellFactory(param -> new ListCell<Child>() {
+                                @Override
+                                protected void updateItem(Child item, boolean empty) {
+                                    super.updateItem(item, empty);
+
+                                    if (empty || item == null) {
+                                        setText(null);
+                                        setStyle(null);
+                                    } else {
+                                        setText(item.getId() + " " + item.getName() + " " + item.getSurename());
+                                        setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                                    }
+                                }
+                            });
+                        }
+
                     }
                 }));
         timeline.setCycleCount(Animation.INDEFINITE);
@@ -157,7 +235,20 @@ public class ControllerForWork {
                 System.out.println("Prvi put...");
                 daysTemp.add(day);
             } else {
-                System.out.println("Vec ste ulazili...");
+                listView.setCellFactory(param -> new ListCell<Child>() {
+                    @Override
+                    protected void updateItem(Child item, boolean empty) {
+                        super.updateItem(item, empty);
+
+                        if (empty || item == null) {
+                            setText(null);
+                            setStyle(null);
+                        } else {
+                            setText(item.getId() + " " + item.getName() + " " + item.getSurename());
+                            setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                        }
+                    }
+                });
             }
 
             childTemp.serialize(daysTemp);
@@ -191,7 +282,7 @@ public class ControllerForWork {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("vec ste koristili ovo dugme danas");
+                        alert.setContentText(bundle.getString("been"));
 
                         alert.showAndWait();
                     } else {
@@ -249,7 +340,7 @@ public class ControllerForWork {
                         Alert alert = new Alert(Alert.AlertType.INFORMATION);
                         alert.setTitle("Alert");
                         alert.setHeaderText(null);
-                        alert.setContentText("vec ste koristili ovo dugme danas");
+                        alert.setContentText(bundle.getString("been"));
 
                         alert.showAndWait();
                     } else {

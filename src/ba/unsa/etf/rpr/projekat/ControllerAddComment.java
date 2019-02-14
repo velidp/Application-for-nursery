@@ -37,7 +37,7 @@ public class ControllerAddComment {
                 if(sveOk) {
                     ArrayList<Day> days = child.desrialize();
                     Day day = days.get(days.size() - 1);
-                    day.getComments().add(comentArea.getText());
+                    day.getComments().add("\n" + comentArea.getText());
                     days.remove(days.size() - 1);
                     days.add(day);
                     child.serialize(days);

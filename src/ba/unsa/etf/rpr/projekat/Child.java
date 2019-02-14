@@ -36,7 +36,6 @@ public class Child {
         } catch (IOException i) {
             i.printStackTrace();
         }
-        System.out.println("Izvrsena serijalizacija");
     }
 
 
@@ -77,7 +76,7 @@ public class Child {
         File f = new File(this.getName() + this.getSurename() + this.id + ".xml");
         if(!(f.exists() && !f.isDirectory())) {
             try {
-                System.out.println("Kreirana datoteka!");
+
                 DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder;
                 Document doc;
@@ -95,7 +94,7 @@ public class Child {
                     out.writeObject(days);
                     out.close();
                     fileOut.close();
-                    System.out.println("to je ta prva");
+
                 } catch (IOException i) {
                     i.printStackTrace();
                 }

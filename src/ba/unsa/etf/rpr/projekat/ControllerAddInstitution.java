@@ -87,6 +87,7 @@ public class ControllerAddInstitution {
                 emailOfDirectorField.getStyleClass().add("poljeIspravno");
             }
 
+            /*
             if (!validateJmbgC(jmbgOfDirectorField.getText())) {
                 jmbgOfDirectorField.getStyleClass().removeAll("poljeIspravno");
                 jmbgOfDirectorField.getStyleClass().add("poljeNijeIspravno");
@@ -94,7 +95,7 @@ public class ControllerAddInstitution {
             } else {
                 jmbgOfDirectorField.getStyleClass().removeAll("poljeNijeIspravno");
                 jmbgOfDirectorField.getStyleClass().add("poljeIspravno");
-            }
+            }*/
 
 
             if(sveOk) {

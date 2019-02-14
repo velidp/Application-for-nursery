@@ -21,30 +21,13 @@ public class Educator {
     private Institution institution;
     private boolean educatorForChildrenForSpecialNeeds;
 
+
     public Educator(String name, String surename, int id){
         this.id = id;
         this.name = name;
         this.surename = surename;
 
-        File f = new File(getName() + getSurename() + id + ".xml");
-        if(!(f.exists() && !f.isDirectory())) {
-            try {
-                DocumentBuilderFactory docFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder;
-                Document doc;
-                docBuilder = docFactory.newDocumentBuilder();
-                doc = docBuilder.newDocument();
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = null;
-                transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(doc);
-                StreamResult result = new StreamResult(new File(this.getName() + this.getSurename() + this.id + ".xml"));
-                transformer.transform(source, result);
-            } catch (
-                    ParserConfigurationException | TransformerException pce) {
-                pce.printStackTrace();
-            }
-        }
+
     }
 
     public int getId() {

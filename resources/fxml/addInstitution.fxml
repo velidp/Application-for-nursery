@@ -47,9 +47,9 @@
       <ComboBox fx:id="placeOfInstitutionCombo" prefHeight="25.0" prefWidth="238.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
       <Button fx:id="addPlaceOfInstitutionButton" mnemonicParsing="false" prefHeight="14.0" prefWidth="46.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
          <graphic>
-            <ImageView fitHeight="16.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/pin_plus-512.png" />
+                  <Image url="@../img/iconfinder_plus-add-new-create-attach-maximize_2931155.png" />
                </image>
             </ImageView>
          </graphic>

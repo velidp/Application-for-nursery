@@ -401,8 +401,7 @@ public class KindergartenDAO {
     }
 
     public void removeEducator(Educator educator) {
-        File file = new File(educator.getName()+educator.getSurename()+educator.getId()+".xml");
-        file.delete();
+
         try {
             removeEducator.setInt(1, educator.getId());
             removeEducator.executeUpdate();

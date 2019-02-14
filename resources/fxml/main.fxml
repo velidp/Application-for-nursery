@@ -130,7 +130,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/Actions-list-add-user-icon.png" />
+                        <Image url="@../img/iconfinder_plus-add-new-create-attach-maximize_2931155.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -139,7 +139,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/Actions-list-remove-user-icon.png" />
+                        <Image url="@../img/iconfinder_trash-delete-remove_2931168%20(1).png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -148,7 +148,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/Actions-document-edit-icon.png" />
+                        <Image url="@../img/iconfinder_edit-change-pencil_2931178.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -157,7 +157,7 @@
                <graphic>
                   <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../img/Document-icon.png" />
+                        <Image url="@../img/iconfinder_print-output-printer_2931177.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -168,7 +168,7 @@
          <graphic>
             <ImageView fitHeight="18.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/icon_404-512.png" />
+                  <Image url="@../img/iconfinder_right-forward-arrow_2931159.png" />
                </image>
             </ImageView>
          </graphic></Button>
@@ -183,9 +183,9 @@
       </ComboBox>
       <Button fx:id="addInstitutionButton" mnemonicParsing="false" prefHeight="16.0" prefWidth="44.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
          <graphic>
-            <ImageView fitHeight="16.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="14.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/home-add-512.png" />
+                  <Image url="@../img/iconfinder_plus-add-new-create-attach-maximize_2931155.png" />
                </image>
             </ImageView>
          </graphic>

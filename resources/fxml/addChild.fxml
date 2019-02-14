@@ -165,7 +165,7 @@
          <graphic>
             <ImageView fitHeight="15.0" fitWidth="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../img/pin_plus-512.png" />
+                  <Image url="@../img/iconfinder_plus-add-new-create-attach-maximize_2931155.png" />
                </image>
             </ImageView>
          </graphic>
