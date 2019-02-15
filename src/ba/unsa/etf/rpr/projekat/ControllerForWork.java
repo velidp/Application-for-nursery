@@ -40,8 +40,8 @@ public class ControllerForWork {
 
     boolean alerted = true;
 
-    LocalDateTime start = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 8, 53, 0);
-    LocalDateTime end = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 18, 46, 0);
+    LocalDateTime start = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 8, 34, 0);
+    LocalDateTime end = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 19, 35, 0);
 
     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 
@@ -90,17 +90,19 @@ public class ControllerForWork {
             @Override
             public void handle(ActionEvent event) {
                 if(datePicker.getValue().isAfter(LocalDate.now())){
+                    //datum u buducnosti
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Alert");
                     alert.setHeaderText(null);
                     alert.setContentText(bundle.getString("FututreDate"));
                     alert.showAndWait();
                     datePicker.setValue(LocalDate.now());
-                }
-                if (!LocalDate.now().equals(datePicker.getValue())) {
+                } else if (!LocalDate.now().equals(datePicker.getValue())) {
+                    //datum iz proslosti
                     apsentButton.setDisable(true);
                     notApsentButton.setDisable(true);
                     addComentButton.setDisable(true);
+
 
                     listView.setCellFactory(param -> new ListCell<Child>() {
                         @Override
@@ -118,10 +120,49 @@ public class ControllerForWork {
                     });
 
                 } else if (LocalDate.now().equals(datePicker.getValue())) {
+                    //danasnji datum
                     apsentButton.setDisable(false);
                     addComentButton.setDisable(false);
                     notApsentButton.setDisable(false);
+                    if(LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end)) {
+                        listView.setCellFactory(param -> new ListCell<Child>() {
+                            @Override
+                            protected void updateItem(Child item, boolean empty) {
+                                super.updateItem(item, empty);
 
+                                if (empty || item == null) {
+                                    setText(null);
+                                    setStyle(null);
+                                } else {
+                                    setText(item.getId() + " " + item.getName() + " " + item.getSurename());
+                                    setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                                }
+                            }
+                        });
+                    } else if(!(LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end))){
+                        apsentButton.setDisable(true);
+                        notApsentButton.setDisable(true);
+                        addComentButton.setDisable(true);
+                        listView.setCellFactory(param -> new ListCell<Child>() {
+                            @Override
+                            protected void updateItem(Child item, boolean empty) {
+                                super.updateItem(item, empty);
+
+                                if (empty || item == null) {
+                                    setText(null);
+                                    setStyle(null);
+                                } else {
+                                    setText(item.getId() + " " + item.getName() + " " + item.getSurename());
+                                    //setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                                }
+                            }
+                        });
+                    }
+                } else if(/*!(datePicker.getValue().equals(LocalDate.now())) &&*/ (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end))){
+                    System.out.println("to je to");
+                    apsentButton.setDisable(true);
+                    notApsentButton.setDisable(true);
+                    addComentButton.setDisable(true);
                     listView.setCellFactory(param -> new ListCell<Child>() {
                         @Override
                         protected void updateItem(Child item, boolean empty) {
@@ -132,7 +173,7 @@ public class ControllerForWork {
                                 setStyle(null);
                             } else {
                                 setText(item.getId() + " " + item.getName() + " " + item.getSurename());
-                                setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                                //setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
                             }
                         }
                     });
@@ -169,14 +210,14 @@ public class ControllerForWork {
         final Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(500), event -> {
                     timeLabel.setText(timeFormat.format(System.currentTimeMillis()));
-                    if (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end)) {
+                    if (LocalDateTime.now().isAfter(start) && LocalDateTime.now().isBefore(end) && LocalDate.now().equals(datePicker.getValue())) {
                         progresBar.setProgress(0.0909 * (LocalDateTime.now().getHour() - 7));
                         apsentButton.setDisable(false);
                         notApsentButton.setDisable(false);
                         addComentButton.setDisable(false);
                     } else {
                         ///////////////////////////
-                        /*ako je radno vrijeme zavr?eno a ima djece koja su prisutna
+                        /*ako je radno vrijeme zavrseno a ima djece koja su prisutna
                         * treba ih postaviti tako da budu odsutna*/
                         Iterator it = listView.getItems().iterator();
                         while (it.hasNext()){
@@ -197,7 +238,7 @@ public class ControllerForWork {
                         apsentButton.setDisable(true);
                         notApsentButton.setDisable(true);
                         addComentButton.setDisable(true);
-                        if(alerted){
+                        if(alerted && LocalDate.now().equals(datePicker.getValue())){
                             Alert alert = new Alert(Alert.AlertType.INFORMATION);
                             alert.setTitle("Information Dialog");
                             alert.setHeaderText(null);
@@ -215,7 +256,7 @@ public class ControllerForWork {
                                         setStyle(null);
                                     } else {
                                         setText(item.getId() + " " + item.getName() + " " + item.getSurename());
-                                        setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
+                                        //setStyle(item.desrialize().get(item.desrialize().size() - 1).isApsent() ? "-fx-control-inner-background: greenyellow;" : "-fx-control-inner-background: lightpink;");
                                     }
                                 }
                             });

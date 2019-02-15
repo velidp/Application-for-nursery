@@ -6,6 +6,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -24,41 +27,62 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
-        launch(args);
+        KindergartenDAO base = new KindergartenDAO();
 
+        Child child1 = (Child) base.getAllChildren().get(0);
+        Child child2 = (Child) base.getAllChildren().get(1);
+        Child child3 = (Child) base.getAllChildren().get(2);
+
+        //1.
+        ArrayList<Day> days1 = child1.desrialize();
+
+        Day posljednjiDan1 = days1.get(days1.size()-1);
+
+        days1 = new ArrayList<Day>();
+
+        Day dayA = new Day();
+        dayA.setApsent(true);
+        dayA.setArrivalTime(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 10, 30, 0));
+        dayA.setDepartureTime(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 19, 0, 0));
+        dayA.setDate(LocalDate.now().minusDays(1));
+        ArrayList komentari = new ArrayList<String>();
+        komentari.add("komentar1");
+        komentari.add("komentar2");
+        dayA.setComments(komentari);
+
+        Day dayB = new Day();
+        dayB.setApsent(true);
+        dayB.setArrivalTime(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 10, 0, 0));
+        dayB.setDepartureTime(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 18, 0, 0));
+        dayB.setDate(LocalDate.now().minusDays(2));
+        ArrayList komentari1 = new ArrayList<String>();
+        komentari1.add("neki komentar");
+        komentari1.add("melo lp");
+        dayB.setComments(komentari1);
+
+
+        days1.add(dayB);
+        days1.add(dayA);
+        days1.add(posljednjiDan1);
+
+        child1.serialize(days1);
+
+
+
+        launch(args);
     }
 }
-
-
-/*
-1. Alati za automatsku izgradnju kode.
-4. Napisati izvještaj i poslati ga.
-1. Još detaljno izanalizirati program.
-2. Napraviti testove.
- */
-/*
-
-dakle, pod ovim detaljno izanalizirati program podrazumjevam
-nadoavati djece i odgajatelja
-dodati dane u djecu i vidjeti da li se pravilno prikazuju informaicie
-vidjtei kako radno vrijeme funkcionise i zezancije oko toga
-
-isprobati jos izmjenu djece.
-izmjenom imena djeteta gube se njegovi podaci sačuvani u xml.
-da li ce stari xml biti izbrisan
-
-alati za automatsku izgradnju koda uraditi ono po sablonu i doci
-do toga da da se jar pokrene kako treba
-
-dodati testove neke bezveze da sve bude pokriveno kako treba.
-
-napraviti izvještaj da liči na nešto
-
-i to je definitivno kraj. za ovo sve mi treba jos mozda 5 sati.
-
-treba i nesretni class dijagram
- */
 
 /*
 VALIDACIJA JMBG NE ZABORAVI AKTIVIRATI
  */
+/*
+u biti imam jos uradite sljedece:
+
+8. izmjena djeteta
+4. testovi
+5. maven
+6. class dijagram
+7. izvjštaj
+ */
+
