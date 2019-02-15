@@ -28,6 +28,8 @@ public class ControllerAddEducator {
     public ComboBox typeCombo;
     public ComboBox placeCombo;
     public Button addPlaceButton;
+    public TextField phoneNumberField;
+    public TextField emailField;
     private KindergartenDAO base = new KindergartenDAO();
     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 
@@ -50,6 +52,8 @@ public class ControllerAddEducator {
             institutionsCombo.getSelectionModel().selectFirst();
             typeCombo.getSelectionModel().selectFirst();
             placeCombo.getSelectionModel().selectFirst();
+            emailField.setText(educatoR.getEmail());
+            phoneNumberField.setText(educatoR.getPhoneNumber());
         }
 
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -85,6 +89,9 @@ public class ControllerAddEducator {
 
                 boolean sveOk = validirajPrazno(nameField);
                 sveOk &= validirajPrazno(surenameField);
+                sveOk &= validirajPrazno(emailField);
+                sveOk &= validirajPrazno(phoneNumberField);
+
 
 
                 if (placeCombo.getSelectionModel().isEmpty()) {
@@ -145,6 +152,8 @@ public class ControllerAddEducator {
                         educator.setEducatorForChildrenForSpecialNeeds(true);
                     else if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("ordinary"))
                         educator.setEducatorForChildrenForSpecialNeeds(false);
+                    educator.setEmail(emailField.getText());
+                    educator.setPhoneNumber(phoneNumberField.getText());
 
                     base.addEducator(educator);
 
@@ -157,6 +166,9 @@ public class ControllerAddEducator {
 
                 boolean sveOk = validirajPrazno(nameField);
                 sveOk &= validirajPrazno(surenameField);
+                sveOk &= validirajPrazno(emailField);
+                sveOk &= validirajPrazno(phoneNumberField);
+
 
 
                 if (placeCombo.getSelectionModel().isEmpty()) {
@@ -219,6 +231,8 @@ public class ControllerAddEducator {
                         educator.setEducatorForChildrenForSpecialNeeds(true);
                     else if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("ordinary"))
                         educator.setEducatorForChildrenForSpecialNeeds(false);
+                    educator.setPhoneNumber(phoneNumberField.getText());
+                    educator.setEmail(emailField.getText());
 
                     base.addEducator(educator);
 

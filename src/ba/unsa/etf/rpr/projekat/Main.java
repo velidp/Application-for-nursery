@@ -84,7 +84,6 @@ u biti imam jos uradite sljedece:
 5. maven
 6. class dijagram
 7. izvjštaj
-8. mozda dodati broj i email za odgajatelja
  */
 
 

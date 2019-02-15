@@ -28,7 +28,7 @@ public class KindergartenDAO {
             getPlaces = con.prepareStatement("select * from places");
             addPlace = con.prepareStatement("insert into places (id, name, adress, zip_code) values (?,?,?,?)");
             institutionById = con.prepareStatement("select * from institutions where id = ?");
-            addEducator = con.prepareStatement("insert into educators (id,name,surename,jmbg,date_of_birth,place,institution,special_needs) values (?,?,?,?,?,?,?,?)");
+            addEducator = con.prepareStatement("insert into educators (id,name,surename,jmbg,date_of_birth,place,institution,special_needs, email, phone_number) values (?,?,?,?,?,?,?,?,?,?)");
             addChild = con.prepareStatement("insert into children (id,name,surename,date_of_birth,jmbg,place,institution,special_needs,parents_name,parents_surename, parents_jmbg,parents_date_of_birth,parents_phone_number) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             getEducators = con.prepareStatement("select * from educators");
             removeEducator = con.prepareStatement("delete from educators where id = ?");
@@ -231,6 +231,8 @@ public class KindergartenDAO {
                 educator.setDweling(this.placeById(rs.getInt(6)));
                 educator.setInstitution(this.institutionById(rs.getInt(7)));
                 educator.setEducatorForChildrenForSpecialNeeds(rs.getBoolean(8));
+                educator.setEmail(rs.getString(9));
+                educator.setPhoneNumber(rs.getString(10));
 
                 if(educator.getInstitution().getId() == institution.getId() && a == 1 && !educator.isEducatorForChildrenForSpecialNeeds())
                 list.add(educator);
@@ -257,6 +259,8 @@ public class KindergartenDAO {
                 educator.setDweling(this.placeById(rs.getInt(6)));
                 educator.setInstitution(this.institutionById(rs.getInt(7)));
                 educator.setEducatorForChildrenForSpecialNeeds(rs.getBoolean(8));
+                educator.setEmail(rs.getString(9));
+                educator.setPhoneNumber(rs.getString(10));
 
                 list.add(educator);
             }
@@ -381,6 +385,8 @@ public class KindergartenDAO {
             addEducator.setInt(6, educator.getDweling().getId());
             addEducator.setInt(7, educator.getInstitution().getId());
             addEducator.setBoolean(8, educator.isEducatorForChildrenForSpecialNeeds());
+            addEducator.setString(9, educator.getEmail());
+            addEducator.setString(10, educator.getPhoneNumber());
             addEducator.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

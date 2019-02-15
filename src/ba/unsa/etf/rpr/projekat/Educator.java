@@ -15,7 +15,7 @@ import java.time.LocalDate;
 
 public class Educator {
     private int id;
-    private String name, surename, jmbg;
+    private String name, surename, jmbg, email, phoneNumber;
     private LocalDate dateOfBirth;
     private Place dweling;
     private Institution institution;
@@ -28,6 +28,22 @@ public class Educator {
         this.surename = surename;
 
 
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public int getId() {
