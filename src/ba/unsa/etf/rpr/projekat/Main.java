@@ -27,6 +27,7 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        /*
         KindergartenDAO base = new KindergartenDAO();
 
         Child child1 = (Child) base.getAllChildren().get(0);
@@ -65,7 +66,7 @@ public class Main extends Application {
         days1.add(dayA);
         days1.add(posljednjiDan1);
 
-        child1.serialize(days1);
+        child1.serialize(days1);*/
 
 
 
@@ -79,10 +80,11 @@ VALIDACIJA JMBG NE ZABORAVI AKTIVIRATI
 /*
 u biti imam jos uradite sljedece:
 
-8. izmjena djeteta
 4. testovi
 5. maven
 6. class dijagram
 7. izvjštaj
+8. mozda dodati broj i email za odgajatelja
  */
+
 

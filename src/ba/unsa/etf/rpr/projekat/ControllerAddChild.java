@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class ControllerAddChild {
@@ -87,8 +88,8 @@ public class ControllerAddChild {
             surenameField.setText(chilD.getSurename());
             jmbgField.setText(chilD.getJmbg());
             dateField.setValue(chilD.getDateOfBirth());
-            placeCombo.getSelectionModel().select(chilD.getDwelling());
-            institutionCombo.getSelectionModel().select(chilD.getInstitution());
+            placeCombo.getSelectionModel().selectFirst();
+            institutionCombo.getSelectionModel().selectFirst();
             nameParentField.setText(chilD.getParentsName());
             surenameParrentField.setText(chilD.getParentsSurename());
             jmbgParentField.setText(chilD.getJmbg());
@@ -200,7 +201,7 @@ public class ControllerAddChild {
             }
 
             } else {
-                base.removeChild(chilD);
+                //ovdje je izmjena
 
                 boolean sveOk = validirajPrazno(nameField);
                 sveOk &= validirajPrazno(surenameField);
@@ -249,6 +250,7 @@ public class ControllerAddChild {
                     dateParrentField.getStyleClass().add("poljeIspravno");
                 }
 
+                /*
                 if (!validateJmbgC(jmbgField.getText())) {
                     jmbgField.getStyleClass().removeAll("poljeIspravno");
                     jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -265,10 +267,19 @@ public class ControllerAddChild {
                 } else {
                     jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgParentField.getStyleClass().add("poljeIspravno");
-                }
+                }*/
 
                 if(sveOk) {
+                    System.out.println("jel dosl dobe");
+
+
                     Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
+
+                    ArrayList<Day> oldData = chilD.desrialize();
+
+                    base.removeChild(chilD);
+
+                    child.serialize(oldData);
 
                     child.setDateOfBirth(dateField.getValue());
                     child.setJmbg(jmbgField.getText());

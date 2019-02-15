@@ -47,12 +47,9 @@ public class ControllerAddEducator {
             surenameField.setText(educatoR.getSurename());
             jmbgField.setText(educatoR.getSurename());
             dateField.setValue(educatoR.getDateOfBirth());
-            institutionsCombo.getSelectionModel().select(educatoR.getInstitution());
-            if(educatoR.isEducatorForChildrenForSpecialNeeds())
-            typeCombo.getSelectionModel().select(0);
-            else if (educatoR.isEducatorForChildrenForSpecialNeeds())
-                typeCombo.getSelectionModel().select(1);
-            placeCombo.getSelectionModel().select(educatoR.getDweling());
+            institutionsCombo.getSelectionModel().selectFirst();
+            typeCombo.getSelectionModel().selectFirst();
+            placeCombo.getSelectionModel().selectFirst();
         }
 
         cancelButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -156,7 +153,7 @@ public class ControllerAddEducator {
                 }
 
             } else if (educatoR != null){
-                base.removeEducator(educatoR);
+
 
                 boolean sveOk = validirajPrazno(nameField);
                 sveOk &= validirajPrazno(surenameField);
@@ -211,6 +208,7 @@ public class ControllerAddEducator {
 
 
                 if(sveOk) {
+                    base.removeEducator(educatoR);
                     Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
 
                     educator.setJmbg(jmbgField.getText());
