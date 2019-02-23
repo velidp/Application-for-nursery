@@ -40,8 +40,8 @@ public class ControllerForWork {
 
     boolean alerted = true;
 
-    LocalDateTime start = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 8, 34, 0);
-    LocalDateTime end = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 19, 35, 0);
+    LocalDateTime start = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 7, 0, 0);
+    LocalDateTime end = LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 18, 0, 0);
 
     ResourceBundle bundle = ResourceBundle.getBundle("Trn");
 

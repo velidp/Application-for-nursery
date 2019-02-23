@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -18,6 +19,7 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/main.fxml"), bundle);
         primaryStage.setTitle(bundle.getString("appName"));
         primaryStage.setResizable(false);
+        primaryStage.getIcons().add(new Image("img/child_1191970.png"));
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
     }

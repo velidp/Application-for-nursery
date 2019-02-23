@@ -44,7 +44,7 @@
         <menus>
           <Menu fx:id="fileMenu" text="_File">
             <items>
-              <MenuItem fx:id="closeMenu" text="%Exit">
+              <MenuItem fx:id="closeMenu" text="%exit">
                      <accelerator>
                         <KeyCodeCombination alt="UP" code="X" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
                      </accelerator></MenuItem>
@@ -106,17 +106,17 @@
       </MenuBar>
       <TableView fx:id="tableOfPersons" prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="6" GridPane.rowIndex="4">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="202.0" text="%nameCoumn" />
-            <TableColumn fx:id="surenameColumn" minWidth="1.0" prefWidth="158.0" text="%surenameColumn" />
-            <TableColumn fx:id="jmbgColumn" minWidth="0.0" prefWidth="181.0" text="%jmbgColumn" />
+          <TableColumn fx:id="nameColumn" prefWidth="202.0" text="%name_coumn" />
+            <TableColumn fx:id="surenameColumn" minWidth="1.0" prefWidth="158.0" text="%surename_column" />
+            <TableColumn fx:id="jmbgColumn" minWidth="0.0" prefWidth="181.0" text="%jmbg_column" />
         </columns>
       </TableView>
-      <ComboBox fx:id="groupCombo" prefHeight="25.0" prefWidth="243.0" promptText="%choseGroupCombo" GridPane.columnIndex="1" GridPane.rowIndex="2">
+      <ComboBox fx:id="groupCombo" prefHeight="25.0" prefWidth="243.0" promptText="%chose_group_combo" GridPane.columnIndex="1" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ComboBox>
-      <Label text="%choseGroup" GridPane.rowIndex="2">
+      <Label text="%chose_group" GridPane.rowIndex="2">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -176,7 +176,7 @@
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin></Label>
-      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="255.0" promptText="%choseInstitutionCombo" GridPane.columnIndex="1" GridPane.rowIndex="1">
+      <ComboBox fx:id="institutionCombo" prefHeight="25.0" prefWidth="255.0" promptText="%chose_institution_combo" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>

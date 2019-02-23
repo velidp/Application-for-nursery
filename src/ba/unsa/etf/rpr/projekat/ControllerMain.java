@@ -9,6 +9,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 
@@ -213,8 +214,9 @@ public class ControllerMain {
             public void handle(ActionEvent event) {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("About");
+
                 alert.setHeaderText(bundle.getString("appName"));
-                alert.setContentText(bundle.getString("Autor") + "Velid Poško");
+                alert.setContentText(bundle.getString("Autor") + "Velid Posko");
                 alert.showAndWait();
             }
         });
@@ -753,7 +755,7 @@ public class ControllerMain {
                     Stage stage = new Stage();
                     stage.setTitle(bundle.getString("work"));
                     stage.setResizable(false);
-                    stage.setScene(new Scene(root, 365, 485));
+                    stage.setScene(new Scene(root, 431, 486));
                     stage.setResizable(false);
                     stage.show();
                     Stage stage1 = (Stage) startButton.getScene().getWindow();
@@ -762,8 +764,4 @@ public class ControllerMain {
             }
         });
     }
-
-
-
-
 }

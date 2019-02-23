@@ -8,6 +8,7 @@ class ChildTest {
 
     @Test
     void serialize() {
+
     }
 
     @Test

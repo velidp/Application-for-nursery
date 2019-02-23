@@ -158,7 +158,7 @@ public class ControllerAddChild {
                 }
 
 
-                /*
+
                 if (!validateJmbgC(jmbgField.getText())) {
                     jmbgField.getStyleClass().removeAll("poljeIspravno");
                     jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -175,7 +175,7 @@ public class ControllerAddChild {
                 } else {
                     jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgParentField.getStyleClass().add("poljeIspravno");
-                }*/
+                }
 
 
 
@@ -250,7 +250,7 @@ public class ControllerAddChild {
                     dateParrentField.getStyleClass().add("poljeIspravno");
                 }
 
-                /*
+
                 if (!validateJmbgC(jmbgField.getText())) {
                     jmbgField.getStyleClass().removeAll("poljeIspravno");
                     jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -267,7 +267,7 @@ public class ControllerAddChild {
                 } else {
                     jmbgParentField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgParentField.getStyleClass().add("poljeIspravno");
-                }*/
+                }
 
                 if(sveOk) {
                     System.out.println("jel dosl dobe");

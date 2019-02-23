@@ -130,7 +130,7 @@ public class ControllerAddEducator {
                     dateField.getStyleClass().add("poljeIspravno");
                 }
 
-                /*
+
                 if (!validateJmbgP(jmbgField.getText())) {
                     jmbgField.getStyleClass().removeAll("poljeIspravno");
                     jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -138,7 +138,7 @@ public class ControllerAddEducator {
                 } else {
                     jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgField.getStyleClass().add("poljeIspravno");
-                }*/
+                }
 
 
                 if(sveOk) {
@@ -207,7 +207,7 @@ public class ControllerAddEducator {
                     dateField.getStyleClass().add("poljeIspravno");
                 }
 
-                /*
+
                 if (!validateJmbgP(jmbgField.getText())) {
                     jmbgField.getStyleClass().removeAll("poljeIspravno");
                     jmbgField.getStyleClass().add("poljeNijeIspravno");
@@ -215,7 +215,7 @@ public class ControllerAddEducator {
                 } else {
                     jmbgField.getStyleClass().removeAll("poljeNijeIspravno");
                     jmbgField.getStyleClass().add("poljeIspravno");
-                }*/
+                }
 
 
 

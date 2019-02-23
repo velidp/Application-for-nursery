@@ -33,7 +33,6 @@ public class ControllerStatus {
     }
 
 
-
     public void initialize(){
         okButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override

@@ -44,7 +44,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </ButtonBar>
-      <DatePicker fx:id="datePicker" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+      <DatePicker fx:id="datePicker" editable="false" prefHeight="25.0" prefWidth="257.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnSpan="2" GridPane.rowIndex="5">
         <buttons>
           <Button fx:id="apsentButton" mnemonicParsing="false">
