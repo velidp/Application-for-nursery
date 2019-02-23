@@ -26,8 +26,6 @@ public class Educator {
         this.id = id;
         this.name = name;
         this.surename = surename;
-
-
     }
 
     public String getEmail() {

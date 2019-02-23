@@ -2,96 +2,38 @@ package ba.unsa.etf.rpr.projekat;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class InstitutionTest {
 
     @Test
-    void getId() {
-    }
-
-    @Test
-    void setId() {
-    }
-
-    @Test
-    void getName() {
-    }
-
-    @Test
-    void setName() {
-    }
-
-    @Test
-    void getPhoneNumber() {
-    }
-
-    @Test
-    void setPhoneNumber() {
-    }
-
-    @Test
-    void getEmail() {
-    }
-
-    @Test
-    void setEmail() {
-    }
-
-    @Test
-    void getNameOfDirector() {
-    }
-
-    @Test
-    void setNameOfDirector() {
-    }
-
-    @Test
-    void getSurenameOfDirector() {
-    }
-
-    @Test
-    void setSurenameOfDirector() {
-    }
-
-    @Test
-    void getJmbgOfDirector() {
-    }
-
-    @Test
-    void setJmbgOfDirector() {
-    }
-
-    @Test
-    void getPhoneNumberOfDirector() {
-    }
-
-    @Test
-    void setPhoneNumberOfDirector() {
-    }
-
-    @Test
-    void getEmailOfDirector() {
-    }
-
-    @Test
-    void setEmailOfDirector() {
-    }
-
-    @Test
-    void getDateOfBirthOfDirector() {
-    }
-
-    @Test
-    void setDateOfBirthOfDirector() {
-    }
-
-    @Test
-    void getPlace() {
-    }
-
-    @Test
-    void setPlace() {
+    void test() {
+        Institution inst = new Institution();
+        inst.setId(87);
+        assertEquals(inst.getId(), 87);
+        inst.setName("First");
+        assertEquals(inst.getName(), "First");
+        inst.setPhoneNumber("065897654");
+        assertEquals(inst.getPhoneNumber(), "065897654");
+        inst.setEmail("first@gmail.com");
+        assertEquals(inst.getEmail(), "first@gmail.com");
+        inst.setNameOfDirector("dir");
+        assertEquals(inst.getNameOfDirector(), "dir");
+        inst.setSurenameOfDirector("sur");
+        assertEquals(inst.getSurenameOfDirector(), "sur");
+        inst.setJmbgOfDirector("jmbg");
+        assertEquals(inst.getJmbgOfDirector(), "jmbg");
+        inst.setPhoneNumberOfDirector("061222333");
+        assertEquals(inst.getPhoneNumberOfDirector(), "061222333");
+        inst.setEmailOfDirector("dir@gmail.com");
+        assertEquals(inst.getEmailOfDirector(), "dir@gmail.com");
+        inst.setDateOfBirthOfDirector(LocalDate.now());
+        assertEquals(inst.getDateOfBirthOfDirector(), LocalDate.now());
+        Place place = new Place();
+        inst.setPlace(place);
+        assertEquals(inst.getPlace(), place);
     }
 
 

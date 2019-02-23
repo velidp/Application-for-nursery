@@ -6,11 +6,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Day implements Serializable {
-    LocalDate date;
-    boolean apsent;
-    LocalDateTime arrivalTime;
-    LocalDateTime departureTime;
-    ArrayList comments = new ArrayList<String>();
+    private LocalDate date;
+    private boolean apsent;
+    private LocalDateTime arrivalTime;
+    private LocalDateTime departureTime;
+    private ArrayList comments = new ArrayList<String>();
 
     public LocalDate getDate() {
         return date;
@@ -53,6 +53,6 @@ public class Day implements Serializable {
     }
 
     public String toString(){
-        return "DaDatum: " + date;
+        return "Datum: " + date;
     }
 }

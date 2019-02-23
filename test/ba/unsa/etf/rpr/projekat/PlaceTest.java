@@ -7,35 +7,18 @@ import static org.junit.jupiter.api.Assertions.*;
 class PlaceTest {
 
     @Test
-    void getId() {
-    }
-
-    @Test
-    void setId() {
-    }
-
-    @Test
-    void getName() {
-    }
-
-    @Test
-    void setName() {
-    }
-
-    @Test
-    void getAdress() {
-    }
-
-    @Test
-    void setAdress() {
-    }
-
-    @Test
-    void getZipCode() {
-    }
-
-    @Test
-    void setZipCode() {
+    void test() {
+        Place place = new Place();
+        place.setId(89);
+        assertEquals(place.getId(), 89);
+        place.setId(89);
+        assertEquals(place.getId(), 89);
+        place.setName("place");
+        assertEquals(place.getName(), "place");
+        place.setAdress("adr");
+        assertEquals(place.getAdress(), "adr");
+        place.setZipCode("71000");
+        assertEquals(place.getZipCode(), "71000");
     }
 
 

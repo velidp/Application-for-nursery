@@ -48,5 +48,10 @@ u biti imam jos uradite sljedece:
 
 6 i 7 class dijagram i izvještaj napravit napisat.
  */
+/*
+testiranje
+main i printreport se ne mogu testirati
 
+ostaje pitanje kako testirati kontrolere i DAO...
+ */
 

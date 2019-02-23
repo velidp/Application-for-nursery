@@ -47,10 +47,8 @@ public class Child {
             komentari = (ArrayList<Day>) in.readObject();
             in.close();
             fileIn.close();
-        } catch (IOException i) {
+        } catch (IOException | ClassNotFoundException i) {
             i.printStackTrace();
-        } catch (ClassNotFoundException c) {
-            c.printStackTrace();
         }
         return komentari;
     }
