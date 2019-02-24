@@ -47,8 +47,10 @@ public class Child {
             komentari = (ArrayList<Day>) in.readObject();
             in.close();
             fileIn.close();
-        } catch (IOException | ClassNotFoundException i) {
+        } catch (IOException i) {
             i.printStackTrace();
+        } catch (ClassNotFoundException c) {
+            c.printStackTrace();
         }
         return komentari;
     }
@@ -212,6 +214,6 @@ public class Child {
 
 
     public String toString(){
-        return id + " " + name + surename;
+        return id + " " + name + " " + surename;
     }
 }

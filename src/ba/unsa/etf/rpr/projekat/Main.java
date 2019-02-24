@@ -29,29 +29,23 @@ public class Main extends Application {
     }
 }
 
-/*
-VALIDACIJA JMBG NE ZABORAVI AKTIVIRATI
- */
-/*
-u biti imam jos uradite sljedece:
 
-4. testovi
-5. maven
-
-
-6. class dijagram
-7. izvjštaj
- */
-/*
-4. testovi - testirat sto se testirat moze
-5. maeven po sablonu
-
-6 i 7 class dijagram i izvještaj napravit napisat.
- */
 /*
 testiranje
 main i printreport se ne mogu testirati
 
 ostaje pitanje kako testirati kontrolere i DAO...
+
+dakle ideja je pomocu robota testirati cijeli graficki interfejs ovo treba fino osmisliti...
+i na kraju vidjet sta nije pokriveno testovima i pokusat i to testirati...
+
+ */
+/*
+u biti plan je sljedeci:
+1. zavrsiti testove
+2. napravit class dijagram
+3. meaven
+4. napisati izvještaj
+5. preostalo vrijeme uloziti na popravljanje gresaka i uljepsavanje
  */
 

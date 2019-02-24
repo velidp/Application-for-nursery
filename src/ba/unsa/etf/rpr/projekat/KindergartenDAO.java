@@ -16,7 +16,7 @@ public class KindergartenDAO {
 
     private Connection con;
 
-    private PreparedStatement getChildren, removeChild, removeEducator, addEducator, getEducators, getInstitutions, addChild, placeById, addInstitution, getPlaces, addPlace, institutionById;
+    private PreparedStatement getChildren, removePlace, removeInstitution, removeChild, removeEducator, addEducator, getEducators, getInstitutions, addChild, placeById, addInstitution, getPlaces, addPlace, institutionById;
 
     {
         try {
@@ -32,7 +32,9 @@ public class KindergartenDAO {
             addChild = con.prepareStatement("insert into children (id,name,surename,date_of_birth,jmbg,place,institution,special_needs,parents_name,parents_surename, parents_jmbg,parents_date_of_birth,parents_phone_number) values (?,?,?,?,?,?,?,?,?,?,?,?,?)");
             getEducators = con.prepareStatement("select * from educators");
             removeEducator = con.prepareStatement("delete from educators where id = ?");
+            removeInstitution = con.prepareStatement("delete from institutions where id = ?");
             removeChild = con.prepareStatement("delete from children where id = ?");
+            removePlace = con.prepareStatement("delete from places where id = ?");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -418,5 +420,52 @@ public class KindergartenDAO {
 
     }
 
+    public void removeInstitution(int institution) {
+
+        try {
+            removeInstitution.setInt(1, institution);
+            removeInstitution.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+    public void removePlace(int place) {
+
+        try {
+            removePlace.setInt(1, place);
+            removePlace.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeChild1(int id, String name, String surename) {
+        File file = new File(name + surename + id +".xml");
+        file.delete();
+        try {
+            removeChild.setInt(1, id);
+            removeChild.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void removeEducator1(int id) {
+
+        try {
+            removeEducator.setInt(1, id);
+            removeEducator.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
 
 }

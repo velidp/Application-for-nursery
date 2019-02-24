@@ -17,15 +17,15 @@ import java.util.ResourceBundle;
 public class ControllerAddChild {
 
 
-    public Button okButton;
+    public Button okButton3;
     public Button cancelButton;
 
     public TextField nameField;
     public TextField surenameField;
     public TextField jmbgField;
     public DatePicker dateField;
-    public ComboBox placeCombo;
-    public ComboBox institutionCombo;
+    public ComboBox placeCombo1;
+    public ComboBox institutionCombo1;
     public TextField nameParentField;
     public TextField surenameParrentField;
     public TextField jmbgParentField;
@@ -45,9 +45,9 @@ public class ControllerAddChild {
 
     public void initialize(){
 
-        institutionCombo.setItems(base.getInstitutions());
+        institutionCombo1.setItems(base.getInstitutions());
 
-        placeCombo.setItems(base.getPlaces());
+        placeCombo1.setItems(base.getPlaces());
 
         addPlaceButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -64,8 +64,8 @@ public class ControllerAddChild {
                 stage.setResizable(false);
                 stage.setScene(new Scene(root, 304, 159));
                 stage.showAndWait();
-                placeCombo.setItems(base.getPlaces());
-                placeCombo.getSelectionModel().selectLast();
+                placeCombo1.setItems(base.getPlaces());
+                placeCombo1.getSelectionModel().selectLast();
             }
         });
 
@@ -88,8 +88,8 @@ public class ControllerAddChild {
             surenameField.setText(chilD.getSurename());
             jmbgField.setText(chilD.getJmbg());
             dateField.setValue(chilD.getDateOfBirth());
-            placeCombo.getSelectionModel().selectFirst();
-            institutionCombo.getSelectionModel().selectFirst();
+            placeCombo1.getSelectionModel().selectFirst();
+            institutionCombo1.getSelectionModel().selectFirst();
             nameParentField.setText(chilD.getParentsName());
             surenameParrentField.setText(chilD.getParentsSurename());
             jmbgParentField.setText(chilD.getJmbg());
@@ -108,7 +108,7 @@ public class ControllerAddChild {
             }
         });
 
-        okButton.setOnAction(event -> {
+        okButton3.setOnAction(event -> {
             if(chilD == null){
                 boolean sveOk = validirajPrazno(nameField);
                 sveOk &= validirajPrazno(surenameField);
@@ -116,23 +116,23 @@ public class ControllerAddChild {
                 sveOk &= validirajPrazno(surenameParrentField);
                 sveOk &= validirajPrazno(phoneNumberField);
 
-                if (placeCombo.getSelectionModel().isEmpty()) {
-                    placeCombo.getStyleClass().removeAll("poljeIspravno");
-                    placeCombo.getStyleClass().add("poljeNijeIspravno");
+                if (placeCombo1.getSelectionModel().isEmpty()) {
+                    placeCombo1.getStyleClass().removeAll("poljeIspravno");
+                    placeCombo1.getStyleClass().add("poljeNijeIspravno");
                     sveOk = false;
                 } else {
-                    placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                    placeCombo.getStyleClass().add("poljeIspravno");
+                    placeCombo1.getStyleClass().removeAll("poljeNijeIspravno");
+                    placeCombo1.getStyleClass().add("poljeIspravno");
                 }
 
 
-                if (institutionCombo.getSelectionModel().isEmpty()) {
-                    institutionCombo.getStyleClass().removeAll("poljeIspravno");
-                    institutionCombo.getStyleClass().add("poljeNijeIspravno");
+                if (institutionCombo1.getSelectionModel().isEmpty()) {
+                    institutionCombo1.getStyleClass().removeAll("poljeIspravno");
+                    institutionCombo1.getStyleClass().add("poljeNijeIspravno");
                     sveOk = false;
                 } else {
-                    institutionCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                    institutionCombo.getStyleClass().add("poljeIspravno");
+                    institutionCombo1.getStyleClass().removeAll("poljeNijeIspravno");
+                    institutionCombo1.getStyleClass().add("poljeIspravno");
                 }
 
                 if(!specialNeedsYes.isSelected() && !specialNeedsNo.isSelected()){
@@ -185,8 +185,8 @@ public class ControllerAddChild {
                 Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());
                 child.setDateOfBirth(dateField.getValue());
                 child.setJmbg(jmbgField.getText());
-                child.setDwelling((Place) placeCombo.getSelectionModel().getSelectedItem());
-                child.setInstitution((Institution) institutionCombo.getSelectionModel().getSelectedItem());
+                child.setDwelling((Place) placeCombo1.getSelectionModel().getSelectedItem());
+                child.setInstitution((Institution) institutionCombo1.getSelectionModel().getSelectedItem());
                 child.setChildWithSpecialNeeds(specialNeedsYes.isSelected());
                 child.setParentsName(nameParentField.getText());
                 child.setParentsSurename(surenameParrentField.getText());
@@ -196,7 +196,7 @@ public class ControllerAddChild {
 
                 base.addChild(child);
 
-                Stage stage = (Stage) okButton.getScene().getWindow();
+                Stage stage = (Stage) okButton3.getScene().getWindow();
                 stage.close();
             }
 
@@ -209,23 +209,23 @@ public class ControllerAddChild {
                 sveOk &= validirajPrazno(surenameParrentField);
                 sveOk &= validirajPrazno(phoneNumberField);
 
-                if (placeCombo.getSelectionModel().isEmpty()) {
-                    placeCombo.getStyleClass().removeAll("poljeIspravno");
-                    placeCombo.getStyleClass().add("poljeNijeIspravno");
+                if (placeCombo1.getSelectionModel().isEmpty()) {
+                    placeCombo1.getStyleClass().removeAll("poljeIspravno");
+                    placeCombo1.getStyleClass().add("poljeNijeIspravno");
                     sveOk = false;
                 } else {
-                    placeCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                    placeCombo.getStyleClass().add("poljeIspravno");
+                    placeCombo1.getStyleClass().removeAll("poljeNijeIspravno");
+                    placeCombo1.getStyleClass().add("poljeIspravno");
                 }
 
 
-                if (institutionCombo.getSelectionModel().isEmpty()) {
-                    institutionCombo.getStyleClass().removeAll("poljeIspravno");
-                    institutionCombo.getStyleClass().add("poljeNijeIspravno");
+                if (institutionCombo1.getSelectionModel().isEmpty()) {
+                    institutionCombo1.getStyleClass().removeAll("poljeIspravno");
+                    institutionCombo1.getStyleClass().add("poljeNijeIspravno");
                     sveOk = false;
                 } else {
-                    institutionCombo.getStyleClass().removeAll("poljeNijeIspravno");
-                    institutionCombo.getStyleClass().add("poljeIspravno");
+                    institutionCombo1.getStyleClass().removeAll("poljeNijeIspravno");
+                    institutionCombo1.getStyleClass().add("poljeIspravno");
                 }
 
                 if(!specialNeedsYes.isSelected() && !specialNeedsNo.isSelected()){
@@ -283,8 +283,8 @@ public class ControllerAddChild {
 
                     child.setDateOfBirth(dateField.getValue());
                     child.setJmbg(jmbgField.getText());
-                    child.setDwelling((Place) placeCombo.getSelectionModel().getSelectedItem());
-                    child.setInstitution((Institution) institutionCombo.getSelectionModel().getSelectedItem());
+                    child.setDwelling((Place) placeCombo1.getSelectionModel().getSelectedItem());
+                    child.setInstitution((Institution) institutionCombo1.getSelectionModel().getSelectedItem());
                     child.setChildWithSpecialNeeds(specialNeedsYes.isSelected());
                     child.setParentsName(nameParentField.getText());
                     child.setParentsSurename(surenameParrentField.getText());
@@ -294,7 +294,7 @@ public class ControllerAddChild {
 
                     base.addChild(child);
 
-                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    Stage stage = (Stage) okButton3.getScene().getWindow();
                     stage.close();
                 }
             }

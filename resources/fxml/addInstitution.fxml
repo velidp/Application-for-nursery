@@ -40,7 +40,7 @@
       <Label text="%placeOfInstitution" GridPane.rowIndex="1" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="11">
         <buttons>
-          <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
+          <Button fx:id="okButton2" mnemonicParsing="false" text="OK" />
             <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
         </buttons>
       </ButtonBar>

@@ -11,7 +11,7 @@ public class ControllerAddPlace {
     public TextField nameOfPlaceField;
     public TextField adressOfPlaceField;
     public TextField zipCodeField;
-    public Button okButton;
+    public Button okButtonPlace;
     public Button cancelButton;
     private KindergartenDAO base = new KindergartenDAO();
 
@@ -24,7 +24,7 @@ public class ControllerAddPlace {
             }
         });
 
-        okButton.setOnAction(new EventHandler<ActionEvent>() {
+        okButtonPlace.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
                 boolean sveOk = validirajPrazno(nameOfPlaceField);
@@ -38,7 +38,7 @@ public class ControllerAddPlace {
                     place.setAdress(adressOfPlaceField.getText());
                     place.setZipCode(zipCodeField.getText());
                     base.addPlace(place);
-                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    Stage stage = (Stage) okButtonPlace.getScene().getWindow();
                     stage.close();
                 }
             }

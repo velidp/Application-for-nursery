@@ -18,12 +18,12 @@ import java.util.ResourceBundle;
 public class ControllerAddEducator {
 
 
-    public Button okButton;
+    public Button okButtonn;
     public Button cancelButton;
     public TextField nameField;
     public TextField surenameField;
     public TextField jmbgField;
-    public DatePicker dateField;
+    public DatePicker dateFieldd;
     public ComboBox institutionsCombo;
     public ComboBox typeCombo;
     public ComboBox placeCombo;
@@ -48,7 +48,7 @@ public class ControllerAddEducator {
             nameField.setText(educatoR.getName());
             surenameField.setText(educatoR.getSurename());
             jmbgField.setText(educatoR.getSurename());
-            dateField.setValue(educatoR.getDateOfBirth());
+            dateFieldd.setValue(educatoR.getDateOfBirth());
             institutionsCombo.getSelectionModel().selectFirst();
             typeCombo.getSelectionModel().selectFirst();
             placeCombo.getSelectionModel().selectFirst();
@@ -84,7 +84,7 @@ public class ControllerAddEducator {
             }
         });
 
-        okButton.setOnAction(event -> {
+        okButtonn.setOnAction(event -> {
             if(educatoR == null) {
 
                 boolean sveOk = validirajPrazno(nameField);
@@ -121,13 +121,13 @@ public class ControllerAddEducator {
                     typeCombo.getStyleClass().add("poljeIspravno");
                 }
 
-                if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
-                    dateField.getStyleClass().removeAll("poljeIspravno");
-                    dateField.getStyleClass().add("poljeNijeIspravno");
+                if (dateFieldd.getValue() == null || dateFieldd.getValue().isAfter(LocalDate.now())) {
+                    dateFieldd.getStyleClass().removeAll("poljeIspravno");
+                    dateFieldd.getStyleClass().add("poljeNijeIspravno");
                     sveOk = false;
                 } else {
-                    dateField.getStyleClass().removeAll("poljeNijeIspravno");
-                    dateField.getStyleClass().add("poljeIspravno");
+                    dateFieldd.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateFieldd.getStyleClass().add("poljeIspravno");
                 }
 
 
@@ -145,7 +145,7 @@ public class ControllerAddEducator {
                     Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
 
                     educator.setJmbg(jmbgField.getText());
-                    educator.setDateOfBirth(dateField.getValue());
+                    educator.setDateOfBirth(dateFieldd.getValue());
                     educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
                     educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
                     if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("educatorSn"))
@@ -157,7 +157,7 @@ public class ControllerAddEducator {
 
                     base.addEducator(educator);
 
-                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    Stage stage = (Stage) okButtonn.getScene().getWindow();
                     stage.close();
                 }
 
@@ -198,13 +198,13 @@ public class ControllerAddEducator {
                     typeCombo.getStyleClass().add("poljeIspravno");
                 }
 
-                if (dateField.getValue() == null || dateField.getValue().isAfter(LocalDate.now())) {
-                    dateField.getStyleClass().removeAll("poljeIspravno");
-                    dateField.getStyleClass().add("poljeNijeIspravno");
+                if (dateFieldd.getValue() == null || dateFieldd.getValue().isAfter(LocalDate.now())) {
+                    dateFieldd.getStyleClass().removeAll("poljeIspravno");
+                    dateFieldd.getStyleClass().add("poljeNijeIspravno");
                     sveOk = false;
                 } else {
-                    dateField.getStyleClass().removeAll("poljeNijeIspravno");
-                    dateField.getStyleClass().add("poljeIspravno");
+                    dateFieldd.getStyleClass().removeAll("poljeNijeIspravno");
+                    dateFieldd.getStyleClass().add("poljeIspravno");
                 }
 
 
@@ -224,7 +224,7 @@ public class ControllerAddEducator {
                     Educator educator = new Educator(nameField.getText(), surenameField.getText(), base.getMaxIdFromEducators());
 
                     educator.setJmbg(jmbgField.getText());
-                    educator.setDateOfBirth(dateField.getValue());
+                    educator.setDateOfBirth(dateFieldd.getValue());
                     educator.setDweling((Place) placeCombo.getSelectionModel().getSelectedItem());
                     educator.setInstitution((Institution) institutionsCombo.getSelectionModel().getSelectedItem());
                     if (typeCombo.getSelectionModel().getSelectedItem() == bundle.getString("educatorSn"))
@@ -236,7 +236,7 @@ public class ControllerAddEducator {
 
                     base.addEducator(educator);
 
-                    Stage stage = (Stage) okButton.getScene().getWindow();
+                    Stage stage = (Stage) okButtonn.getScene().getWindow();
                     stage.close();
                 }
             }
@@ -248,7 +248,7 @@ public class ControllerAddEducator {
         if (jmbg.length() != 13)
             return false;
 
-        LocalDate datum = dateField.getValue();
+        LocalDate datum = dateFieldd.getValue();
         if (datum.getDayOfMonth() != Integer.parseInt(jmbg.substring(0, 2)))
             return false;
         else if (datum.getMonthValue() != Integer.parseInt(jmbg.substring(2, 4)))

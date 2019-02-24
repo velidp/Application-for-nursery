@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 
 public class ControllerAddInstitution {
 
-    public Button okButton;
+    public Button okButton2;
     public Button cancelButton;
     public ComboBox placeOfInstitutionCombo;
     public Button addPlaceOfInstitutionButton;
@@ -46,7 +46,7 @@ public class ControllerAddInstitution {
             }
         });
 
-        okButton.setOnAction(event -> {
+        okButton2.setOnAction(event -> {
             boolean sveOk = validirajPrazno(nameOfInstitution);
             sveOk &= validirajPrazno(nameOfDirectorField);
             sveOk &= validirajPrazno(surenameOfDirectorField);
@@ -113,7 +113,7 @@ public class ControllerAddInstitution {
                 institution.setEmailOfDirector(emailOfDirectorField.getText());
 
                 base.addInstitiution(institution);
-                Stage stage = (Stage) okButton.getScene().getWindow();
+                Stage stage = (Stage) okButton2.getScene().getWindow();
                 stage.close();
             }
         });

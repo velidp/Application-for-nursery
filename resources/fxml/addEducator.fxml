@@ -67,7 +67,7 @@
       </Label>
       <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="9">
         <buttons>
-          <Button fx:id="okButton" mnemonicParsing="false" text="OK" />
+          <Button fx:id="okButtonn" mnemonicParsing="false" text="OK" />
             <Button fx:id="cancelButton" mnemonicParsing="false" text="Cancel" />
         </buttons>
          <GridPane.margin>
@@ -89,7 +89,7 @@
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
       </TextField>
-      <DatePicker fx:id="dateField" prefHeight="25.0" prefWidth="278.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+      <DatePicker fx:id="dateFieldd" prefHeight="25.0" prefWidth="278.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
          <GridPane.margin>
             <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
          </GridPane.margin>
