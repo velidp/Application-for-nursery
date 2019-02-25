@@ -270,7 +270,7 @@ public class ControllerAddChild {
                 }
 
                 if(sveOk) {
-                    System.out.println("jel dosl dobe");
+
 
 
                     Child child = new Child(nameField.getText(), surenameField.getText(), base.getMaxIdFromChildren());

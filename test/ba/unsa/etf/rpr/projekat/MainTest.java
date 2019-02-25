@@ -19,6 +19,7 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -429,13 +430,18 @@ class MainTest {
 
 
         robot.clickOn("#institutionCombo");
-        robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+        robot.press(KeyCode.DOWN);
 
         robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+        robot.release(KeyCode.ALL_CANDIDATES);
+
+        robot.press(KeyCode.CONTROL).press(KeyCode.C).release(KeyCode.CONTROL).release(KeyCode.C);
+        robot.press(KeyCode.CONTROL).press(KeyCode.W).release(KeyCode.CONTROL).release(KeyCode.W);
+
+        robot.release(KeyCode.ALL_CANDIDATES);
 
         robot.clickOn("#tableOfPersons");
-        robot.press(KeyCode.DOWN);
-        robot.release(KeyCode.DOWN);
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
 
 
 
@@ -444,11 +450,33 @@ class MainTest {
         //ovdje vec testiramo for work...
         //pa cemo se kasnije vratiti da testiramo ostale opcije iz glavne...
 
+        //ovo je moguce testirati samo ako je vrijeme od 7 do 18, jer je to radno vrijeme vrtica
+        if (LocalDateTime.now().isAfter(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 7, 0, 0)) && LocalDateTime.now().isBefore(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 18, 0, 0))) {
+            robot.clickOn("#listView");
+            robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            robot.clickOn("#apsentButton");
+            robot.clickOn("#addComentButton");
+            robot.clickOn("#comentArea");
+            robot.write("Dodajemo komentar.");
+            robot.clickOn("#okButton");
+            robot.clickOn("#notApsentButton");
+            robot.clickOn("#aboutButton");
+            robot.clickOn("#okButton");
+        } else{
+
+        }
+
+        robot.clickOn("#settingsButton");
+        robot.release(KeyCode.ALL_CANDIDATES);
+
+
 
         base.removeInstitution(base.getMaxIdFromInstitutions()-1);
         base.removePlace(base.getMaxIdFromPlaces()-1);
+        base.removePlace(base.getMaxIdFromPlaces()-1);
         base.removeChild1(base.getMaxIdFromChildren()-1, "Djete", "Djetovic");
         base.removeEducator1(base.getMaxIdFromEducators()-1);
+
 
     }
 
@@ -477,3 +505,10 @@ class MainTest {
     21. prelazimo na bazu
     22. provjeravom exit
      */
+/*
+dobro... testovi fino funkcionisu kada je baza prazna...
+sada moram rijesiti ovo sta ako u bazi vec postoje podaci...
+
+ima jos stvari koje trebam testirati, izmjniti djete, obrisati djete, izmjeniti edukatora, izbrisati edukatora...
+i ispitati ovo kada se pojavljuju ovi alerti...
+ */
