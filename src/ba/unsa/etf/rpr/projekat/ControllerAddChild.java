@@ -92,7 +92,7 @@ public class ControllerAddChild {
             institutionCombo1.getSelectionModel().selectFirst();
             nameParentField.setText(chilD.getParentsName());
             surenameParrentField.setText(chilD.getParentsSurename());
-            jmbgParentField.setText(chilD.getJmbg());
+            jmbgParentField.setText(chilD.getParentsJmbg());
             dateParrentField.setValue(chilD.getParentsDateOfBirth());
             phoneNumberField.setText(chilD.getPhoneNumber());
             if(chilD.isChildWithSpecialNeeds()) specialNeedsYes.setSelected(true);

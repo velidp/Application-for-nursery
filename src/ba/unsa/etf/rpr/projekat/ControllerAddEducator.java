@@ -47,7 +47,7 @@ public class ControllerAddEducator {
         if(educatoR != null){
             nameField.setText(educatoR.getName());
             surenameField.setText(educatoR.getSurename());
-            jmbgField.setText(educatoR.getSurename());
+            jmbgField.setText(educatoR.getJmbg());
             dateFieldd.setValue(educatoR.getDateOfBirth());
             institutionsCombo.getSelectionModel().selectFirst();
             typeCombo.getSelectionModel().selectFirst();

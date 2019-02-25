@@ -352,7 +352,7 @@ public class KindergartenDAO {
             addChild.setBoolean(8, child.isChildWithSpecialNeeds());
             addChild.setString(9, child.getParentsName());
             addChild.setString(10, child.getParentsSurename());
-            addChild.setString(11, child.getJmbg());
+            addChild.setString(11, child.getParentsJmbg());
             addChild.setDate(12, Date.valueOf(child.getParentsDateOfBirth()));
             addChild.setString(13, child.getPhoneNumber());
 

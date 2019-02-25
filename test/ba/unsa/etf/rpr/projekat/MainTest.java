@@ -3,10 +3,7 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Background;
@@ -431,17 +428,40 @@ class MainTest {
 
         robot.clickOn("#institutionCombo");
         robot.press(KeyCode.DOWN);
+        robot.release(KeyCode.DOWN);
 
-        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
-        robot.release(KeyCode.ALL_CANDIDATES);
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
 
-        robot.press(KeyCode.CONTROL).press(KeyCode.C).release(KeyCode.CONTROL).release(KeyCode.C);
-        robot.press(KeyCode.CONTROL).press(KeyCode.W).release(KeyCode.CONTROL).release(KeyCode.W);
 
-        robot.release(KeyCode.ALL_CANDIDATES);
+        robot.press(KeyCode.CONTROL);
+        robot.press(KeyCode.C);
+        robot.release(KeyCode.CONTROL);
+        robot.release(KeyCode.C);
+        robot.press(KeyCode.CONTROL);
+        robot.press(KeyCode.W);
+        robot.release(KeyCode.CONTROL);
+        robot.release(KeyCode.W);
+
+
+
+        robot.clickOn("#institutionCombo");
+
+        for(int i = 0; i <= base.getInstitutions().size(); i++) {
+            robot.press(KeyCode.UP);
+            robot.release(KeyCode.UP);
+        }
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
+
 
         robot.clickOn("#tableOfPersons");
-        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+        for(int i = 0; i <= base.getAllChildren().size(); i++) {
+            robot.press(KeyCode.DOWN);
+            robot.release(KeyCode.DOWN);
+        }
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
 
 
 
@@ -453,7 +473,12 @@ class MainTest {
         //ovo je moguce testirati samo ako je vrijeme od 7 do 18, jer je to radno vrijeme vrtica
         if (LocalDateTime.now().isAfter(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 7, 0, 0)) && LocalDateTime.now().isBefore(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 18, 0, 0))) {
             robot.clickOn("#listView");
-            robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            robot.press(KeyCode.ENTER);
+            robot.release(KeyCode.ENTER);
+            for(int i = 0; i <= base.getAllChildren().size(); i++) {
+                robot.press(KeyCode.DOWN);
+                robot.release(KeyCode.DOWN);
+            }
             robot.clickOn("#apsentButton");
             robot.clickOn("#addComentButton");
             robot.clickOn("#comentArea");
@@ -467,14 +492,115 @@ class MainTest {
         }
 
         robot.clickOn("#settingsButton");
-        robot.release(KeyCode.ALL_CANDIDATES);
 
 
+
+
+        robot.clickOn("#groupCombo");
+        robot.press(KeyCode.DOWN);
+        robot.release(KeyCode.DOWN);
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
+
+        robot.clickOn("#institutionCombo");
+        robot.press(KeyCode.DOWN);
+        robot.release(KeyCode.DOWN);
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
+
+
+
+
+        robot.clickOn("#tableOfPersons");
+        robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+
+        for(int i = 0; i <= base.getAllChildren().size(); i++) {
+            robot.press(KeyCode.DOWN);
+            robot.release(KeyCode.DOWN);
+        }
+
+        robot.clickOn("#editPerson");
+
+       /*---------------------------------*/
+
+        ///////////////////////////////
+        /////////////////////////////
+        robot.clickOn("#nameField");
+        robot.write("Izmjena");
+        ////////////////////////
+        ////////////////////////
+        ///////////////////////////////
+        /////////////////////////////
+
+
+
+        robot.clickOn("#okButton3");
+
+        /*-----------------------------------*/
+
+        robot.clickOn("#tableOfPersons");
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
+
+        for(int i = 0; i <= base.getAllChildren().size(); i++){
+            robot.press(KeyCode.DOWN);
+            robot.release(KeyCode.DOWN);
+        }
+
+        robot.clickOn("#removePerson");
+        // cekamo da dijalog postane vidljiv
+        robot.lookup(".dialog-pane").tryQuery().isPresent();
+
+        // Klik na dugme Ok
+        DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+        Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+        robot.clickOn(okButton);
+
+        // cekamo da se obrice korisnik
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        robot.clickOn("#optionsMenu");
+        robot.clickOn("#radioWorker");
+
+        robot.clickOn("#tableOfPersons");
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
+
+        for(int i = 0 ; i <= base.getAllEducators().size(); i++){
+            robot.press(KeyCode.DOWN);
+            robot.release(KeyCode.DOWN);
+        }
+
+        robot.clickOn("#editPerson");
+
+        robot.clickOn("#nameField");
+        robot.write("Izmjena");
+        robot.clickOn("#okButtonn");
+
+        robot.clickOn("#tableOfPersons");
+        robot.press(KeyCode.ENTER);
+        robot.release(KeyCode.ENTER);
+
+
+
+
+
+
+
+
+        robot.clickOn("#languageCombo");
+        robot.press(KeyCode.SHIFT);
+        robot.press(KeyCode.UP);
+        robot.release(KeyCode.SHIFT);
+        robot.release(KeyCode.UP);
 
         base.removeInstitution(base.getMaxIdFromInstitutions()-1);
         base.removePlace(base.getMaxIdFromPlaces()-1);
         base.removePlace(base.getMaxIdFromPlaces()-1);
-        base.removeChild1(base.getMaxIdFromChildren()-1, "Djete", "Djetovic");
         base.removeEducator1(base.getMaxIdFromEducators()-1);
 
 
