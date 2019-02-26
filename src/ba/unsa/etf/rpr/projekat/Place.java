@@ -1,8 +1,8 @@
 package ba.unsa.etf.rpr.projekat;
 
 public class Place {
-    int id;
-    String name, adress, zipCode;
+    private int id;
+    private String name, adress, zipCode;
 
     public int getId() {
         return id;

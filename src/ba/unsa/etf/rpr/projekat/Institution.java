@@ -3,10 +3,10 @@ package ba.unsa.etf.rpr.projekat;
 import java.time.LocalDate;
 
 public class Institution {
-    int id;
-    String name, phoneNumber, email, nameOfDirector, surenameOfDirector, jmbgOfDirector, phoneNumberOfDirector, emailOfDirector;
-    LocalDate dateOfBirthOfDirector;
-    Place place;
+    private int id;
+    private String name, phoneNumber, email, nameOfDirector, surenameOfDirector, jmbgOfDirector, phoneNumberOfDirector, emailOfDirector;
+    private LocalDate dateOfBirthOfDirector;
+    private Place place;
 
     public int getId() {
         return id;

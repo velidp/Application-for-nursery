@@ -30,22 +30,4 @@ public class Main extends Application {
 }
 
 
-/*
-testiranje
-main i printreport se ne mogu testirati
-
-ostaje pitanje kako testirati kontrolere i DAO...
-
-dakle ideja je pomocu robota testirati cijeli graficki interfejs ovo treba fino osmisliti...
-i na kraju vidjet sta nije pokriveno testovima i pokusat i to testirati...
-
- */
-/*
-u biti plan je sljedeci:
-1. zavrsiti testove
-2. napravit class dijagram
-3. meaven
-4. napisati izvještaj
-5. preostalo vrijeme uloziti na popravljanje gresaka i uljepsavanje
- */
 

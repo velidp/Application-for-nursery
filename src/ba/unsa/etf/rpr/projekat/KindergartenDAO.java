@@ -21,6 +21,8 @@ public class KindergartenDAO {
     {
         try {
             con = DriverManager.getConnection("jdbc:sqlite:base.db");
+
+
             getChildren = con.prepareStatement("select * from children order by id");
             getInstitutions = con.prepareStatement("select * from institutions");
             placeById = con.prepareStatement("select * from places where id = ?");
@@ -35,6 +37,8 @@ public class KindergartenDAO {
             removeInstitution = con.prepareStatement("delete from institutions where id = ?");
             removeChild = con.prepareStatement("delete from children where id = ?");
             removePlace = con.prepareStatement("delete from places where id = ?");
+
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -443,12 +447,13 @@ public class KindergartenDAO {
 
     }
 
-    public void removeChild1(int id, String name, String surename) {
-        File file = new File(name + surename + id +".xml");
-        file.delete();
+
+
+    public void removeEducator1(int id) {
+
         try {
-            removeChild.setInt(1, id);
-            removeChild.executeUpdate();
+            removeEducator.setInt(1, id);
+            removeEducator.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
@@ -456,11 +461,13 @@ public class KindergartenDAO {
 
     }
 
-    public void removeEducator1(int id) {
+    public void removeChild1(int id, String name, String surename) {
 
+        File file = new File(name + surename + id + ".xml");
+        file.delete();
         try {
-            removeEducator.setInt(1, id);
-            removeEducator.executeUpdate();
+            removeChild.setInt(1, id);
+            removeChild.executeUpdate();
 
         } catch (SQLException e) {
             e.printStackTrace();
