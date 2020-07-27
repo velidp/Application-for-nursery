@@ -20,7 +20,7 @@ The following video shows a demonstration of the app and some of its functionali
 
 <a href="https://www.youtube.com/watch?v=5VACdEL58fs" target="_blank">
 <p align="left">
-  <img src="https://raw.githubusercontent.com/velidp/test/master/a2.jpg?token=AKPB5ITYRJ7HKHRQMOLH2DC7E7BZI" width="400">
+  <img src="https://raw.githubusercontent.com/velidp/Application-for-nursery/master/resources/img/a2.jpg" width="400">
 </p>
 </a>  
 
