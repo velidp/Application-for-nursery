@@ -16,7 +16,7 @@ The application was developed in the Intellij IDEA development environment. The 
 
 ## Application demo 
 
-The following video shows a demonstration of the application and a display of some of its functionalities:
+The following video shows a demonstration of the app and some of its functionalities:
 
 <a href="https://www.youtube.com/watch?v=5VACdEL58fs" target="_blank">
 <p align="left">
