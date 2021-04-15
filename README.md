@@ -1,4 +1,4 @@
-# Application for nursery
+# Application for kindergarten
 
 This is a desktop application intended primarily for keeping records of classes in kindergartens. In addition, the application has the option of storing data on educators employed in kindergartens. Also application provide managing kindergarten institutions (because the application is intended for kindergarten chains). It provides the ability to store data on the presence of children, keeps the time of arrival and departure of the child. It also provides the ability to add comments about each child’s progress. It has a GUI that is intuitive and easy to use. The application is available in two languages, Bosnian and English.
 
